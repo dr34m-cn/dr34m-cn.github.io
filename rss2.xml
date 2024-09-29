@@ -1,0 +1,1970 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"
+  xmlns:atom="http://www.w3.org/2005/Atom"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Dr34m&#39;s Blog</title>
+    <link>https://blog.ctftools.com/</link>
+    
+    <atom:link href="https://blog.ctftools.com/rss2.xml" rel="self" type="application/rss+xml"/>
+    
+    <description>用心写文字，愿赤诚之心不被辜负</description>
+    <pubDate>Sun, 29 Sep 2024 06:58:21 GMT</pubDate>
+    <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>taoSync排除项简易教程</title>
+      <link>https://blog.ctftools.com/2024/09/newpost-60/</link>
+      <guid>https://blog.ctftools.com/2024/09/newpost-60/</guid>
+      <pubDate>Thu, 26 Sep 2024 02:59:43 GMT</pubDate>
+      
+      <description>&lt;p&gt;&lt;code&gt;taoSync&lt;/code&gt;的排除项规则是一种类似&lt;code&gt;gitignore&lt;/code&gt;的规则，但不支持[非]的语法（即&lt;code&gt;!&lt;/code&gt;），优先级未得到正确支持（详见&lt;a href=&quot;https://github.com/bitranox/igittigitt?tab=readme-ov-file#limitations&quot;&gt;这里&lt;/a&gt;）;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;taoSync&lt;/code&gt;规定的排除项根目录为同步来源或目标目录，例如你的来源目录为&lt;code&gt;/baidu/pan/&lt;/code&gt;，使用规则&lt;code&gt;/123321/*&lt;/code&gt;将忽略目录&lt;code&gt;/baidu/pan/123321/&lt;/code&gt;下的文件；使用&lt;code&gt;/baidu/*&lt;/code&gt;不会有效果。&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E7%BB%8F%E9%AA%8C/">经验</category>
+      
+      <category domain="https://blog.ctftools.com/tags/%E6%96%87%E6%A1%A3/">文档</category>
+      
+      
+      <comments>https://blog.ctftools.com/2024/09/newpost-60/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>apscheduler的cron配置项</title>
+      <link>https://blog.ctftools.com/2024/08/newpost-58/</link>
+      <guid>https://blog.ctftools.com/2024/08/newpost-58/</guid>
+      <pubDate>Thu, 08 Aug 2024 09:37:07 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h2 id=&quot;字段&quot;&gt;&lt;a href=&quot;#字段&quot; class=&quot;headerlink&quot;</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E7%BC%96%E7%A8%8B/">编程</category>
+      
+      <category domain="https://blog.ctftools.com/tags/Python/">Python</category>
+      
+      
+      <comments>https://blog.ctftools.com/2024/08/newpost-58/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>如何在绿联NAS中使用TaoSync同步我的文件到各个网盘</title>
+      <link>https://blog.ctftools.com/2024/07/newpost-57/</link>
+      <guid>https://blog.ctftools.com/2024/07/newpost-57/</guid>
+      <pubDate>Tue, 16 Jul 2024 12:39:26 GMT</pubDate>
+      
+      <description>&lt;h1 id=&quot;目标&quot;&gt;&lt;a href=&quot;#目标&quot; class=&quot;headerlink&quot; title=&quot;目标&quot;&gt;&lt;/a&gt;目标&lt;/h1&gt;&lt;p&gt;在绿联NAS中使用&lt;a href=&quot;https://github.com/dr34m-cn/taosync&quot;&gt;TaoSync&lt;/a&gt;自动定时同步我的文件到各个网盘。&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E7%BB%8F%E9%AA%8C/">经验</category>
+      
+      <category domain="https://blog.ctftools.com/tags/%E5%88%86%E4%BA%AB/">分享</category>
+      
+      
+      <comments>https://blog.ctftools.com/2024/07/newpost-57/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>GB28181抓包记录</title>
+      <link>https://blog.ctftools.com/2024/05/newpost-56/</link>
+      <guid>https://blog.ctftools.com/2024/05/newpost-56/</guid>
+      <pubDate>Fri, 17 May 2024 08:18:45 GMT</pubDate>
+      
+      <description>&lt;h1 id=&quot;目标&quot;&gt;&lt;a href=&quot;#目标&quot; class=&quot;headerlink&quot; title=&quot;目标&quot;&gt;&lt;/a&gt;目标&lt;/h1&gt;&lt;p&gt;记录GB28181交互过程，以便相关开发研究&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E8%BF%90%E7%BB%B4/">运维</category>
+      
+      <category domain="https://blog.ctftools.com/tags/%E7%BB%8F%E9%AA%8C/">经验</category>
+      
+      
+      <comments>https://blog.ctftools.com/2024/05/newpost-56/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>JS计算字节大小，把字节转换为KB/MB/GB/TB等</title>
+      <link>https://blog.ctftools.com/2024/04/newpost-55/</link>
+      <guid>https://blog.ctftools.com/2024/04/newpost-55/</guid>
+      <pubDate>Wed, 10 Apr 2024 09:24:35 GMT</pubDate>
+      
+      <description>&lt;h1 id=&quot;目标&quot;&gt;&lt;a href=&quot;#目标&quot; class=&quot;headerlink&quot; title=&quot;目标&quot;&gt;&lt;/a&gt;目标&lt;/h1&gt;&lt;p&gt;通过JS函数，把诸如&lt;code&gt;1024&lt;/code&gt;转为&lt;code&gt;1KB&lt;/code&gt;&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E5%89%8D%E7%AB%AF/">前端</category>
+      
+      <category domain="https://blog.ctftools.com/tags/JavaScript/">JavaScript</category>
+      
+      
+      <comments>https://blog.ctftools.com/2024/04/newpost-55/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>在Python中使用onvif管理摄像头，包括设备发现，获取RTSP地址，获取设备信息，截图，云台控制与缩放，设置时间</title>
+      <link>https://blog.ctftools.com/2023/12/newpost-54/</link>
+      <guid>https://blog.ctftools.com/2023/12/newpost-54/</guid>
+      <pubDate>Thu, 14 Dec 2023 07:26:20 GMT</pubDate>
+      
+      <description>&lt;h1 id=&quot;目标&quot;&gt;&lt;a href=&quot;#目标&quot; class=&quot;headerlink&quot; title=&quot;目标&quot;&gt;&lt;/a&gt;目标&lt;/h1&gt;&lt;p&gt;使用Python管理支持&lt;code&gt;ONVIF&lt;/code&gt;的设备。支持：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;设备发现&lt;/li&gt;
+&lt;li&gt;获取RTSP地址&lt;/li&gt;
+&lt;li&gt;获取设备信息&lt;/li&gt;
+&lt;li&gt;截图&lt;/li&gt;
+&lt;li&gt;云台控制、缩放与聚焦&lt;/li&gt;
+&lt;li&gt;设置时间&lt;/li&gt;
+&lt;/ul&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/Python/">Python</category>
+      
+      <category domain="https://blog.ctftools.com/tags/Onvif/">Onvif</category>
+      
+      
+      <comments>https://blog.ctftools.com/2023/12/newpost-54/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>编写bat脚本实现对vue项目构建并压缩</title>
+      <link>https://blog.ctftools.com/2023/09/newpost-53/</link>
+      <guid>https://blog.ctftools.com/2023/09/newpost-53/</guid>
+      <pubDate>Thu, 07 Sep 2023 08:26:15 GMT</pubDate>
+      
+      <description>&lt;h1 id=&quot;目标&quot;&gt;&lt;a href=&quot;#目标&quot; class=&quot;headerlink&quot; title=&quot;目标&quot;&gt;&lt;/a&gt;目标&lt;/h1&gt;&lt;p&gt;编写bat脚本自动完成代码更新、构建、压缩为日期命名的压缩包&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E8%BF%90%E7%BB%B4/">运维</category>
+      
+      <category domain="https://blog.ctftools.com/tags/%E5%89%8D%E7%AB%AF/">前端</category>
+      
+      
+      <comments>https://blog.ctftools.com/2023/09/newpost-53/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>内网穿透工具frp快速使用</title>
+      <link>https://blog.ctftools.com/2023/09/newpost-52/</link>
+      <guid>https://blog.ctftools.com/2023/09/newpost-52/</guid>
+      <pubDate>Thu, 07 Sep 2023 06:17:14 GMT</pubDate>
+      
+      <description>&lt;h1 id=&quot;目标&quot;&gt;&lt;a href=&quot;#目标&quot; class=&quot;headerlink&quot; title=&quot;目标&quot;&gt;&lt;/a&gt;目标&lt;/h1&gt;&lt;p&gt;通过简化的配置，实现内网穿透&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E8%BF%90%E7%BB%B4/">运维</category>
+      
+      <category domain="https://blog.ctftools.com/tags/%E7%BB%8F%E9%AA%8C/">经验</category>
+      
+      
+      <comments>https://blog.ctftools.com/2023/09/newpost-52/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>CentOS 7.9 安装基础开发环境jdk redis nacos nginx mysql</title>
+      <link>https://blog.ctftools.com/2023/05/newpost-51/</link>
+      <guid>https://blog.ctftools.com/2023/05/newpost-51/</guid>
+      <pubDate>Wed, 10 May 2023 08:22:50 GMT</pubDate>
+      
+      <description>&lt;p&gt;注意：以下环境基于CentOS 7.9 最小化（&lt;code&gt;Minimal&lt;/code&gt;）系统（镜像文件名称为&lt;code&gt;CentOS-7-x86_64-Minimal-2207-02.iso&lt;/code&gt;，988MB），其他系统或版本可能略有不同&lt;/p&gt;
+&lt;p&gt;系统下载链接：&lt;a href=&quot;http://isoredirect.centos.org/centos/7/isos/x86_64/&quot;&gt;CentOS Mirrors List&lt;/a&gt;&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E8%BF%90%E7%BB%B4/">运维</category>
+      
+      <category domain="https://blog.ctftools.com/tags/%E7%BB%8F%E9%AA%8C/">经验</category>
+      
+      <category domain="https://blog.ctftools.com/tags/Nginx/">Nginx</category>
+      
+      
+      <comments>https://blog.ctftools.com/2023/05/newpost-51/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>Pyinstaller 逆向</title>
+      <link>https://blog.ctftools.com/2022/10/newpost-50/</link>
+      <guid>https://blog.ctftools.com/2022/10/newpost-50/</guid>
+      <pubDate>Fri, 28 Oct 2022 05:22:14 GMT</pubDate>
+      
+      <description>&lt;h1 id=&quot;目标&quot;&gt;&lt;a href=&quot;#目标&quot; class=&quot;headerlink&quot; title=&quot;目标&quot;&gt;&lt;/a&gt;目标&lt;/h1&gt;&lt;p&gt;在Windows下，逆向由Pyinstaller打包的exe文件，获取源码&lt;/p&gt;
+&lt;p&gt;本次仅考虑无&lt;code&gt;-key&lt;/code&gt;参数的打包&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/Python/">Python</category>
+      
+      <category domain="https://blog.ctftools.com/tags/%E9%80%86%E5%90%91/">逆向</category>
+      
+      <category domain="https://blog.ctftools.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</category>
+      
+      
+      <comments>https://blog.ctftools.com/2022/10/newpost-50/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>VUE实现复制与粘贴_获取剪切板内容</title>
+      <link>https://blog.ctftools.com/2022/09/newpost-49/</link>
+      <guid>https://blog.ctftools.com/2022/09/newpost-49/</guid>
+      <pubDate>Thu, 01 Sep 2022 01:28:23 GMT</pubDate>
+      
+      <description>&lt;h1 id=&quot;目标&quot;&gt;&lt;a href=&quot;#目标&quot; class=&quot;headerlink&quot; title=&quot;目标&quot;&gt;&lt;/a&gt;目标&lt;/h1&gt;&lt;p&gt;在VUE项目中实现复制与粘贴。&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E5%89%8D%E7%AB%AF/">前端</category>
+      
+      <category domain="https://blog.ctftools.com/tags/Vue/">Vue</category>
+      
+      
+      <comments>https://blog.ctftools.com/2022/09/newpost-49/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>Electron + xterm.js + node-pty + vue 实现本地终端</title>
+      <link>https://blog.ctftools.com/2022/08/newpost-48/</link>
+      <guid>https://blog.ctftools.com/2022/08/newpost-48/</guid>
+      <pubDate>Thu, 25 Aug 2022 08:36:29 GMT</pubDate>
+      
+      <description>&lt;p&gt;本文介绍一种简单方法，实现本地终端程序。&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E5%89%8D%E7%AB%AF/">前端</category>
+      
+      
+      <comments>https://blog.ctftools.com/2022/08/newpost-48/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>child_process exec 中文乱码 Windows&amp;Linux 解决方法</title>
+      <link>https://blog.ctftools.com/2022/08/newpost-47/</link>
+      <guid>https://blog.ctftools.com/2022/08/newpost-47/</guid>
+      <pubDate>Thu, 25 Aug 2022 02:29:58 GMT</pubDate>
+      
+      <description>&lt;h1 id=&quot;目标&quot;&gt;&lt;a href=&quot;#目标&quot; class=&quot;headerlink&quot; title=&quot;目标&quot;&gt;&lt;/a&gt;目标&lt;/h1&gt;&lt;p&gt;在Windows&amp;amp;Linux中，Mac理论也可以，执行child_process exec时，中文可以正常显示。&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E5%89%8D%E7%AB%AF/">前端</category>
+      
+      
+      <comments>https://blog.ctftools.com/2022/08/newpost-47/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>yum 更新 gcc</title>
+      <link>https://blog.ctftools.com/2022/06/newpost-46/</link>
+      <guid>https://blog.ctftools.com/2022/06/newpost-46/</guid>
+      <pubDate>Fri, 24 Jun 2022 05:50:42 GMT</pubDate>
+      
+      <description>&lt;h1 id=&quot;目标&quot;&gt;&lt;a href=&quot;#目标&quot; class=&quot;headerlink&quot; title=&quot;目标&quot;&gt;&lt;/a&gt;目标&lt;/h1&gt;&lt;p&gt;使用yum简单更新gcc，而不是编译安装&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E8%BF%90%E7%BB%B4/">运维</category>
+      
+      
+      <comments>https://blog.ctftools.com/2022/06/newpost-46/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>CentOS安装并使用conda</title>
+      <link>https://blog.ctftools.com/2022/06/newpost-45/</link>
+      <guid>https://blog.ctftools.com/2022/06/newpost-45/</guid>
+      <pubDate>Fri, 24 Jun 2022 01:40:50 GMT</pubDate>
+      
+      <description>&lt;h1 id=&quot;一、简介&quot;&gt;&lt;a href=&quot;#一、简介&quot; class=&quot;headerlink&quot; title=&quot;一、简介&quot;&gt;&lt;/a&gt;一、简介&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://docs.conda.io/en/latest/&quot;&gt;conda&lt;/a&gt;是一款适用于任何语言（Python、R、Ruby、Lua、Scala、Java、JavaScript、C/C++、Fortran 等）的包、依赖项和环境管理工具。&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E8%BF%90%E7%BB%B4/">运维</category>
+      
+      
+      <comments>https://blog.ctftools.com/2022/06/newpost-45/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>将fluid主题博客的静态资源由第三方改为本地存储</title>
+      <link>https://blog.ctftools.com/2022/06/newpost-44/</link>
+      <guid>https://blog.ctftools.com/2022/06/newpost-44/</guid>
+      <pubDate>Tue, 21 Jun 2022 08:24:22 GMT</pubDate>
+      
+      <description>&lt;h1 id=&quot;目标&quot;&gt;&lt;a href=&quot;#目标&quot; class=&quot;headerlink&quot; title=&quot;目标&quot;&gt;&lt;/a&gt;目标&lt;/h1&gt;&lt;p&gt;将fluid主题博客的静态资源由第三方改为本地存储，以防止第三方服务挂掉导致博客无法正常运行。&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E5%89%8D%E7%AB%AF/">前端</category>
+      
+      <category domain="https://blog.ctftools.com/tags/%E7%BB%8F%E9%AA%8C/">经验</category>
+      
+      
+      <comments>https://blog.ctftools.com/2022/06/newpost-44/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>一个上手即用的通用公众号/小程序/h5/app框架</title>
+      <link>https://blog.ctftools.com/2022/06/newpost-43/</link>
+      <guid>https://blog.ctftools.com/2022/06/newpost-43/</guid>
+      <pubDate>Fri, 10 Jun 2022 10:50:03 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;p&gt;源码地址：&lt;a</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E5%89%8D%E7%AB%AF/">前端</category>
+      
+      
+      <comments>https://blog.ctftools.com/2022/06/newpost-43/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>python批量转化doc到docx</title>
+      <link>https://blog.ctftools.com/2022/05/newpost-42/</link>
+      <guid>https://blog.ctftools.com/2022/05/newpost-42/</guid>
+      <pubDate>Thu, 19 May 2022 07:25:38 GMT</pubDate>
+      
+      <description>&lt;h1 id=&quot;目标&quot;&gt;&lt;a href=&quot;#目标&quot; class=&quot;headerlink&quot; title=&quot;目标&quot;&gt;&lt;/a&gt;目标&lt;/h1&gt;&lt;p&gt;通过python批量转换doc文档为docx文档&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/Python/">Python</category>
+      
+      
+      <comments>https://blog.ctftools.com/2022/05/newpost-42/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>SpringBoot单元测试注入空指针</title>
+      <link>https://blog.ctftools.com/2022/04/newpost-41/</link>
+      <guid>https://blog.ctftools.com/2022/04/newpost-41/</guid>
+      <pubDate>Wed, 27 Apr 2022 08:10:52 GMT</pubDate>
+      
+      <description>&lt;h2 id=&quot;现象&quot;&gt;&lt;a href=&quot;#现象&quot; class=&quot;headerlink&quot; title=&quot;现象&quot;&gt;&lt;/a&gt;现象&lt;/h2&gt;&lt;p&gt;运行出现空指针异常，指向注入类的使用行&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/Java/">Java</category>
+      
+      
+      <comments>https://blog.ctftools.com/2022/04/newpost-41/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>TensorFlow 预测出现NaN的一种可能以及解决方法</title>
+      <link>https://blog.ctftools.com/2022/04/newpost-40/</link>
+      <guid>https://blog.ctftools.com/2022/04/newpost-40/</guid>
+      <pubDate>Thu, 21 Apr 2022 13:11:09 GMT</pubDate>
+      
+      <description>&lt;h2 id=&quot;现象&quot;&gt;&lt;a href=&quot;#现象&quot; class=&quot;headerlink&quot; title=&quot;现象&quot;&gt;&lt;/a&gt;现象&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;使用TensorFlow进行训练（&lt;code&gt;model.fit&lt;/code&gt;）时，一切正常，并且对测试数据集的预测结果（&lt;code&gt;model.evaluate&lt;/code&gt;）也表现正常，这时候保存模型&lt;/li&gt;
+&lt;li&gt;对训练集中单独一条数据，或者少量数据进行预测，预测结果出现&lt;code&gt;NaN&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;如果对稍大量数据预测，则能正常出结果，但预测结果准确度低于预期&lt;/li&gt;
+&lt;li&gt;如果对大量数据预测，则结果准确度符合预期&lt;/li&gt;
+&lt;/ul&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/Python/">Python</category>
+      
+      <category domain="https://blog.ctftools.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</category>
+      
+      <category domain="https://blog.ctftools.com/tags/TensorFlow/">TensorFlow</category>
+      
+      
+      <comments>https://blog.ctftools.com/2022/04/newpost-40/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>随笔</title>
+      <link>https://blog.ctftools.com/2022/04/newpost-39/</link>
+      <guid>https://blog.ctftools.com/2022/04/newpost-39/</guid>
+      <pubDate>Tue, 05 Apr 2022 15:35:11 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;p&gt;百年之后，假设我的博客还在，未来的人读到上边的文字，是否会想到，写下这些文字的人，已经死了&lt;/p&gt;
+</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E9%9A%8F%E7%AC%94/">随笔</category>
+      
+      
+      <comments>https://blog.ctftools.com/2022/04/newpost-39/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>python归一化数据</title>
+      <link>https://blog.ctftools.com/2022/03/newpost-38/</link>
+      <guid>https://blog.ctftools.com/2022/03/newpost-38/</guid>
+      <pubDate>Thu, 31 Mar 2022 12:08:58 GMT</pubDate>
+      
+      <description>&lt;h1 id=&quot;目标&quot;&gt;&lt;a href=&quot;#目标&quot; class=&quot;headerlink&quot; title=&quot;目标&quot;&gt;&lt;/a&gt;目标&lt;/h1&gt;&lt;p&gt;使用python对pandas拿到的数据进行归一化，方便用于训练或者预测&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/Python/">Python</category>
+      
+      <category domain="https://blog.ctftools.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</category>
+      
+      <category domain="https://blog.ctftools.com/tags/TensorFlow/">TensorFlow</category>
+      
+      
+      <comments>https://blog.ctftools.com/2022/03/newpost-38/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>windows下python安装sasl遇到的问题及解决</title>
+      <link>https://blog.ctftools.com/2022/03/newpost-37/</link>
+      <guid>https://blog.ctftools.com/2022/03/newpost-37/</guid>
+      <pubDate>Wed, 30 Mar 2022 01:29:34 GMT</pubDate>
+      
+      <description>&lt;h1 id=&quot;目标&quot;&gt;&lt;a href=&quot;#目标&quot; class=&quot;headerlink&quot; title=&quot;目标&quot;&gt;&lt;/a&gt;目标&lt;/h1&gt;&lt;p&gt;windows下python安装sasl&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E7%BC%96%E7%A8%8B/">编程</category>
+      
+      <category domain="https://blog.ctftools.com/tags/Python/">Python</category>
+      
+      
+      <comments>https://blog.ctftools.com/2022/03/newpost-37/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>将对象List中的某个字段放到新的List中[转载]</title>
+      <link>https://blog.ctftools.com/2022/03/newpost-36/</link>
+      <guid>https://blog.ctftools.com/2022/03/newpost-36/</guid>
+      <pubDate>Tue, 22 Mar 2022 08:38:34 GMT</pubDate>
+      
+      <description>&lt;h1 id=&quot;目标&quot;&gt;&lt;a href=&quot;#目标&quot; class=&quot;headerlink&quot; title=&quot;目标&quot;&gt;&lt;/a&gt;目标&lt;/h1&gt;&lt;p&gt;将对象List中的某个字段放到新的List中&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E7%BC%96%E7%A8%8B/">编程</category>
+      
+      <category domain="https://blog.ctftools.com/tags/Java/">Java</category>
+      
+      
+      <comments>https://blog.ctftools.com/2022/03/newpost-36/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>Python http.server 本地服务支持跨域</title>
+      <link>https://blog.ctftools.com/2022/02/newpost-35/</link>
+      <guid>https://blog.ctftools.com/2022/02/newpost-35/</guid>
+      <pubDate>Thu, 24 Feb 2022 09:34:09 GMT</pubDate>
+      
+      <description>&lt;h1 id=&quot;目标&quot;&gt;&lt;a href=&quot;#目标&quot; class=&quot;headerlink&quot; title=&quot;目标&quot;&gt;&lt;/a&gt;目标&lt;/h1&gt;&lt;p&gt;Python 使用http.server启动本地服务支持跨域&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E8%BF%90%E7%BB%B4/">运维</category>
+      
+      <category domain="https://blog.ctftools.com/tags/Python/">Python</category>
+      
+      
+      <comments>https://blog.ctftools.com/2022/02/newpost-35/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>TensorFlow入门</title>
+      <link>https://blog.ctftools.com/2022/02/newpost-33/</link>
+      <guid>https://blog.ctftools.com/2022/02/newpost-33/</guid>
+      <pubDate>Tue, 08 Feb 2022 08:19:08 GMT</pubDate>
+      
+      <description>&lt;h1 id=&quot;目标&quot;&gt;&lt;a href=&quot;#目标&quot; class=&quot;headerlink&quot; title=&quot;目标&quot;&gt;&lt;/a&gt;目标&lt;/h1&gt;&lt;p&gt;实现&lt;a href=&quot;https://www.tensorflow.org/tutorials/keras/classification?hl=zh_cn&quot;&gt;官方案例&lt;/a&gt;，训练一个神经网络模型，对运动鞋和衬衫等服装图像进行分类，数据集来自&lt;a href=&quot;https://github.com/zalandoresearch/fashion-mnist&quot;&gt;Fashion-MNIST 样本&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;本文环境为Python3 x64，windows系统&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/Python/">Python</category>
+      
+      <category domain="https://blog.ctftools.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</category>
+      
+      <category domain="https://blog.ctftools.com/tags/TensorFlow/">TensorFlow</category>
+      
+      
+      <comments>https://blog.ctftools.com/2022/02/newpost-33/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>Flink学习笔记</title>
+      <link>https://blog.ctftools.com/2022/01/newpost-32/</link>
+      <guid>https://blog.ctftools.com/2022/01/newpost-32/</guid>
+      <pubDate>Thu, 20 Jan 2022 07:00:19 GMT</pubDate>
+      
+      <description>&lt;p&gt;本文基于B站视频教程&lt;a href=&quot;https://www.bilibili.com/video/BV1qy4y1q728&quot;&gt;尚硅谷Java版Flink（武老师清华硕士，原IBM-CDL负责人）&lt;/a&gt;，本文软件版本，行文顺序等可能与视频略有不同&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E8%BF%90%E7%BB%B4/">运维</category>
+      
+      <category domain="https://blog.ctftools.com/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据</category>
+      
+      
+      <comments>https://blog.ctftools.com/2022/01/newpost-32/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>windows本地配置spark开发环境</title>
+      <link>https://blog.ctftools.com/2022/01/newpost-31/</link>
+      <guid>https://blog.ctftools.com/2022/01/newpost-31/</guid>
+      <pubDate>Tue, 18 Jan 2022 01:52:21 GMT</pubDate>
+      
+      <description>&lt;h1 id=&quot;目标&quot;&gt;&lt;a href=&quot;#目标&quot; class=&quot;headerlink&quot; title=&quot;目标&quot;&gt;&lt;/a&gt;目标&lt;/h1&gt;&lt;p&gt;在windows系统本地配置spark开发环境，能够通过idea开发spark项目&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E8%BF%90%E7%BB%B4/">运维</category>
+      
+      <category domain="https://blog.ctftools.com/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据</category>
+      
+      
+      <comments>https://blog.ctftools.com/2022/01/newpost-31/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>dataX使用</title>
+      <link>https://blog.ctftools.com/2022/01/newpost-30/</link>
+      <guid>https://blog.ctftools.com/2022/01/newpost-30/</guid>
+      <pubDate>Mon, 10 Jan 2022 08:00:10 GMT</pubDate>
+      
+      <description>&lt;h1 id=&quot;目标&quot;&gt;&lt;a href=&quot;#目标&quot; class=&quot;headerlink&quot; title=&quot;目标&quot;&gt;&lt;/a&gt;目标&lt;/h1&gt;&lt;p&gt;安装、测试与简单使用dataX，本文基于CentOS7 x64实现&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E8%BF%90%E7%BB%B4/">运维</category>
+      
+      <category domain="https://blog.ctftools.com/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据</category>
+      
+      
+      <comments>https://blog.ctftools.com/2022/01/newpost-30/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>Apache Hive 学习笔记</title>
+      <link>https://blog.ctftools.com/2022/01/newpost-29/</link>
+      <guid>https://blog.ctftools.com/2022/01/newpost-29/</guid>
+      <pubDate>Thu, 06 Jan 2022 08:41:00 GMT</pubDate>
+      
+      <description>&lt;p&gt;本文基于B站视频教程&lt;a href=&quot;https://www.bilibili.com/video/BV1CU4y1N7Sh&quot;&gt;2022最新黑马程序员大数据Hadoop入门视频教程，最适合零基础自学的大数据Hadoop教程&lt;/a&gt;，p51-p83，本文软件版本，行文顺序等可能与视频略有不同&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E8%BF%90%E7%BB%B4/">运维</category>
+      
+      <category domain="https://blog.ctftools.com/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据</category>
+      
+      
+      <comments>https://blog.ctftools.com/2022/01/newpost-29/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>hadoop学习笔记</title>
+      <link>https://blog.ctftools.com/2022/01/newpost-28/</link>
+      <guid>https://blog.ctftools.com/2022/01/newpost-28/</guid>
+      <pubDate>Wed, 05 Jan 2022 02:52:51 GMT</pubDate>
+      
+      <description>&lt;p&gt;本文基于B站视频教程&lt;a href=&quot;https://www.bilibili.com/video/BV1CU4y1N7Sh&quot;&gt;2022最新黑马程序员大数据Hadoop入门视频教程，最适合零基础自学的大数据Hadoop教程&lt;/a&gt;，p19-p50，本文软件版本，行文顺序等可能与视频略有不同&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E8%BF%90%E7%BB%B4/">运维</category>
+      
+      <category domain="https://blog.ctftools.com/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据</category>
+      
+      
+      <comments>https://blog.ctftools.com/2022/01/newpost-28/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>element-ui 自带事件添加自定义参数</title>
+      <link>https://blog.ctftools.com/2021/12/newpost-27/</link>
+      <guid>https://blog.ctftools.com/2021/12/newpost-27/</guid>
+      <pubDate>Mon, 20 Dec 2021 06:59:33 GMT</pubDate>
+      
+      <description>&lt;h2 id=&quot;目的&quot;&gt;&lt;a href=&quot;#目的&quot; class=&quot;headerlink&quot; title=&quot;目的&quot;&gt;&lt;/a&gt;目的&lt;/h2&gt;&lt;p&gt;在使用&lt;code&gt;element-ui&lt;/code&gt;自带事件，例如&lt;code&gt;@change&lt;/code&gt;，添加自定义参数，并且保留原有参数&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E5%89%8D%E7%AB%AF/">前端</category>
+      
+      
+      <comments>https://blog.ctftools.com/2021/12/newpost-27/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>windows 11安装安卓应用程序</title>
+      <link>https://blog.ctftools.com/2021/12/newpost-26/</link>
+      <guid>https://blog.ctftools.com/2021/12/newpost-26/</guid>
+      <pubDate>Tue, 07 Dec 2021 02:35:21 GMT</pubDate>
+      
+      <description>&lt;h2 id=&quot;一、目的&quot;&gt;&lt;a href=&quot;#一、目的&quot; class=&quot;headerlink&quot; title=&quot;一、目的&quot;&gt;&lt;/a&gt;一、目的&lt;/h2&gt;&lt;p&gt;在windows 11中通过windows 11自带的子系统功能，实现自由安装安卓应用程序&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E7%BB%8F%E9%AA%8C/">经验</category>
+      
+      
+      <comments>https://blog.ctftools.com/2021/12/newpost-26/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>centos7安装zookeeper</title>
+      <link>https://blog.ctftools.com/2021/11/newpost-25/</link>
+      <guid>https://blog.ctftools.com/2021/11/newpost-25/</guid>
+      <pubDate>Tue, 09 Nov 2021 09:38:53 GMT</pubDate>
+      
+      <description>&lt;h3 id=&quot;一、下载并解压&quot;&gt;&lt;a href=&quot;#一、下载并解压&quot; class=&quot;headerlink&quot; title=&quot;一、下载并解压&quot;&gt;&lt;/a&gt;一、下载并解压&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;https://zookeeper.apache.org/releases.html&quot;&gt;下载地址&lt;/a&gt;&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E8%BF%90%E7%BB%B4/">运维</category>
+      
+      
+      <comments>https://blog.ctftools.com/2021/11/newpost-25/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>centos7安装jdk8</title>
+      <link>https://blog.ctftools.com/2021/11/newpost-24/</link>
+      <guid>https://blog.ctftools.com/2021/11/newpost-24/</guid>
+      <pubDate>Tue, 09 Nov 2021 09:18:06 GMT</pubDate>
+      
+      <description>&lt;h3 id=&quot;一、检查是否已安装&quot;&gt;&lt;a href=&quot;#一、检查是否已安装&quot; class=&quot;headerlink&quot; title=&quot;一、检查是否已安装&quot;&gt;&lt;/a&gt;一、检查是否已安装&lt;/h3&gt;&lt;figure class=&quot;highlight shell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;hljs shell&quot;&gt;rpm -qa | grep java&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E8%BF%90%E7%BB%B4/">运维</category>
+      
+      
+      <comments>https://blog.ctftools.com/2021/11/newpost-24/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>用idea开发spring项目过程中热重启</title>
+      <link>https://blog.ctftools.com/2021/11/newpost-23/</link>
+      <guid>https://blog.ctftools.com/2021/11/newpost-23/</guid>
+      <pubDate>Fri, 05 Nov 2021 07:15:30 GMT</pubDate>
+      
+      <description>&lt;h2 id=&quot;一、目标&quot;&gt;&lt;a href=&quot;#一、目标&quot; class=&quot;headerlink&quot; title=&quot;一、目标&quot;&gt;&lt;/a&gt;一、目标&lt;/h2&gt;&lt;p&gt;在用idea开发spring项目过程中，修改代码自动热重启，无需手动操作。&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/Java/">Java</category>
+      
+      
+      <comments>https://blog.ctftools.com/2021/11/newpost-23/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>docker学习笔记</title>
+      <link>https://blog.ctftools.com/2021/09/newpost-22/</link>
+      <guid>https://blog.ctftools.com/2021/09/newpost-22/</guid>
+      <pubDate>Fri, 10 Sep 2021 08:23:23 GMT</pubDate>
+      
+      <description>&lt;p&gt;&lt;strong&gt;基于centos7，root登录&lt;/strong&gt;，笔记为&lt;a href=&quot;https://www.bilibili.com/video/BV1CJ411T7BK?p=1&quot;&gt;黑马程序员Docker容器化技术，从零学会Docker教程&lt;/a&gt;学习笔记&lt;/p&gt;
+&lt;h2 id=&quot;一、安装docker-ce并配置自启动&quot;&gt;&lt;a href=&quot;#一、安装docker-ce并配置自启动&quot; class=&quot;headerlink&quot; title=&quot;一、安装docker-ce并配置自启动&quot;&gt;&lt;/a&gt;一、安装docker-ce并配置自启动&lt;/h2&gt;&lt;h3 id=&quot;1-安装&quot;&gt;&lt;a href=&quot;#1-安装&quot; class=&quot;headerlink&quot; title=&quot;1.安装&quot;&gt;&lt;/a&gt;1.安装&lt;/h3&gt;&lt;figure class=&quot;highlight sh&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;hljs sh&quot;&gt;yum install -y yum-utils device-mapper-persistent-data lvm2&lt;br&gt;yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo&lt;br&gt;yum -y install docker-ce docker-ce-cli containerd.io&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E8%BF%90%E7%BB%B4/">运维</category>
+      
+      
+      <comments>https://blog.ctftools.com/2021/09/newpost-22/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>CentOS7安装k8s集群</title>
+      <link>https://blog.ctftools.com/2021/09/newpost-21/</link>
+      <guid>https://blog.ctftools.com/2021/09/newpost-21/</guid>
+      <pubDate>Thu, 09 Sep 2021 08:23:11 GMT</pubDate>
+      
+      <description>&lt;h2 id=&quot;准备机器&quot;&gt;&lt;a href=&quot;#准备机器&quot; class=&quot;headerlink&quot; title=&quot;准备机器&quot;&gt;&lt;/a&gt;准备机器&lt;/h2&gt;&lt;p&gt;准备机器，本次以虚拟机示范，系统都是CentOS7，以root用户的登录，实际应用中如果使用虚拟机，可以先创建一台，然后完成master和node都需要的配置之后，再克隆出多台。本次演示的机器ip分别为：&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E8%BF%90%E7%BB%B4/">运维</category>
+      
+      
+      <comments>https://blog.ctftools.com/2021/09/newpost-21/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>通过Github Actions部署静态网站到腾讯云COS，并自动刷新CDN</title>
+      <link>https://blog.ctftools.com/2021/07/newpost-20/</link>
+      <guid>https://blog.ctftools.com/2021/07/newpost-20/</guid>
+      <pubDate>Fri, 30 Jul 2021 02:14:06 GMT</pubDate>
+      
+      <description>&lt;h2 id=&quot;一、腾讯云操作&quot;&gt;&lt;a href=&quot;#一、腾讯云操作&quot; class=&quot;headerlink&quot; title=&quot;一、腾讯云操作&quot;&gt;&lt;/a&gt;一、腾讯云操作&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;进入腾讯云控制台-云产品-基础存储服务-对象存储-存储桶列表-创建存储桶&lt;/li&gt;
+&lt;/ul&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E8%BF%90%E7%BB%B4/">运维</category>
+      
+      <category domain="https://blog.ctftools.com/tags/%E7%BB%8F%E9%AA%8C/">经验</category>
+      
+      
+      <comments>https://blog.ctftools.com/2021/07/newpost-20/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>用Typora编写Hexo博客时图片的处理</title>
+      <link>https://blog.ctftools.com/2021/07/newpost-19/</link>
+      <guid>https://blog.ctftools.com/2021/07/newpost-19/</guid>
+      <pubDate>Wed, 28 Jul 2021 09:44:03 GMT</pubDate>
+      
+      <description>&lt;h2 id=&quot;目标&quot;&gt;&lt;a href=&quot;#目标&quot; class=&quot;headerlink&quot; title=&quot;目标&quot;&gt;&lt;/a&gt;目标&lt;/h2&gt;&lt;p&gt;1.使用Typora编写Hexo博客时，可以直接本地拖拽图片(或复制图片粘贴，后同不赘述)到Typora编辑器，并且能正常预览；&lt;/p&gt;
+&lt;p&gt;2.部署Hexo时图片也能正常显示；&lt;/p&gt;
+&lt;p&gt;3.图片放在hexo目录里，不依赖其他平台。&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E7%BB%8F%E9%AA%8C/">经验</category>
+      
+      
+      <comments>https://blog.ctftools.com/2021/07/newpost-19/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>Hexo + Github Actions 提交代码自动部署 云服务器 腾讯云COS github-pages</title>
+      <link>https://blog.ctftools.com/2021/07/newpost-18/</link>
+      <guid>https://blog.ctftools.com/2021/07/newpost-18/</guid>
+      <pubDate>Fri, 23 Jul 2021 09:41:16 GMT</pubDate>
+      
+      <description>&lt;h1 id=&quot;最终成果&quot;&gt;&lt;a href=&quot;#最终成果&quot; class=&quot;headerlink&quot; title=&quot;最终成果&quot;&gt;&lt;/a&gt;最终成果&lt;/h1&gt;&lt;p&gt;编写文章后只需提交代码，之后自动构建hexo生成public文件夹，并自动将其发布到你需要的平台，还可以自动生成release用于存档，方便随时回滚到过去任意一版博客。&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E8%BF%90%E7%BB%B4/">运维</category>
+      
+      <category domain="https://blog.ctftools.com/tags/%E7%BB%8F%E9%AA%8C/">经验</category>
+      
+      
+      <comments>https://blog.ctftools.com/2021/07/newpost-18/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>常用的Linux进程基本命令</title>
+      <link>https://blog.ctftools.com/2021/07/newpost-17/</link>
+      <guid>https://blog.ctftools.com/2021/07/newpost-17/</guid>
+      <pubDate>Mon, 12 Jul 2021 06:44:07 GMT</pubDate>
+      
+      <description>&lt;h4 id=&quot;按内存或cpu占用排序&quot;&gt;&lt;a href=&quot;#按内存或cpu占用排序&quot; class=&quot;headerlink&quot; title=&quot;按内存或cpu占用排序&quot;&gt;&lt;/a&gt;按内存或cpu占用排序&lt;/h4&gt;&lt;p&gt;首先输入&lt;code&gt;top&lt;/code&gt;命令，然后:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;按&lt;code&gt;P&lt;/code&gt;-以 CPU 占用率大小的顺序排列进程列表&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;按&lt;code&gt;M&lt;/code&gt;-以内存占用率大小的顺序排列进程列表&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E8%BF%90%E7%BB%B4/">运维</category>
+      
+      
+      <comments>https://blog.ctftools.com/2021/07/newpost-17/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>python实现微信jsapi签名</title>
+      <link>https://blog.ctftools.com/2021/06/newpost-16/</link>
+      <guid>https://blog.ctftools.com/2021/06/newpost-16/</guid>
+      <pubDate>Thu, 24 Jun 2021 08:12:39 GMT</pubDate>
+      
+      <description>&lt;ul&gt;
+&lt;li&gt;以下完整演示了获取access_token，获取ticket，最后签名返回前端全过程。&lt;/li&gt;
+&lt;/ul&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E7%BC%96%E7%A8%8B/">编程</category>
+      
+      <category domain="https://blog.ctftools.com/tags/Python/">Python</category>
+      
+      
+      <comments>https://blog.ctftools.com/2021/06/newpost-16/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>VsCode开发Python常用配置</title>
+      <link>https://blog.ctftools.com/2021/06/newpost-15/</link>
+      <guid>https://blog.ctftools.com/2021/06/newpost-15/</guid>
+      <pubDate>Thu, 24 Jun 2021 08:06:11 GMT</pubDate>
+      
+      <description>&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;hljs js&quot;&gt;&amp;#123;&lt;br&gt;    &lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;python.linting.flake8Enabled&amp;quot;&lt;/span&gt;: &lt;span class=&quot;hljs-literal&quot;&gt;true&lt;/span&gt;,&lt;br&gt;    &lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;python.formatting.provider&amp;quot;&lt;/span&gt;: &lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;yapf&amp;quot;&lt;/span&gt;,&lt;br&gt;    &lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;python.formatting.yapfArgs&amp;quot;&lt;/span&gt;: [&lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;--style=&amp;#123;column_limit=128&amp;#125;&amp;quot;&lt;/span&gt;],&lt;br&gt;    &lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;python.linting.flake8Args&amp;quot;&lt;/span&gt;: [&lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;--max-line-length=248&amp;quot;&lt;/span&gt;],&lt;br&gt;    &lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;python.linting.pylintEnabled&amp;quot;&lt;/span&gt;: &lt;span class=&quot;hljs-literal&quot;&gt;false&lt;/span&gt;&lt;br&gt;&amp;#125;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E7%BC%96%E7%A8%8B/">编程</category>
+      
+      <category domain="https://blog.ctftools.com/tags/Python/">Python</category>
+      
+      
+      <comments>https://blog.ctftools.com/2021/06/newpost-15/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>mysql获取当期日期是该年第几周</title>
+      <link>https://blog.ctftools.com/2021/06/newpost-14/</link>
+      <guid>https://blog.ctftools.com/2021/06/newpost-14/</guid>
+      <pubDate>Mon, 21 Jun 2021 05:52:30 GMT</pubDate>
+      
+      <description>&lt;ul&gt;
+&lt;li&gt;最简单常用，返回值为4，这种情况按国际标准，周四在哪一年，这周就属于哪一年，默认周一是一周的第一天&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;hljs mysql&quot;&gt;WEEKOFYEAR(&amp;#x27;2020-01-20&amp;#x27;)&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E7%BC%96%E7%A8%8B/">编程</category>
+      
+      <category domain="https://blog.ctftools.com/tags/MySQL/">MySQL</category>
+      
+      
+      <comments>https://blog.ctftools.com/2021/06/newpost-14/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>LocalDate获取当前周周一日期</title>
+      <link>https://blog.ctftools.com/2021/06/newpost-13/</link>
+      <guid>https://blog.ctftools.com/2021/06/newpost-13/</guid>
+      <pubDate>Mon, 21 Jun 2021 05:40:24 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E7%BC%96%E7%A8%8B/">编程</category>
+      
+      <category domain="https://blog.ctftools.com/tags/Java/">Java</category>
+      
+      
+      <comments>https://blog.ctftools.com/2021/06/newpost-13/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>删除node_modules重新安装</title>
+      <link>https://blog.ctftools.com/2021/03/newpost-12/</link>
+      <guid>https://blog.ctftools.com/2021/03/newpost-12/</guid>
+      <pubDate>Thu, 18 Mar 2021 06:48:05 GMT</pubDate>
+      
+      <description>&lt;ul&gt;
+&lt;li&gt;1.关闭项目，终端中进入项目目录&lt;/li&gt;
+&lt;/ul&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E7%BC%96%E7%A8%8B/">编程</category>
+      
+      <category domain="https://blog.ctftools.com/tags/%E5%89%8D%E7%AB%AF/">前端</category>
+      
+      
+      <comments>https://blog.ctftools.com/2021/03/newpost-12/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>基于firewalld端口转发</title>
+      <link>https://blog.ctftools.com/2021/02/newpost-10/</link>
+      <guid>https://blog.ctftools.com/2021/02/newpost-10/</guid>
+      <pubDate>Mon, 08 Feb 2021 07:07:53 GMT</pubDate>
+      
+      <description>&lt;h2 id=&quot;1-首先确认firewalld已经安装&quot;&gt;&lt;a href=&quot;#1-首先确认firewalld已经安装&quot; class=&quot;headerlink&quot; title=&quot;1.首先确认firewalld已经安装&quot;&gt;&lt;/a&gt;1.首先确认firewalld已经安装&lt;/h2&gt;&lt;figure class=&quot;highlight shell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;hljs shell&quot;&gt;firewall-cmd --state&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;如果输出不&lt;strong&gt;是running&lt;/strong&gt;，则可能没安装或者没启动，没启动会提示&lt;code&gt;not running&lt;/code&gt;&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E8%BF%90%E7%BB%B4/">运维</category>
+      
+      
+      <comments>https://blog.ctftools.com/2021/02/newpost-10/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>pip 安装 tensorflow MemoryError</title>
+      <link>https://blog.ctftools.com/2021/01/newpost-9/</link>
+      <guid>https://blog.ctftools.com/2021/01/newpost-9/</guid>
+      <pubDate>Mon, 18 Jan 2021 08:11:46 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;p&gt;原因是内存不够了，可以添加&lt;code&gt;--no-cache-dir&lt;/code&gt;禁用缓存，例如：&lt;/p&gt;
+&lt;figure class=&quot;highlight apache&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E7%BC%96%E7%A8%8B/">编程</category>
+      
+      <category domain="https://blog.ctftools.com/tags/Python/">Python</category>
+      
+      
+      <comments>https://blog.ctftools.com/2021/01/newpost-9/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>Java过滤html标签</title>
+      <link>https://blog.ctftools.com/2020/12/newpost-8/</link>
+      <guid>https://blog.ctftools.com/2020/12/newpost-8/</guid>
+      <pubDate>Mon, 28 Dec 2020 06:26:04 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;p&gt;假设str为html富文本，则&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E7%BC%96%E7%A8%8B/">编程</category>
+      
+      <category domain="https://blog.ctftools.com/tags/Java/">Java</category>
+      
+      
+      <comments>https://blog.ctftools.com/2020/12/newpost-8/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>mysql清空表，并让自增从0开始</title>
+      <link>https://blog.ctftools.com/2020/12/newpost-7/</link>
+      <guid>https://blog.ctftools.com/2020/12/newpost-7/</guid>
+      <pubDate>Wed, 23 Dec 2020 05:51:34 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;p&gt;mysql清空表与自增&lt;/p&gt;
+&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E7%BC%96%E7%A8%8B/">编程</category>
+      
+      <category domain="https://blog.ctftools.com/tags/MySQL/">MySQL</category>
+      
+      
+      <comments>https://blog.ctftools.com/2020/12/newpost-7/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>JavaScript获取当前周或下n周的周n的日期</title>
+      <link>https://blog.ctftools.com/2020/12/newpost-6/</link>
+      <guid>https://blog.ctftools.com/2020/12/newpost-6/</guid>
+      <pubDate>Tue, 15 Dec 2020 09:32:57 GMT</pubDate>
+      
+      <description>&lt;p&gt;调用方法&lt;code&gt;getDate(cur_m, day_m)&lt;/code&gt;&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E5%89%8D%E7%AB%AF/">前端</category>
+      
+      <category domain="https://blog.ctftools.com/tags/JavaScript/">JavaScript</category>
+      
+      
+      <comments>https://blog.ctftools.com/2020/12/newpost-6/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>java复制不同实体类中相同的字段</title>
+      <link>https://blog.ctftools.com/2020/12/newpost-5/</link>
+      <guid>https://blog.ctftools.com/2020/12/newpost-5/</guid>
+      <pubDate>Thu, 03 Dec 2020 09:50:16 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;p&gt;用下边的方法就能实现，其中&lt;code&gt;source&lt;/code&gt;为复制源，&lt;code&gt;target&lt;/code&gt;为复制目标。&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E7%BC%96%E7%A8%8B/">编程</category>
+      
+      <category domain="https://blog.ctftools.com/tags/Java/">Java</category>
+      
+      
+      <comments>https://blog.ctftools.com/2020/12/newpost-5/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>前端下载二进制文件</title>
+      <link>https://blog.ctftools.com/2020/11/newpost-4/</link>
+      <guid>https://blog.ctftools.com/2020/11/newpost-4/</guid>
+      <pubDate>Mon, 30 Nov 2020 01:28:30 GMT</pubDate>
+      
+      <description>&lt;p&gt;假设你从后台获取到的二进制数据为&lt;code&gt;res&lt;/code&gt;，则&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E5%89%8D%E7%AB%AF/">前端</category>
+      
+      
+      <comments>https://blog.ctftools.com/2020/11/newpost-4/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>mysql获取最近一段时间数据</title>
+      <link>https://blog.ctftools.com/2020/11/newpost-3/</link>
+      <guid>https://blog.ctftools.com/2020/11/newpost-3/</guid>
+      <pubDate>Thu, 26 Nov 2020 08:25:56 GMT</pubDate>
+      
+      <description>&lt;ul&gt;
+&lt;li&gt;获取最近七天，其中&lt;code&gt;CREATE_TIME&lt;/code&gt;改为实际表中存储时间的字段&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;hljs mysql&quot;&gt;select count(id) from table where date_sub(curdate(), interval 7 day) &amp;lt;= date(CREATE_TIME)&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E7%BC%96%E7%A8%8B/">编程</category>
+      
+      <category domain="https://blog.ctftools.com/tags/MySQL/">MySQL</category>
+      
+      
+      <comments>https://blog.ctftools.com/2020/11/newpost-3/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>python - pip换源</title>
+      <link>https://blog.ctftools.com/2020/11/newpost-2/</link>
+      <guid>https://blog.ctftools.com/2020/11/newpost-2/</guid>
+      <pubDate>Mon, 16 Nov 2020 09:06:23 GMT</pubDate>
+      
+      <description>&lt;ul&gt;
+&lt;li&gt;windows直接在user目录中创建一个pip目录，如：C:&#92;Users&#92;xx&#92;pip，新建文件pip.ini，内容如下&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&quot;highlight ini&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;hljs ini&quot;&gt;&lt;span class=&quot;hljs-section&quot;&gt;[global]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;hljs-attr&quot;&gt;index-url&lt;/span&gt; = https://mirrors.aliyun.com/pypi/simple/&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E8%BF%90%E7%BB%B4/">运维</category>
+      
+      <category domain="https://blog.ctftools.com/tags/Python/">Python</category>
+      
+      
+      <comments>https://blog.ctftools.com/2020/11/newpost-2/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>svn提交后jenkins自动部署</title>
+      <link>https://blog.ctftools.com/2020/11/newpost-1/</link>
+      <guid>https://blog.ctftools.com/2020/11/newpost-1/</guid>
+      <pubDate>Fri, 13 Nov 2020 06:53:49 GMT</pubDate>
+      
+      <description>&lt;h2 id=&quot;一、jenkins相关&quot;&gt;&lt;a href=&quot;#一、jenkins相关&quot; class=&quot;headerlink&quot; title=&quot;一、jenkins相关&quot;&gt;&lt;/a&gt;一、jenkins相关&lt;/h2&gt;&lt;h3 id=&quot;1-创建SVN专用账号&quot;&gt;&lt;a href=&quot;#1-创建SVN专用账号&quot; class=&quot;headerlink&quot; title=&quot;1.创建SVN专用账号&quot;&gt;&lt;/a&gt;1.创建SVN专用账号&lt;/h3&gt;&lt;p&gt;进入&lt;code&gt;jenkins&lt;/code&gt;管理后台，&lt;code&gt;系统管理&lt;/code&gt;-&lt;code&gt;管理用户&lt;/code&gt;-左边的&lt;code&gt;新建用户&lt;/code&gt;，输入相关信息后点击&lt;code&gt;新建用户&lt;/code&gt;，假设你创建的账号密码分别是&lt;code&gt;svn&lt;/code&gt;，&lt;code&gt;svnpwd&lt;/code&gt;。&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E8%BF%90%E7%BB%B4/">运维</category>
+      
+      <category domain="https://blog.ctftools.com/tags/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/">持续集成</category>
+      
+      
+      <comments>https://blog.ctftools.com/2020/11/newpost-1/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>常见nginx反向代理配置</title>
+      <link>https://blog.ctftools.com/2020/11/newpost/</link>
+      <guid>https://blog.ctftools.com/2020/11/newpost/</guid>
+      <pubDate>Fri, 13 Nov 2020 02:20:28 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;ul&gt;
+&lt;li&gt;此配置可以用于jenkins反向代理等&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&quot;highlight nginx&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E8%BF%90%E7%BB%B4/">运维</category>
+      
+      <category domain="https://blog.ctftools.com/tags/Nginx/">Nginx</category>
+      
+      
+      <comments>https://blog.ctftools.com/2020/11/newpost/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>h5实现一种自动滚动的告警列表</title>
+      <link>https://blog.ctftools.com/2020/11/post252/</link>
+      <guid>https://blog.ctftools.com/2020/11/post252/</guid>
+      <pubDate>Thu, 12 Nov 2020 06:25:44 GMT</pubDate>
+      
+      <description>&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/dr34m-cn/wrnlist&quot;&gt;项目地址&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E5%89%8D%E7%AB%AF/">前端</category>
+      
+      
+      <comments>https://blog.ctftools.com/2020/11/post252/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>nginx代理网站子目录到本地目录</title>
+      <link>https://blog.ctftools.com/2020/11/post251/</link>
+      <guid>https://blog.ctftools.com/2020/11/post251/</guid>
+      <pubDate>Thu, 12 Nov 2020 05:54:49 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;p&gt;使用nginx的alias即可，例如下边的配置将子目录&lt;code&gt;static_web&lt;/code&gt;代理到&lt;code&gt;/www/wwwroot/bg.ctftools.com&lt;/code&gt;路径，访问&lt;code&gt;http://xxx.xx/static_web/index.h</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E8%BF%90%E7%BB%B4/">运维</category>
+      
+      
+      <comments>https://blog.ctftools.com/2020/11/post251/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>centos下hexo + svn + jenkins实现博客自动部署</title>
+      <link>https://blog.ctftools.com/2020/11/post249/</link>
+      <guid>https://blog.ctftools.com/2020/11/post249/</guid>
+      <pubDate>Wed, 04 Nov 2020 01:53:02 GMT</pubDate>
+      
+      <description>&lt;p&gt;起由：hexo是一个很好用的轻量级博客系统，生成纯静态相对安全而且高性能，但是每次写完博文都需要手动生成静态文件，部署到服务器，影响生活，于是就考虑使用jenkins实现自动部署。&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E8%BF%90%E7%BB%B4/">运维</category>
+      
+      <category domain="https://blog.ctftools.com/tags/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/">持续集成</category>
+      
+      
+      <comments>https://blog.ctftools.com/2020/11/post249/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>centos中jenkins配置环境变量</title>
+      <link>https://blog.ctftools.com/2020/11/post248/</link>
+      <guid>https://blog.ctftools.com/2020/11/post248/</guid>
+      <pubDate>Tue, 03 Nov 2020 10:22:55 GMT</pubDate>
+      
+      <description>&lt;p&gt;起由：在Jenkins配置脚本期望执行npm命令，但实际没有执行，也没有报错&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E8%BF%90%E7%BB%B4/">运维</category>
+      
+      <category domain="https://blog.ctftools.com/tags/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/">持续集成</category>
+      
+      
+      <comments>https://blog.ctftools.com/2020/11/post248/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>centos安装jenkins</title>
+      <link>https://blog.ctftools.com/2020/11/post247/</link>
+      <guid>https://blog.ctftools.com/2020/11/post247/</guid>
+      <pubDate>Tue, 03 Nov 2020 09:58:28 GMT</pubDate>
+      
+      <description>&lt;h2 id=&quot;一、安装jdk&quot;&gt;&lt;a href=&quot;#一、安装jdk&quot; class=&quot;headerlink&quot; title=&quot;一、安装jdk&quot;&gt;&lt;/a&gt;一、安装jdk&lt;/h2&gt;&lt;p&gt;首先确认系统是否安装jdk环境&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;hljs bash&quot;&gt;java -version&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E8%BF%90%E7%BB%B4/">运维</category>
+      
+      <category domain="https://blog.ctftools.com/tags/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/">持续集成</category>
+      
+      
+      <comments>https://blog.ctftools.com/2020/11/post247/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>centos安装svn服务器</title>
+      <link>https://blog.ctftools.com/2020/11/post246/</link>
+      <guid>https://blog.ctftools.com/2020/11/post246/</guid>
+      <pubDate>Tue, 03 Nov 2020 09:11:47 GMT</pubDate>
+      
+      <description>&lt;h2 id=&quot;一、安装svn&quot;&gt;&lt;a href=&quot;#一、安装svn&quot; class=&quot;headerlink&quot; title=&quot;一、安装svn&quot;&gt;&lt;/a&gt;一、安装svn&lt;/h2&gt;&lt;figure class=&quot;highlight sh&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;hljs sh&quot;&gt;yum install subversion&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E8%BF%90%E7%BB%B4/">运维</category>
+      
+      
+      <comments>https://blog.ctftools.com/2020/11/post246/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>Ubuntu 20.04 换国内源</title>
+      <link>https://blog.ctftools.com/2020/11/post245/</link>
+      <guid>https://blog.ctftools.com/2020/11/post245/</guid>
+      <pubDate>Mon, 02 Nov 2020 06:57:54 GMT</pubDate>
+      
+      <description>&lt;p&gt;编辑 &lt;code&gt;/etc/apt/sources.list&lt;/code&gt;&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E8%BF%90%E7%BB%B4/">运维</category>
+      
+      
+      <comments>https://blog.ctftools.com/2020/11/post245/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>Vs Code编写md文件实现实时预览</title>
+      <link>https://blog.ctftools.com/2020/10/post244/</link>
+      <guid>https://blog.ctftools.com/2020/10/post244/</guid>
+      <pubDate>Wed, 28 Oct 2020 09:36:54 GMT</pubDate>
+      
+      <description>&lt;p&gt;使用组合键Ctrl + Shift + P，打开命令窗口，输入mark，点击即可在右边实时预览，如图&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E7%BB%8F%E9%AA%8C/">经验</category>
+      
+      
+      <comments>https://blog.ctftools.com/2020/10/post244/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>Python自动处理依赖</title>
+      <link>https://blog.ctftools.com/2019/11/post243/</link>
+      <guid>https://blog.ctftools.com/2019/11/post243/</guid>
+      <pubDate>Thu, 14 Nov 2019 12:45:54 GMT</pubDate>
+      
+      <description>&lt;h3 id=&quot;一、起由&quot;&gt;&lt;a href=&quot;#一、起由&quot; class=&quot;headerlink&quot; title=&quot;一、起由&quot;&gt;&lt;/a&gt;一、起由&lt;/h3&gt;&lt;p&gt;python项目常常引入众多包，当更换环境时一个个导入太麻烦，而且有导入错版本导致不兼容的可能，本文提供了一种常用的方法自动处理python依赖。&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E7%BC%96%E7%A8%8B/">编程</category>
+      
+      <category domain="https://blog.ctftools.com/tags/Python/">Python</category>
+      
+      
+      <comments>https://blog.ctftools.com/2019/11/post243/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>海滨校园助手api使用文档</title>
+      <link>https://blog.ctftools.com/2018/06/post242/</link>
+      <guid>https://blog.ctftools.com/2018/06/post242/</guid>
+      <pubDate>Mon, 04 Jun 2018 07:25:08 GMT</pubDate>
+      
+      <description>&lt;h3 id=&quot;公共接口&quot;&gt;&lt;a href=&quot;#公共接口&quot; class=&quot;headerlink&quot; title=&quot;公共接口&quot;&gt;&lt;/a&gt;公共接口&lt;/h3&gt;&lt;p&gt;公共接口面向所有组织及个人开放，开发者可以凭借用户授权秘钥确认用户身份，以及获取用户姓名班级等信息。&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E7%BC%96%E7%A8%8B/">编程</category>
+      
+      <category domain="https://blog.ctftools.com/tags/%E6%96%87%E6%A1%A3/">文档</category>
+      
+      
+      <comments>https://blog.ctftools.com/2018/06/post242/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>hexo-yilia主题相册</title>
+      <link>https://blog.ctftools.com/2017/12/post235/</link>
+      <guid>https://blog.ctftools.com/2017/12/post235/</guid>
+      <pubDate>Sun, 17 Dec 2017 08:27:43 GMT</pubDate>
+      
+      <description>&lt;h3 id=&quot;起由&quot;&gt;&lt;a href=&quot;#起由&quot; class=&quot;headerlink&quot; title=&quot;起由&quot;&gt;&lt;/a&gt;起由&lt;/h3&gt;&lt;p&gt;从yilia作者&lt;a href=&quot;http://litten.me/&quot;&gt;Litten的博客&lt;/a&gt;看到了他的相册，蛮喜欢的，就想给自己也弄一个，于是找了到他的博客在github上边的备份下载了source/photos文件夹，但是没有get到作者的方法，只好稍作修改把照片放到本地实现了作者博客中的效果。&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E7%BC%96%E7%A8%8B/">编程</category>
+      
+      <category domain="https://blog.ctftools.com/tags/%E5%89%8D%E7%AB%AF/">前端</category>
+      
+      
+      <comments>https://blog.ctftools.com/2017/12/post235/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>Java实现文件重命名，Java文件追加写入，java读取图片尺寸</title>
+      <link>https://blog.ctftools.com/2017/12/post234/</link>
+      <guid>https://blog.ctftools.com/2017/12/post234/</guid>
+      <pubDate>Fri, 15 Dec 2017 09:47:38 GMT</pubDate>
+      
+      <description>&lt;h3 id=&quot;起由&quot;&gt;&lt;a href=&quot;#起由&quot; class=&quot;headerlink&quot; title=&quot;起由&quot;&gt;&lt;/a&gt;起由&lt;/h3&gt;&lt;p&gt;因为规范要求，需要对一批文件重命名并获取尺寸，刚好上午的java课学了文件输入输出流，学以致用嘛，就利用java做了尝试。&lt;/p&gt;
+&lt;h3 id=&quot;功能&quot;&gt;&lt;a href=&quot;#功能&quot; class=&quot;headerlink&quot; title=&quot;功能&quot;&gt;&lt;/a&gt;功能&lt;/h3&gt;&lt;p&gt;1.文件按照指定格式重命名；&lt;/p&gt;
+&lt;p&gt;2.文件夹内所有文件名与图片尺寸按格式写入一个TXT文件。&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E7%BC%96%E7%A8%8B/">编程</category>
+      
+      <category domain="https://blog.ctftools.com/tags/Java/">Java</category>
+      
+      
+      <comments>https://blog.ctftools.com/2017/12/post234/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>Hexo安装配置并托管至github</title>
+      <link>https://blog.ctftools.com/2017/12/post233/</link>
+      <guid>https://blog.ctftools.com/2017/12/post233/</guid>
+      <pubDate>Thu, 07 Dec 2017 10:27:36 GMT</pubDate>
+      
+      <description>&lt;p&gt;所有可能用到的工具或者文件都放在百度网盘：链接：&lt;a href=&quot;https://pan.baidu.com/s/1mhLRnk8&quot;&gt;https://pan.baidu.com/s/1mhLRnk8&lt;/a&gt; 提取密码：7ott&lt;/p&gt;
+&lt;h3 id=&quot;一、安装Hexo到本地&quot;&gt;&lt;a href=&quot;#一、安装Hexo到本地&quot; class=&quot;headerlink&quot; title=&quot;一、安装Hexo到本地&quot;&gt;&lt;/a&gt;一、安装Hexo到本地&lt;/h3&gt;&lt;h4 id=&quot;1-安装Git&quot;&gt;&lt;a href=&quot;#1-安装Git&quot; class=&quot;headerlink&quot; title=&quot;1.安装Git&quot;&gt;&lt;/a&gt;1.安装Git&lt;/h4&gt;&lt;p&gt;1.1从&lt;a href=&quot;https://git-scm.com/download/win&quot;&gt;官网&lt;/a&gt;或者上边提供的百度网盘下载Git安装包，由于众所周知的原因，官网下载十分缓慢。下载完安装即可，中间会让你选择默认编辑器，如果不习惯Vim推荐Notepad++作为默认编辑器，如图&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E8%BF%90%E7%BB%B4/">运维</category>
+      
+      
+      <comments>https://blog.ctftools.com/2017/12/post233/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>新起点，新征程</title>
+      <link>https://blog.ctftools.com/2017/12/post232/</link>
+      <guid>https://blog.ctftools.com/2017/12/post232/</guid>
+      <pubDate>Sun, 03 Dec 2017 01:21:20 GMT</pubDate>
+      
+      <description>&lt;h2 id=&quot;新起点，新征程&quot;&gt;&lt;a href=&quot;#新起点，新征程&quot; class=&quot;headerlink&quot; title=&quot;新起点，新征程&quot;&gt;&lt;/a&gt;新起点，新征程&lt;/h2&gt;&lt;p&gt;之前一直再用wordpress写博客，但是wordpress有很多缺点，比如说不够安全，评论方面太多广告，占用服务器资源，等等。后来发现一个&lt;a href=&quot;http://www.se7ensec.cn/&quot;&gt;朋友的博客&lt;/a&gt;换成了hexo，百度了一下，纯静态博客，还能托管到github，不需要自己的公网服务器资源，于是当晚就开始接触配置，托管之后发现不能配置https，对于有点强迫症的我来说难以忍受，再加上托管服务器在日本，就又配合腾讯云的cdn加速服务实现了https。详细的过程有空会写个博客记录下来。&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E9%9A%8F%E7%AC%94/">随笔</category>
+      
+      
+      <comments>https://blog.ctftools.com/2017/12/post232/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>在ubuntu安装jdk并配置环境变量</title>
+      <link>https://blog.ctftools.com/2017/09/post231/</link>
+      <guid>https://blog.ctftools.com/2017/09/post231/</guid>
+      <pubDate>Thu, 21 Sep 2017 09:11:43 GMT</pubDate>
+      
+      <description>&lt;p&gt;首先到java官网下载jdk:&lt;a href=&quot;http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html&quot;&gt;http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;我使用的是ubuntu64位系统，所以下载的是jdk-8u144-linux-x64.tar.gz这个文件，下载完解压到/usr/lib/jvm目录下&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;hljs bash&quot;&gt;&lt;span class=&quot;hljs-built_in&quot;&gt;sudo&lt;/span&gt; tar zxvf jdk-8u144-linux-x64.tar.gz -C /usr/lib/jvm&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;(如果没有/usr/lib/jvm目录先使用&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;hljs bash&quot;&gt;&lt;span class=&quot;hljs-built_in&quot;&gt;cd&lt;/span&gt; /usr/lib&lt;br&gt;&lt;span class=&quot;hljs-built_in&quot;&gt;sudo&lt;/span&gt; &lt;span class=&quot;hljs-built_in&quot;&gt;mkdir&lt;/span&gt; jvm&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这两条命令创建)&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E8%BF%90%E7%BB%B4/">运维</category>
+      
+      
+      <comments>https://blog.ctftools.com/2017/09/post231/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>一个不到300行的C语言消灭敌机游戏</title>
+      <link>https://blog.ctftools.com/2017/06/post207/</link>
+      <guid>https://blog.ctftools.com/2017/06/post207/</guid>
+      <pubDate>Sat, 17 Jun 2017 04:41:59 GMT</pubDate>
+      
+      <description>&lt;h3 id=&quot;一个不到300行的C语言消灭敌机游戏&quot;&gt;&lt;a href=&quot;#一个不到300行的C语言消灭敌机游戏&quot; class=&quot;headerlink&quot; title=&quot;一个不到300行的C语言消灭敌机游戏&quot;&gt;&lt;/a&gt;一个不到300行的C语言消灭敌机游戏&lt;/h3&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E7%BC%96%E7%A8%8B/">编程</category>
+      
+      <category domain="https://blog.ctftools.com/tags/C/">C</category>
+      
+      
+      <comments>https://blog.ctftools.com/2017/06/post207/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>搭建L(Linux)+A(Apache)+M(MySQL)+P(PHP)网站环境，并安装Discuz</title>
+      <link>https://blog.ctftools.com/2017/06/post199/</link>
+      <guid>https://blog.ctftools.com/2017/06/post199/</guid>
+      <pubDate>Fri, 16 Jun 2017 13:17:32 GMT</pubDate>
+      
+      <description>&lt;h3 id=&quot;搭建LAMP环境：以下基于腾讯云镜像CentOS-6-8-64bit，本方法不适用于其他镜像&quot;&gt;&lt;a href=&quot;#搭建LAMP环境：以下基于腾讯云镜像CentOS-6-8-64bit，本方法不适用于其他镜像&quot; class=&quot;headerlink&quot; title=&quot;搭建LAMP环境：以下基于腾讯云镜像CentOS 6.8 64bit，本方法不适用于其他镜像&quot;&gt;&lt;/a&gt;搭建LAMP环境：以下基于腾讯云镜像CentOS 6.8 64bit，本方法不适用于其他镜像&lt;/h3&gt;&lt;h3 id=&quot;一、安装MySQL&quot;&gt;&lt;a href=&quot;#一、安装MySQL&quot; class=&quot;headerlink&quot; title=&quot;一、安装MySQL&quot;&gt;&lt;/a&gt;一、安装MySQL&lt;/h3&gt;&lt;h4 id=&quot;1-使用-yum-安装-MySQL：&quot;&gt;&lt;a href=&quot;#1-使用-yum-安装-MySQL：&quot; class=&quot;headerlink&quot; title=&quot;1.使用 yum 安装 MySQL：&quot;&gt;&lt;/a&gt;1.使用 yum 安装 MySQL：&lt;/h4&gt;&lt;pre&gt;&lt;code&gt;yum install mysql-server -y
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&quot;2-安装完成后，启动-MySQL-服务：&quot;&gt;&lt;a href=&quot;#2-安装完成后，启动-MySQL-服务：&quot; class=&quot;headerlink&quot; title=&quot;2.安装完成后，启动 MySQL 服务：&quot;&gt;&lt;/a&gt;2.安装完成后，启动 MySQL 服务：&lt;/h4&gt;&lt;pre&gt;&lt;code&gt;service mysqld restart
+&lt;/code&gt;&lt;/pre&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E8%BF%90%E7%BB%B4/">运维</category>
+      
+      
+      <comments>https://blog.ctftools.com/2017/06/post199/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>搭建L(Linux)+N(Nginx)+M(MySQL)+P(PHP)网站环境，并安装Wordpress</title>
+      <link>https://blog.ctftools.com/2017/06/post192/</link>
+      <guid>https://blog.ctftools.com/2017/06/post192/</guid>
+      <pubDate>Fri, 16 Jun 2017 12:57:54 GMT</pubDate>
+      
+      <description>&lt;h3 id=&quot;搭建LNMP环境：以下基于腾讯云镜像CentOS-6-8-64bit，或不适用于其他镜像&quot;&gt;&lt;a href=&quot;#搭建LNMP环境：以下基于腾讯云镜像CentOS-6-8-64bit，或不适用于其他镜像&quot; class=&quot;headerlink&quot; title=&quot;搭建LNMP环境：以下基于腾讯云镜像CentOS 6.8 64bit，或不适用于其他镜像&quot;&gt;&lt;/a&gt;搭建LNMP环境：以下基于腾讯云镜像CentOS 6.8 64bit，或不适用于其他镜像&lt;/h3&gt;&lt;h3 id=&quot;一、安装Nginx&quot;&gt;&lt;a href=&quot;#一、安装Nginx&quot; class=&quot;headerlink&quot; title=&quot;一、安装Nginx&quot;&gt;&lt;/a&gt;一、安装Nginx&lt;/h3&gt;&lt;h4 id=&quot;1-使用-yum-安装-Nginx：&quot;&gt;&lt;a href=&quot;#1-使用-yum-安装-Nginx：&quot; class=&quot;headerlink&quot; title=&quot;1.使用 yum 安装 Nginx：&quot;&gt;&lt;/a&gt;1.使用 yum 安装 Nginx：&lt;/h4&gt;&lt;p&gt;yum install nginx -y&lt;/p&gt;
+&lt;h4 id=&quot;2-修改-etc-nginx-conf-d-default-conf&quot;&gt;&lt;a href=&quot;#2-修改-etc-nginx-conf-d-default-conf&quot; class=&quot;headerlink&quot; title=&quot;2.修改/etc/nginx/conf.d/default.conf&quot;&gt;&lt;/a&gt;2.修改/etc/nginx/conf.d/default.conf&lt;/h4&gt;&lt;p&gt;去除对 IPv6 地址的监听，可参考下面的示例&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E8%BF%90%E7%BB%B4/">运维</category>
+      
+      
+      <comments>https://blog.ctftools.com/2017/06/post192/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>NSA工具包验证之RDP漏洞利用</title>
+      <link>https://blog.ctftools.com/2017/06/post162/</link>
+      <guid>https://blog.ctftools.com/2017/06/post162/</guid>
+      <pubDate>Thu, 15 Jun 2017 13:32:39 GMT</pubDate>
+      
+      <description>&lt;h3 id=&quot;验证环境：&quot;&gt;&lt;a href=&quot;#验证环境：&quot; class=&quot;headerlink&quot; title=&quot;验证环境：&quot;&gt;&lt;/a&gt;验证环境：&lt;/h3&gt;&lt;p&gt;攻击机1(本次演示IP：172.16.11.2)：windows系统，&lt;a href=&quot;https://www.python.org/download/releases/2.6.6/&quot;&gt;安装python2.6.6&lt;/a&gt;, &lt;a href=&quot;https://sourceforge.net/projects/pywin32/files/pywin32/Build%20221/&quot;&gt;pywin32-221.win32-py2.6.exe&lt;/a&gt;, xshell, xftp, &lt;a href=&quot;https://codeload.github.com/misterch0c/shadowbroker/zip/master&quot;&gt;下载方程式工具包&lt;/a&gt;放到C盘，在工具包目录下的windows目录新建文件夹”listeningposts”，并且开放所有端口关闭防火墙，确保内网可以访问之&lt;/p&gt;
+&lt;p&gt;攻击机2(本次演示IP：172.16.12.2)：kali linux，需要开启ssh服务，详情百度&lt;/p&gt;
+&lt;p&gt;目标机1(本次演示IP：172.16.12.4)：开放了3389端口的Windows Server 2003&lt;/p&gt;
+&lt;p&gt;以上所有IP之间均可以直接访问&lt;/p&gt;
+&lt;h3 id=&quot;验证步骤：&quot;&gt;&lt;a href=&quot;#验证步骤：&quot; class=&quot;headerlink&quot; title=&quot;验证步骤：&quot;&gt;&lt;/a&gt;验证步骤：&lt;/h3&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</category>
+      
+      
+      <comments>https://blog.ctftools.com/2017/06/post162/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>NSA工具包验证之IIS6.0漏洞利用</title>
+      <link>https://blog.ctftools.com/2017/06/post164/</link>
+      <guid>https://blog.ctftools.com/2017/06/post164/</guid>
+      <pubDate>Thu, 15 Jun 2017 13:20:05 GMT</pubDate>
+      
+      <description>&lt;h3 id=&quot;验证环境：&quot;&gt;&lt;a href=&quot;#验证环境：&quot; class=&quot;headerlink&quot; title=&quot;验证环境：&quot;&gt;&lt;/a&gt;验证环境：&lt;/h3&gt;&lt;p&gt;攻击机1(本次演示IP：172.16.11.2)：windows系统，&lt;a href=&quot;https://www.python.org/download/releases/2.6.6/&quot;&gt;安装python2.6.6&lt;/a&gt;, &lt;a href=&quot;https://sourceforge.net/projects/pywin32/files/pywin32/Build%20221/&quot;&gt;pywin32-221.win32-py2.6.exe&lt;/a&gt;, xshell, xftp, &lt;a href=&quot;https://codeload.github.com/misterch0c/shadowbroker/zip/master&quot;&gt;下载方程式工具包&lt;/a&gt;放到C盘，在工具包目录下的windows目录新建文件夹”listeningposts”，并且开放所有端口关闭防火墙，确保内网可以访问之&lt;/p&gt;
+&lt;p&gt;攻击机2(本次演示IP：172.16.12.2)：kali linux，需要开启ssh服务，详情百度&lt;/p&gt;
+&lt;p&gt;目标机1(本次演示IP：172.16.12.3)：开放了80端口的Windows Server 2003 R2，IIS6.0，开启了Webdav功能&lt;/p&gt;
+&lt;p&gt;以上所有IP之间均可以直接访问&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</category>
+      
+      
+      <comments>https://blog.ctftools.com/2017/06/post164/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>NSA工具包验证之SMB漏洞利用</title>
+      <link>https://blog.ctftools.com/2017/06/post160/</link>
+      <guid>https://blog.ctftools.com/2017/06/post160/</guid>
+      <pubDate>Thu, 15 Jun 2017 04:12:59 GMT</pubDate>
+      
+      <description>&lt;h3 id=&quot;验证环境：&quot;&gt;&lt;a href=&quot;#验证环境：&quot; class=&quot;headerlink&quot; title=&quot;验证环境：&quot;&gt;&lt;/a&gt;验证环境：&lt;/h3&gt;&lt;p&gt;攻击机1(本次演示IP：172.16.11.2)：windows系统，&lt;a href=&quot;https://www.python.org/download/releases/2.6.6/&quot;&gt;安装python2.6.6&lt;/a&gt;, &lt;a href=&quot;https://sourceforge.net/projects/pywin32/files/pywin32/Build%20221/&quot;&gt;pywin32-221.win32-py2.6.exe&lt;/a&gt;, xshell, xftp, &lt;a href=&quot;https://codeload.github.com/misterch0c/shadowbroker/zip/master&quot;&gt;下载方程式工具包&lt;/a&gt;放到C盘，在工具包目录下的windows目录新建文件夹”listeningposts”，并且开放所有端口关闭防火墙，确保内网可以访问之&lt;/p&gt;
+&lt;p&gt;攻击机2(本次演示IP：172.16.12.2)：kali linux，需要开启ssh服务，详情百度&lt;/p&gt;
+&lt;p&gt;目标机1(本次演示IP：172.16.12.3)：开放了445端口的windows 7（windows2008与之攻击方法完全相同）&lt;/p&gt;
+&lt;p&gt;以上所有IP之间均可以直接访问&lt;/p&gt;
+&lt;h3 id=&quot;验证步骤：&quot;&gt;&lt;a href=&quot;#验证步骤：&quot; class=&quot;headerlink&quot; title=&quot;验证步骤：&quot;&gt;&lt;/a&gt;验证步骤：&lt;/h3&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</category>
+      
+      
+      <comments>https://blog.ctftools.com/2017/06/post160/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>SEO Ultimate 7.6.5.9汉化版（中文版）免费下载</title>
+      <link>https://blog.ctftools.com/2017/04/post045/</link>
+      <guid>https://blog.ctftools.com/2017/04/post045/</guid>
+      <pubDate>Sun, 02 Apr 2017 08:25:27 GMT</pubDate>
+      
+      <description>&lt;p&gt;&lt;strong&gt;SEO Ultimate 7.6.5.9发布有一段时间了，到网上找了好久，唯一找到的汉化版还是付费才能用的，心里实在不爽，于是花了两天时间亲自汉化了这个程序，免费分享给大家。汉化主要结合谷歌翻译和自己的翻译能力，个别用到了百度翻译和有道翻译，希望大家能喜欢，谢谢！&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id=&quot;汉化效果图1：&quot;&gt;&lt;a href=&quot;#汉化效果图1：&quot; class=&quot;headerlink&quot; title=&quot;汉化效果图1：&quot;&gt;&lt;/a&gt;汉化效果图1：&lt;/h4&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E5%88%86%E4%BA%AB/">分享</category>
+      
+      <category domain="https://blog.ctftools.com/tags/%E6%B1%89%E5%8C%96/">汉化</category>
+      
+      
+      <comments>https://blog.ctftools.com/2017/04/post045/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>在腾讯云服务器搭建FBCTF平台</title>
+      <link>https://blog.ctftools.com/2017/03/post122/</link>
+      <guid>https://blog.ctftools.com/2017/03/post122/</guid>
+      <pubDate>Thu, 30 Mar 2017 11:56:04 GMT</pubDate>
+      
+      <description>&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;之前有在虚拟机通过翻墙搭建了FBCTF平台，但是毕竟是虚拟机搭建的，只能在校园里网内使用，要让外网访问就需要做内网穿透了，麻烦而且不稳定，于是就想要在云服务器上搭建，由于开始思路就很正确，一次就成功了，具体方法如下：&lt;/p&gt;
+&lt;h1 id=&quot;准备工作&quot;&gt;&lt;a href=&quot;#准备工作&quot; class=&quot;headerlink&quot; title=&quot;准备工作&quot;&gt;&lt;/a&gt;准备工作&lt;/h1&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E8%BF%90%E7%BB%B4/">运维</category>
+      
+      <category domain="https://blog.ctftools.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</category>
+      
+      
+      <comments>https://blog.ctftools.com/2017/03/post122/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>FBCTF汉化简体中文免费下载，FBCTF更新缓存代码</title>
+      <link>https://blog.ctftools.com/2017/03/post106/</link>
+      <guid>https://blog.ctftools.com/2017/03/post106/</guid>
+      <pubDate>Fri, 17 Mar 2017 14:40:52 GMT</pubDate>
+      
+      <description>&lt;p&gt;&lt;a href=&quot;http://d52.pw/fb&quot;&gt;下载中文汉化版&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;安装方法&quot;&gt;&lt;a href=&quot;#安装方法&quot; class=&quot;headerlink&quot; title=&quot;安装方法&quot;&gt;&lt;/a&gt;安装方法&lt;/h3&gt;&lt;h3 id=&quot;已经安装成功平台，更新代码&quot;&gt;&lt;a href=&quot;#已经安装成功平台，更新代码&quot; class=&quot;headerlink&quot; title=&quot;已经安装成功平台，更新代码&quot;&gt;&lt;/a&gt;已经安装成功平台，更新代码&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt; 点击上方链接下载并解压出lang_zh-cn.php&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt; 上传到服务器根目录开始的&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E5%88%86%E4%BA%AB/">分享</category>
+      
+      <category domain="https://blog.ctftools.com/tags/%E6%B1%89%E5%8C%96/">汉化</category>
+      
+      
+      <comments>https://blog.ctftools.com/2017/03/post106/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>wordpress发送邮件设置以及常见问题解决</title>
+      <link>https://blog.ctftools.com/2017/03/post036/</link>
+      <guid>https://blog.ctftools.com/2017/03/post036/</guid>
+      <pubDate>Thu, 09 Mar 2017 06:26:16 GMT</pubDate>
+      
+      <description>&lt;p&gt;关于wordpress的搭建在我的另一篇文章”&lt;a href=&quot;/2017/03/post5&quot;&gt;一个小白的自学建站史（菜鸟建站入门）&lt;/a&gt;“的文末已经有了较为详细的解答，需要的朋友可以参考下。本文主要针对于wordpress的邮件设置，以下所有均在wordpress4.7.3环境下进行。&lt;/p&gt;
+&lt;h1 id=&quot;发送邮件设置&quot;&gt;&lt;a href=&quot;#发送邮件设置&quot; class=&quot;headerlink&quot; title=&quot;发送邮件设置&quot;&gt;&lt;/a&gt;发送邮件设置&lt;/h1&gt;&lt;h3 id=&quot;开启WP-Mail-SMTP插件&quot;&gt;&lt;a href=&quot;#开启WP-Mail-SMTP插件&quot; class=&quot;headerlink&quot; title=&quot;开启WP-Mail-SMTP插件&quot;&gt;&lt;/a&gt;开启WP-Mail-SMTP插件&lt;/h3&gt;&lt;p&gt;wordpress原来的邮件设置是有些鸡肋的，通过main()函数来发送，且不说能不能发送成功，就算发送成功了，一般也很难进入别人的收件箱，或者连垃圾箱都进不去，所以在这里介绍一个著名的插件：WP-Mail-SMTP，我想多数人的wordpress都是使用这个插件。具体使用方法：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt; 首先打开wordpress后台，点击左侧插件，点击安装插件，在右侧搜索插件WP-Mail-SMTP，如图：</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E8%BF%90%E7%BB%B4/">运维</category>
+      
+      
+      <comments>https://blog.ctftools.com/2017/03/post036/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>短网址</title>
+      <link>https://blog.ctftools.com/2017/03/post009/</link>
+      <guid>https://blog.ctftools.com/2017/03/post009/</guid>
+      <pubDate>Tue, 07 Mar 2017 14:40:49 GMT</pubDate>
+      
+      <description>&lt;h3 id=&quot;短网址系统免费开放，欢迎大佬们使用：DZ-GL-（短址过来）&quot;&gt;&lt;a href=&quot;#短网址系统免费开放，欢迎大佬们使用：DZ-GL-（短址过来）&quot; class=&quot;headerlink&quot; title=&quot;短网址系统免费开放，欢迎大佬们使用：DZ.GL （短址过来）&quot;&gt;&lt;/a&gt;短网址系统免费开放，欢迎大佬们使用：&lt;a href=&quot;http://dz.gl/&quot;&gt;DZ.GL&lt;/a&gt; （短址过来）&lt;/h3&gt;&lt;h3 id=&quot;该域名已经售出，继续提供源码下载&quot;&gt;&lt;a href=&quot;#该域名已经售出，继续提供源码下载&quot; class=&quot;headerlink&quot; title=&quot;该域名已经售出，继续提供源码下载&quot;&gt;&lt;/a&gt;该域名已经售出，继续提供源码下载&lt;/h3&gt;&lt;h3 id=&quot;短网址系统已经开源，放在了百度网盘，需要的朋友可以下载。&quot;&gt;&lt;a href=&quot;#短网址系统已经开源，放在了百度网盘，需要的朋友可以下载。&quot; class=&quot;headerlink&quot; title=&quot;短网址系统已经开源，放在了百度网盘，需要的朋友可以下载。&quot;&gt;&lt;/a&gt;短网址系统已经开源，放在了百度网盘，需要的朋友可以下载。&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;https://pan.baidu.com/s/1eR406T8&quot;&gt;下载源码&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;最后更新于2017-02-21&quot;&gt;&lt;a href=&quot;#最后更新于2017-02-21&quot; class=&quot;headerlink&quot; title=&quot;最后更新于2017-02-21&quot;&gt;&lt;/a&gt;最后更新于2017-02-21&lt;/h3&gt;&lt;h3 id=&quot;界面截图：&quot;&gt;&lt;a href=&quot;#界面截图：&quot; class=&quot;headerlink&quot; title=&quot;界面截图：&quot;&gt;&lt;/a&gt;界面截图：&lt;/h3&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E8%BF%90%E7%BB%B4/">运维</category>
+      
+      <category domain="https://blog.ctftools.com/tags/%E7%BC%96%E7%A8%8B/">编程</category>
+      
+      
+      <comments>https://blog.ctftools.com/2017/03/post009/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>一个小白的自学建站史（菜鸟建站入门）</title>
+      <link>https://blog.ctftools.com/2017/03/post005/</link>
+      <guid>https://blog.ctftools.com/2017/03/post005/</guid>
+      <pubDate>Tue, 07 Mar 2017 14:14:49 GMT</pubDate>
+      
+      <description>&lt;h1 id=&quot;接触&quot;&gt;&lt;a href=&quot;#接触&quot; class=&quot;headerlink&quot; title=&quot;接触&quot;&gt;&lt;/a&gt;接触&lt;/h1&gt;&lt;h3 id=&quot;内网的尝试&quot;&gt;&lt;a href=&quot;#内网的尝试&quot; class=&quot;headerlink&quot; title=&quot;内网的尝试&quot;&gt;&lt;/a&gt;内网的尝试&lt;/h3&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E8%BF%90%E7%BB%B4/">运维</category>
+      
+      <category domain="https://blog.ctftools.com/tags/Nginx/">Nginx</category>
+      
+      
+      <comments>https://blog.ctftools.com/2017/03/post005/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>危山</title>
+      <link>https://blog.ctftools.com/2015/09/post239/</link>
+      <guid>https://blog.ctftools.com/2015/09/post239/</guid>
+      <pubDate>Sat, 12 Sep 2015 13:53:18 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;p&gt;寂夜望危山，危山望不穿。&lt;br&gt;孰怜危山前，孤鸿几盘旋。&lt;br&gt;其目泪盈盈，其声戚惨惨。&lt;br&gt;其心无人会，其念隔危山。&lt;/p&gt;
+</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E9%9A%8F%E7%AC%94/">随笔</category>
+      
+      
+      <comments>https://blog.ctftools.com/2015/09/post239/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>水调歌头</title>
+      <link>https://blog.ctftools.com/2015/09/post240/</link>
+      <guid>https://blog.ctftools.com/2015/09/post240/</guid>
+      <pubDate>Tue, 08 Sep 2015 15:09:18 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;p&gt;误被前缘误，痛被昔情痛。拟比名花，远胜月季牡丹红。残月窥人檐下，余晖隐洒案前，杯酒话心声。落花时节逢，安可赏孤鸿。&lt;br&gt;烛偷瘦，夜渐深，梦不成。奇葩艳卉，深红浅白何足争。长夜思君难彻，光阴暗转乾坤，耳畔荡清风。当使伊人在，冯虚幽境中。&lt;/p&gt;
+</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E9%9A%8F%E7%AC%94/">随笔</category>
+      
+      
+      <comments>https://blog.ctftools.com/2015/09/post240/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>水调歌头</title>
+      <link>https://blog.ctftools.com/2015/09/post241/</link>
+      <guid>https://blog.ctftools.com/2015/09/post241/</guid>
+      <pubDate>Fri, 04 Sep 2015 14:16:18 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;p&gt;暮雨何时尽，举酒问青天。不知今夕此刻，孰与我同酣。也欲觅君而去，又恐路途险远，跌落在云端。辗转复反侧，伊人闹心间。&lt;br&gt;风凄凄，夜惨惨，君在安。不应长叹，何日与子共开颜。人云情深不寿，又曰慧极必伤，此事古难全。若使君心欢，吾宁肝肠断。&lt;/p&gt;
+</description>
+          
+        
+      
+      
+      
+      
+      
+      <category domain="https://blog.ctftools.com/tags/%E9%9A%8F%E7%AC%94/">随笔</category>
+      
+      
+      <comments>https://blog.ctftools.com/2015/09/post241/#disqus_thread</comments>
+      
+    </item>
+    
+  </channel>
+</rss>

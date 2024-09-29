@@ -1,0 +1,820 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/favicon.ico">
+  <link rel="icon" href="/assets/img/favicon.ico">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Dr3@m">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="目标在Windows下，逆向由Pyinstaller打包的exe文件，获取源码 本次仅考虑无-key参数的打包">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Pyinstaller 逆向">
+<meta property="og:url" content="https://blog.ctftools.com/2022/10/newpost-50/index.html">
+<meta property="og:site_name" content="Dr34m&#39;s Blog">
+<meta property="og:description" content="目标在Windows下，逆向由Pyinstaller打包的exe文件，获取源码 本次仅考虑无-key参数的打包">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.ctftools.com/assets/headImg/python.png">
+<meta property="article:published_time" content="2022-10-28T05:22:14.000Z">
+<meta property="article:modified_time" content="2024-09-29T06:58:21.691Z">
+<meta property="article:author" content="Dr3@m">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="逆向">
+<meta property="article:tag" content="网络安全">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://blog.ctftools.com/assets/headImg/python.png">
+  
+  
+  
+  <title>Pyinstaller 逆向 - Dr34m&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="/assets/static/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="/assets/static/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="/assets/static/hint.min.css" />
+
+  <link  rel="stylesheet" href="/assets/static/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.ctftools.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":3},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"2e56a139382ea7b1de5ebe406db45f54","google":{"measurement_id":"G-J17J3L2RWK"},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"bxnYbxGO1K0yILGbts7KVLhK-gzGzoHsz","app_key":"zbvF6NeggGIbfjNdAVb1kG6I","server_url":"https://bxnybxgo.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"woyaola":null,"cnzz":1261417535},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?2e56a139382ea7b1de5ebe406db45f54";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=G-J17J3L2RWK", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', 'G-J17J3L2RWK');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Dr34m's Blog" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="Dr34m's Blog" type="application/rss+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Dr34m&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/assets/img/dojm2h.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Pyinstaller 逆向"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Dr3@m
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-10-28 13:22" pubdate>
+          2022年10月28日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          955 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          8 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Pyinstaller 逆向</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><p>在Windows下，逆向由Pyinstaller打包的exe文件，获取源码</p>
+<p>本次仅考虑无<code>-key</code>参数的打包</p>
+<span id="more"></span>
+
+<h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><p>待逆向文件<code>main.exe</code>，当前电脑已经安装<code>Python 3.7</code>环境</p>
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><h2 id="一、解包"><a href="#一、解包" class="headerlink" title="一、解包"></a>一、解包</h2><p>首先通过<a target="_blank" rel="noopener" href="https://github.com/extremecoders-re/pyinstxtractor">PyInstaller Extractor</a>将exe文件解包，具体方法为：</p>
+<ul>
+<li><p>从上边的github链接，下载<code>pyinstxtractor.py</code>，并放到<code>main.exe</code>文件同一目录</p>
+</li>
+<li><p>cmd进入文件所在目录，执行<code>python pyinstxtractor.py main.exe</code>，得到<code>main.exe_extracted</code>文件夹</p>
+</li>
+</ul>
+<h2 id="二、逆向pyc"><a href="#二、逆向pyc" class="headerlink" title="二、逆向pyc"></a>二、逆向pyc</h2><p>打开<code>main.exe_extracted</code>文件夹，即可轻易看到<code>main.pyc</code>文件（部分程序解包后只有类似<code>main</code>或者其他文件名的无后缀文件，这时候需要找到最有可能是主程序的无后缀文件手动添加<code>.pyc</code>后缀）；</p>
+<p>但是使用pyinstaller打包的python程序，可能会去掉<code>.pyc</code>文件的<code>Magic Number</code>与时间戳信息，其中时间戳信息不重要，全部填充0即可，但是<code>Magic Number</code>与Python 版本挂钩，需要正确恢复。</p>
+<h3 id="2-1-pyc文件修复"><a href="#2-1-pyc文件修复" class="headerlink" title="2.1 pyc文件修复"></a>2.1 pyc文件修复</h3><h4 id="2-1-1-Magic-Number获取"><a href="#2-1-1-Magic-Number获取" class="headerlink" title="2.1.1 Magic Number获取"></a>2.1.1 <code>Magic Number</code>获取</h4><p>可查看<code>main.exe_extracted</code>文件夹下的类似于<code>python37.dll</code>文件，猜测本程序打包所使用的Python版本为<code>Python 3.7</code>，通过查找<code>Magic Number</code>与Python版本对照表（文末附录），可知其<code>Magic Number</code>可能为<code>3390</code>到<code>3394</code>之间；也可通过查找同目录下其他<code>.pyc</code>文件的<code>Magic Number</code>，最终得到其<code>Magic Number</code>确实为3394，16进制值为<code>42 0D</code>，如下图为<code>struct.pyc</code>文件的16进制值（通过HxD或其他Hex查看器）</p>
+<img src="/2022/10/newpost-50/2022-10-28-15-08-37-image.png" srcset="/img/loading.gif" lazyload class="">
+
+<p>而且通过观察发现，许多<code>.pyc</code>文件的第二行都是以<code>E3 00</code>开头。</p>
+<h4 id="2-2-2-main-pyc修复"><a href="#2-2-2-main-pyc修复" class="headerlink" title="2.2.2 main.pyc修复"></a>2.2.2 <code>main.pyc</code>修复</h4><p>通过HxD工具打开<code>main.pyc</code>文件，惊奇的发现其并未缺失信息，因此不用修复；之前的几次逆向都是缺失的，如有缺失，只需要在<code>E3 00</code>前插入<code>42 0D 00 00 00 00 00 00 00 00 00 00 00 00</code>，确保第一行就是这个值，并且第二行以<code>E3 00</code>开头即可，如下图</p>
+<img src="/2022/10/newpost-50/2022-10-28-15-16-14-image.png" srcset="/img/loading.gif" lazyload class="">
+
+<h3 id="2-2-逆向pyc"><a href="#2-2-逆向pyc" class="headerlink" title="2.2 逆向pyc"></a>2.2 逆向pyc</h3><p>cmd到<code>main.pyc</code>文件所在目录，执行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">pip install uncompyle6<br>uncompyle6 -o main.py main.pyc<br></code></pre></td></tr></table></figure>
+
+<p>即可得到如图，可知所有信息一览无余，千万别把密码写在客户端代码里哇</p>
+<img src="/2022/10/newpost-50/2022-10-28-15-19-51-image.png" srcset="/img/loading.gif" lazyload class="">
+
+<p>提示，如果项目有多个python文件，通常都在<code>PYZ-00.pyz_extracted</code>文件夹下，找到对应的<code>.pyc</code>文件，按照上边的方式逆向即可</p>
+<h1 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h1><figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br></pre></td><td class="code"><pre><code class="hljs maxima">#     Python <span class="hljs-number">1.5</span>:   <span class="hljs-number">20121</span><br>#     Python <span class="hljs-number">1.5</span><span class="hljs-number">.1</span>: <span class="hljs-number">20121</span><br>#     Python <span class="hljs-number">1.5</span><span class="hljs-number">.2</span>: <span class="hljs-number">20121</span><br>#     Python <span class="hljs-number">1.6</span>:   <span class="hljs-number">50428</span><br>#     Python <span class="hljs-number">2.0</span>:   <span class="hljs-number">50823</span><br>#     Python <span class="hljs-number">2.0</span><span class="hljs-number">.1</span>: <span class="hljs-number">50823</span><br>#     Python <span class="hljs-number">2.1</span>:   <span class="hljs-number">60202</span><br>#     Python <span class="hljs-number">2.1</span><span class="hljs-number">.1</span>: <span class="hljs-number">60202</span><br>#     Python <span class="hljs-number">2.1</span><span class="hljs-number">.2</span>: <span class="hljs-number">60202</span><br>#     Python <span class="hljs-number">2.2</span>:   <span class="hljs-number">60717</span><br>#     Python <span class="hljs-number">2.</span>3a0: <span class="hljs-number">62011</span><br>#     Python <span class="hljs-number">2.</span>3a0: <span class="hljs-number">62021</span><br>#     Python <span class="hljs-number">2.</span>3a0: <span class="hljs-number">62011</span> (!)<br>#     Python <span class="hljs-number">2.</span>4a0: <span class="hljs-number">62041</span><br>#     Python <span class="hljs-number">2.</span>4a3: <span class="hljs-number">62051</span><br>#     Python <span class="hljs-number">2.4b1</span>: <span class="hljs-number">62061</span><br>#     Python <span class="hljs-number">2.</span>5a0: <span class="hljs-number">62071</span><br>#     Python <span class="hljs-number">2.</span>5a0: <span class="hljs-number">62081</span> (ast-branch)<br>#     Python <span class="hljs-number">2.</span>5a0: <span class="hljs-number">62091</span> (with)<br>#     Python <span class="hljs-number">2.</span>5a0: <span class="hljs-number">62092</span> (changed WITH_CLEANUP opcode)<br>#     Python <span class="hljs-number">2.5b3</span>: <span class="hljs-number">62101</span> (<span class="hljs-built_in">fix</span> wrong code: <span class="hljs-keyword">for</span> x, <span class="hljs-keyword">in</span> ...)<br>#     Python <span class="hljs-number">2.5b3</span>: <span class="hljs-number">62111</span> (<span class="hljs-built_in">fix</span> wrong code: x += yield)<br>#     Python <span class="hljs-number">2.</span>5c1: <span class="hljs-number">62121</span> (<span class="hljs-built_in">fix</span> wrong lnotab with <span class="hljs-keyword">for</span> loops <span class="hljs-keyword">and</span><br>#                          storing constants that should have been removed)<br>#     Python <span class="hljs-number">2.</span>5c2: <span class="hljs-number">62131</span> (<span class="hljs-built_in">fix</span> wrong code: <span class="hljs-keyword">for</span> x, <span class="hljs-keyword">in</span> ... <span class="hljs-keyword">in</span> listcomp/genexp)<br>#     Python <span class="hljs-number">2.</span>6a0: <span class="hljs-number">62151</span> (peephole optimizations <span class="hljs-keyword">and</span> STORE_MAP opcode)<br>#     Python <span class="hljs-number">2.</span>6a1: <span class="hljs-number">62161</span> (WITH_CLEANUP optimization)<br>#     Python <span class="hljs-number">2.</span>7a0: <span class="hljs-number">62171</span> (<span class="hljs-built_in">optimize</span> list comprehensions/change LIST_APPEND)<br>#     Python <span class="hljs-number">2.</span>7a0: <span class="hljs-number">62181</span> (<span class="hljs-built_in">optimize</span> conditional branches:<br>#                          introduce POP_JUMP_IF_FALSE <span class="hljs-keyword">and</span> POP_JUMP_IF_TRUE)<br>#     Python <span class="hljs-number">2.</span>7a0  <span class="hljs-number">62191</span> (introduce SETUP_WITH)<br>#     Python <span class="hljs-number">2.</span>7a0  <span class="hljs-number">62201</span> (introduce BUILD_SET)<br>#     Python <span class="hljs-number">2.</span>7a0  <span class="hljs-number">62211</span> (introduce MAP_ADD <span class="hljs-keyword">and</span> SET_ADD)<br>#     Python <span class="hljs-number">3000</span>:   <span class="hljs-number">3000</span><br>#                    <span class="hljs-number">3010</span> (removed UNARY_CONVERT)<br>#                    <span class="hljs-number">3020</span> (added BUILD_SET)<br>#                    <span class="hljs-number">3030</span> (added keyword-only parameters)<br>#                    <span class="hljs-number">3040</span> (added signature annotations)<br>#                    <span class="hljs-number">3050</span> (<span class="hljs-built_in">print</span> becomes a function)<br>#                    <span class="hljs-number">3060</span> (PEP <span class="hljs-number">3115</span> metaclass syntax)<br>#                    <span class="hljs-number">3061</span> (<span class="hljs-built_in">string</span> literals become unicode)<br>#                    <span class="hljs-number">3071</span> (PEP <span class="hljs-number">3109</span> raise changes)<br>#                    <span class="hljs-number">3081</span> (PEP <span class="hljs-number">3137</span> make __file__ <span class="hljs-keyword">and</span> __name__ unicode)<br>#                    <span class="hljs-number">3091</span> (<span class="hljs-built_in">kill</span> str8 interning)<br>#                    <span class="hljs-number">3101</span> (merge from <span class="hljs-number">2.</span>6a0, see <span class="hljs-number">62151</span>)<br>#                    <span class="hljs-number">3103</span> (__file__ <span class="hljs-built_in">points</span> to source file)<br>#     Python <span class="hljs-number">3.</span><span class="hljs-number">0a4</span>: <span class="hljs-number">3111</span> (WITH_CLEANUP optimization).<br>#     Python <span class="hljs-number">3.0b1</span>: <span class="hljs-number">3131</span> (lexical exception stacking, including POP_EXCEPT<br>                          #<span class="hljs-number">3021</span>)<br>#     Python <span class="hljs-number">3.</span>1a1: <span class="hljs-number">3141</span> (<span class="hljs-built_in">optimize</span> list, set <span class="hljs-keyword">and</span> dict comprehensions:<br>#                         change LIST_APPEND <span class="hljs-keyword">and</span> SET_ADD, add MAP_ADD #<span class="hljs-number">2183</span>)<br>#     Python <span class="hljs-number">3.</span>1a1: <span class="hljs-number">3151</span> (<span class="hljs-built_in">optimize</span> conditional branches:<br>#                         introduce POP_JUMP_IF_FALSE <span class="hljs-keyword">and</span> POP_JUMP_IF_TRUE<br>                          #<span class="hljs-number">4715</span>)<br>#     Python <span class="hljs-number">3.</span>2a1: <span class="hljs-number">3160</span> (add SETUP_WITH #<span class="hljs-number">6101</span>)<br>#                   tag: cpython-<span class="hljs-number">32</span><br>#     Python <span class="hljs-number">3.</span>2a2: <span class="hljs-number">3170</span> (add DUP_TOP_TWO, <span class="hljs-built_in">remove</span> DUP_TOPX <span class="hljs-keyword">and</span> ROT_FOUR #<span class="hljs-number">9225</span>)<br>#                   tag: cpython-<span class="hljs-number">32</span><br>#     Python <span class="hljs-number">3.</span>2a3  <span class="hljs-number">3180</span> (add DELETE_DEREF #<span class="hljs-number">4617</span>)<br>#     Python <span class="hljs-number">3.</span>3a1  <span class="hljs-number">3190</span> (__class__ super closure changed)<br>#     Python <span class="hljs-number">3.</span>3a1  <span class="hljs-number">3200</span> (PEP <span class="hljs-number">3155</span> __qualname__ added #<span class="hljs-number">13448</span>)<br>#     Python <span class="hljs-number">3.</span>3a1  <span class="hljs-number">3210</span> (added size modulo <span class="hljs-number">2</span>**<span class="hljs-number">32</span> to the pyc header #<span class="hljs-number">13645</span>)<br>#     Python <span class="hljs-number">3.</span>3a2  <span class="hljs-number">3220</span> (changed PEP <span class="hljs-number">380</span> implementation #<span class="hljs-number">14230</span>)<br>#     Python <span class="hljs-number">3.</span>3a4  <span class="hljs-number">3230</span> (<span class="hljs-built_in">revert</span> changes to <span class="hljs-built_in">implicit</span> __class__ closure #<span class="hljs-number">14857</span>)<br>#     Python <span class="hljs-number">3.</span>4a1  <span class="hljs-number">3250</span> (evaluate positional default arguments before<br>#                        keyword-only defaults #<span class="hljs-number">16967</span>)<br>#     Python <span class="hljs-number">3.</span>4a1  <span class="hljs-number">3260</span> (add LOAD_CLASSDEREF; allow locals of class to override<br>#                        free vars #<span class="hljs-number">17853</span>)<br>#     Python <span class="hljs-number">3.</span>4a1  <span class="hljs-number">3270</span> (various tweaks to the __class__ closure #<span class="hljs-number">12370</span>)<br>#     Python <span class="hljs-number">3.</span>4a1  <span class="hljs-number">3280</span> (<span class="hljs-built_in">remove</span> <span class="hljs-built_in">implicit</span> class argument)<br>#     Python <span class="hljs-number">3.</span>4a4  <span class="hljs-number">3290</span> (changes to __qualname__ computation #<span class="hljs-number">19301</span>)<br>#     Python <span class="hljs-number">3.</span>4a4  <span class="hljs-number">3300</span> (more changes to __qualname__ computation #<span class="hljs-number">19301</span>)<br>#     Python <span class="hljs-number">3.</span>4rc2 <span class="hljs-number">3310</span> (alter __qualname__ computation #<span class="hljs-number">20625</span>)<br>#     Python <span class="hljs-number">3.</span>5a1  <span class="hljs-number">3320</span> (PEP <span class="hljs-number">465</span>: Matrix multiplication operator #<span class="hljs-number">21176</span>)<br>#     Python <span class="hljs-number">3.5b1</span>  <span class="hljs-number">3330</span> (PEP <span class="hljs-number">448</span>: Additional Unpacking Generalizations #<span class="hljs-number">2292</span>)<br>#     Python <span class="hljs-number">3.5b2</span>  <span class="hljs-number">3340</span> (<span class="hljs-built_in">fix</span> dictionary <span class="hljs-built_in">display</span> evaluation order #<span class="hljs-number">11205</span>)<br>#     Python <span class="hljs-number">3.5b3</span>  <span class="hljs-number">3350</span> (add GET_YIELD_FROM_ITER opcode #<span class="hljs-number">24400</span>)<br>#     Python <span class="hljs-number">3.5</span><span class="hljs-number">.2</span>  <span class="hljs-number">3351</span> (<span class="hljs-built_in">fix</span> BUILD_MAP_UNPACK_WITH_CALL opcode #<span class="hljs-number">27286</span>)<br>#     Python <span class="hljs-number">3.</span>6a0  <span class="hljs-number">3360</span> (add FORMAT_VALUE opcode #<span class="hljs-number">25483</span>)<br>#     Python <span class="hljs-number">3.</span>6a1  <span class="hljs-number">3361</span> (lineno <span class="hljs-built_in">delta</span> of code.co_lnotab becomes signed #<span class="hljs-number">26107</span>)<br>#     Python <span class="hljs-number">3.</span>6a2  <span class="hljs-number">3370</span> (<span class="hljs-number">16</span> bit wordcode #<span class="hljs-number">26647</span>)<br>#     Python <span class="hljs-number">3.</span>6a2  <span class="hljs-number">3371</span> (add BUILD_CONST_KEY_MAP opcode #<span class="hljs-number">27140</span>)<br>#     Python <span class="hljs-number">3.</span>6a2  <span class="hljs-number">3372</span> (MAKE_FUNCTION simplification, <span class="hljs-built_in">remove</span> MAKE_CLOSURE<br>#                         #<span class="hljs-number">27095</span>)<br>#     Python <span class="hljs-number">3.6b1</span>  <span class="hljs-number">3373</span> (add BUILD_STRING opcode #<span class="hljs-number">27078</span>)<br>#     Python <span class="hljs-number">3.6b1</span>  <span class="hljs-number">3375</span> (add SETUP_ANNOTATIONS <span class="hljs-keyword">and</span> STORE_ANNOTATION opcodes<br>#                         #<span class="hljs-number">27985</span>)<br>#     Python <span class="hljs-number">3.6b1</span>  <span class="hljs-number">3376</span> (simplify CALL_FUNCTIONs &amp; BUILD_MAP_UNPACK_WITH_CALL<br>                          #<span class="hljs-number">27213</span>)<br>#     Python <span class="hljs-number">3.6b1</span>  <span class="hljs-number">3377</span> (set __class__ cell from type.__new__ #<span class="hljs-number">23722</span>)<br>#     Python <span class="hljs-number">3.6b2</span>  <span class="hljs-number">3378</span> (add BUILD_TUPLE_UNPACK_WITH_CALL #<span class="hljs-number">28257</span>)<br>#     Python <span class="hljs-number">3.</span>6rc1 <span class="hljs-number">3379</span> (more thorough __class__ validation #<span class="hljs-number">23722</span>)<br>#     Python <span class="hljs-number">3.</span>7a1  <span class="hljs-number">3390</span> (add LOAD_METHOD <span class="hljs-keyword">and</span> CALL_METHOD opcodes #<span class="hljs-number">26110</span>)<br>#     Python <span class="hljs-number">3.</span>7a2  <span class="hljs-number">3391</span> (update GET_AITER #<span class="hljs-number">31709</span>)<br>#     Python <span class="hljs-number">3.</span>7a4  <span class="hljs-number">3392</span> (PEP <span class="hljs-number">552</span>: Deterministic pycs #<span class="hljs-number">31650</span>)<br>#     Python <span class="hljs-number">3.7b1</span>  <span class="hljs-number">3393</span> (<span class="hljs-built_in">remove</span> STORE_ANNOTATION opcode #<span class="hljs-number">32550</span>)<br>#     Python <span class="hljs-number">3.7b5</span>  <span class="hljs-number">3394</span> (restored docstring as the <span class="hljs-built_in">first</span> stmt <span class="hljs-keyword">in</span> the body;<br>#                         this might affected the <span class="hljs-built_in">first</span> line number #<span class="hljs-number">32911</span>)<br>#     Python <span class="hljs-number">3.</span>8a1  <span class="hljs-number">3400</span> (move frame <span class="hljs-built_in">block</span> handling to compiler #<span class="hljs-number">17611</span>)<br>#     Python <span class="hljs-number">3.</span>8a1  <span class="hljs-number">3401</span> (add END_ASYNC_FOR #<span class="hljs-number">33041</span>)<br>#     Python <span class="hljs-number">3.</span>8a1  <span class="hljs-number">3410</span> (PEP570 Python Positional-Only Parameters #<span class="hljs-number">36540</span>)<br>#     Python <span class="hljs-number">3.8b2</span>  <span class="hljs-number">3411</span> (Reverse evaluation order of <span class="hljs-built_in">key</span>: value <span class="hljs-keyword">in</span> dict<br>#                         comprehensions #<span class="hljs-number">35224</span>)<br>#     Python <span class="hljs-number">3.8b2</span>  <span class="hljs-number">3412</span> (Swap the <span class="hljs-built_in">position</span> of positional <span class="hljs-built_in">args</span> <span class="hljs-keyword">and</span> positional<br>#                         only <span class="hljs-built_in">args</span> <span class="hljs-keyword">in</span> ast.argumehttps://blog.csdn.net/zheng__huang/article/details/112380221nts #<span class="hljs-number">37593</span>)<br>#     Python <span class="hljs-number">3.8b4</span>  <span class="hljs-number">3413</span> (Fix <span class="hljs-string">&quot;break&quot;</span> <span class="hljs-keyword">and</span> <span class="hljs-string">&quot;continue&quot;</span> <span class="hljs-keyword">in</span> <span class="hljs-string">&quot;finally&quot;</span> #<span class="hljs-number">37830</span>)<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>参考1 <a target="_blank" rel="noopener" href="https://blog.csdn.net/zheng__huang/article/details/112380221">Python Uncompyle6 反编译工具使用 与 Magic Number 详解</a></p>
+</blockquote>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Python/" class="print-no-link">#Python</a>
+      
+        <a href="/tags/%E9%80%86%E5%90%91/" class="print-no-link">#逆向</a>
+      
+        <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" class="print-no-link">#网络安全</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Pyinstaller 逆向</div>
+      <div>https://blog.ctftools.com/2022/10/newpost-50/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Dr3@m</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年10月28日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="NC - 非商业性使用">
+                    <i class="iconfont icon-cc-nc"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                    <i class="iconfont icon-cc-sa"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/05/newpost-51/" title="CentOS 7.9 安装基础开发环境jdk redis nacos nginx mysql">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">CentOS 7.9 安装基础开发环境jdk redis nacos nginx mysql</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/09/newpost-49/" title="VUE实现复制与粘贴_获取剪切板内容">
+                        <span class="hidden-mobile">VUE实现复制与粘贴_获取剪切板内容</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"dr34m-cn/dr34m-cn.github.io","repo-id":"MDEwOlJlcG9zaXRvcnkxMTI4MDcyODI=","category":"Announcements","category-id":"DIC_kwDOBrlNcs4Cibmt","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":1,"input-position":"top","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       &copy; <span id="nowYear">2021</span> Dr3@m | Power by  <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> Theme <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/assets/js/foot.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      冀ICP备16028844号
+    </a>
+  </span>
+  
+</div>
+
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="/assets/static/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="/assets/static/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="/assets/static/jquery.min.js" ></script>
+<script  src="/assets/static/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="/assets/static/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('/assets/static/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=/assets/static/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('/assets/static/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('/assets/static/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

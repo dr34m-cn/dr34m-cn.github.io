@@ -1,0 +1,898 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/favicon.ico">
+  <link rel="icon" href="/assets/img/favicon.ico">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Dr3@m">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="注意：以下环境基于CentOS 7.9 最小化（Minimal）系统（镜像文件名称为CentOS-7-x86_64-Minimal-2207-02.iso，988MB），其他系统或版本可能略有不同 系统下载链接：CentOS Mirrors List">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CentOS 7.9 安装基础开发环境jdk redis nacos nginx mysql">
+<meta property="og:url" content="https://blog.ctftools.com/2023/05/newpost-51/index.html">
+<meta property="og:site_name" content="Dr34m&#39;s Blog">
+<meta property="og:description" content="注意：以下环境基于CentOS 7.9 最小化（Minimal）系统（镜像文件名称为CentOS-7-x86_64-Minimal-2207-02.iso，988MB），其他系统或版本可能略有不同 系统下载链接：CentOS Mirrors List">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.ctftools.com/assets/headImg/linux.png">
+<meta property="article:published_time" content="2023-05-10T08:22:50.000Z">
+<meta property="article:modified_time" content="2024-09-29T06:58:21.694Z">
+<meta property="article:author" content="Dr3@m">
+<meta property="article:tag" content="运维">
+<meta property="article:tag" content="经验">
+<meta property="article:tag" content="Nginx">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://blog.ctftools.com/assets/headImg/linux.png">
+  
+  
+  
+  <title>CentOS 7.9 安装基础开发环境jdk redis nacos nginx mysql - Dr34m&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="/assets/static/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="/assets/static/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="/assets/static/hint.min.css" />
+
+  <link  rel="stylesheet" href="/assets/static/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.ctftools.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":3},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"2e56a139382ea7b1de5ebe406db45f54","google":{"measurement_id":"G-J17J3L2RWK"},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"bxnYbxGO1K0yILGbts7KVLhK-gzGzoHsz","app_key":"zbvF6NeggGIbfjNdAVb1kG6I","server_url":"https://bxnybxgo.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"woyaola":null,"cnzz":1261417535},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?2e56a139382ea7b1de5ebe406db45f54";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=G-J17J3L2RWK", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', 'G-J17J3L2RWK');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Dr34m's Blog" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="Dr34m's Blog" type="application/rss+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Dr34m&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/assets/img/dojm2h.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="CentOS 7.9 安装基础开发环境jdk redis nacos nginx mysql"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Dr3@m
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-05-10 16:22" pubdate>
+          2023年5月10日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          1.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          10 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">CentOS 7.9 安装基础开发环境jdk redis nacos nginx mysql</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>注意：以下环境基于CentOS 7.9 最小化（<code>Minimal</code>）系统（镜像文件名称为<code>CentOS-7-x86_64-Minimal-2207-02.iso</code>，988MB），其他系统或版本可能略有不同</p>
+<p>系统下载链接：<a target="_blank" rel="noopener" href="http://isoredirect.centos.org/centos/7/isos/x86_64/">CentOS Mirrors List</a></p>
+<span id="more"></span>
+
+<p>所用安装包以及系统，如果不方便在官网下载，可通过下边的方式下载</p>
+<ul>
+<li><p>百度网盘</p>
+<p>链接：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1pAKhFt5kEfHmflH1d8z1Lw?pwd=yink">https://pan.baidu.com/s/1pAKhFt5kEfHmflH1d8z1Lw?pwd=yink</a> </p>
+<p>提取码：yink</p>
+</li>
+<li><p>迅雷云盘</p>
+<p>链接：<a target="_blank" rel="noopener" href="https://pan.xunlei.com/s/VNV3oKC6Tsmy9sC2hKVaDTgPA1#">https://pan.xunlei.com/s/VNV3oKC6Tsmy9sC2hKVaDTgPA1#</a></p>
+<p>提取码：xb9a</p>
+</li>
+</ul>
+<h2 id="1、JDK-8"><a href="#1、JDK-8" class="headerlink" title="1、JDK 8"></a>1、JDK 8</h2><p>下载链接：<a target="_blank" rel="noopener" href="https://www.oracle.com/java/technologies/downloads/#java8">Java Downloads | Oracle</a></p>
+<p>下载rpm版，安装：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">rpm -ivh jdk-8u371-linux-x64.rpm<br></code></pre></td></tr></table></figure>
+
+<p>安装后jdk路径为<code>/usr/java/jdk1.8.0-x64</code></p>
+<p>如无特别需要，通过rpm方式安装的jdk无需额外配置环境变量</p>
+<h2 id="2、MySQL-5-7"><a href="#2、MySQL-5-7" class="headerlink" title="2、MySQL 5.7"></a>2、MySQL 5.7</h2><p>yum安装可以参考<a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/beta/article/1886339">centos7 安装 Mysql 5.7.28，详细完整教程-腾讯云开发者社区-腾讯云</a>，以下为普通安装，使用yum安装可以跳到2.3</p>
+<p>下载链接：<a target="_blank" rel="noopener" href="https://dev.mysql.com/downloads/mysql/">MySQL :: Download MySQL Community Server</a></p>
+<p><strong>推荐5.7.42版本</strong></p>
+<img src="/2023/05/newpost-51/2023-05-10-16-30-54-2023-05-10-09-36-18-image.png" srcset="/img/loading.gif" lazyload class="">
+
+<h3 id="2-1-卸载已有mariadb"><a href="#2-1-卸载已有mariadb" class="headerlink" title="2.1 卸载已有mariadb"></a>2.1 卸载已有mariadb</h3><p>首先检查下系统是否有<code>mariadb</code>，有则卸载（注意把<code>mariadb-libs</code>换成自己搜索到的包名）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">rpm -qa |grep mariadb<br><br>rpm -e --nodeps mariadb-libs<br></code></pre></td></tr></table></figure>
+
+<h3 id="2-2-安装"><a href="#2-2-安装" class="headerlink" title="2.2 安装"></a>2.2 安装</h3><p>下载后解压得到一堆rpm文件，用到其中的common、libs、client、server，先后安装如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell">rpm -ivh mysql-community-common-5.7.42-1.el7.x86_64.rpm<br>rpm -ivh mysql-community-libs-5.7.42-1.el7.x86_64.rpm<br>rpm -ivh mysql-community-client-5.7.42-1.el7.x86_64.rpm<br>yum -y install perl.x86_64 # 如果已安装，无需此步<br>yum -y install net-tools.x86_64 # 如果已安装，无需此步<br>rpm -ivh mysql-community-server-5.7.42-1.el7.x86_64.rpm<br></code></pre></td></tr></table></figure>
+
+<h3 id="2-3-设置开机自启并启动mysql"><a href="#2-3-设置开机自启并启动mysql" class="headerlink" title="2.3 设置开机自启并启动mysql"></a>2.3 设置开机自启并启动mysql</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">systemctl daemon-reload<br>systemctl enable mysqld<br>systemctl start mysqld<br></code></pre></td></tr></table></figure>
+
+<h3 id="2-4-修改密码"><a href="#2-4-修改密码" class="headerlink" title="2.4 修改密码"></a>2.4 修改密码</h3><p>获取安装时默认的密码，最后冒号之后的就是密码</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">grep &#x27;temporary password&#x27; /var/log/mysqld.log<br></code></pre></td></tr></table></figure>
+
+<p>登录并修改密码（初始密码不能进行其他操作）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs shell">mysql -uroot -p<br><span class="hljs-meta prompt_"># </span><span class="language-bash">然后输入初始密码后回车</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">下边的操作解除密码规则限制</span><br>set global validate_password_policy=0;<br>set global validate_password_length=1;<br><span class="hljs-meta prompt_"># </span><span class="language-bash">设置密码为`yourpassword`，替换为自己的密码</span><br>set password for root@localhost=password(&quot;yourpassword&quot;);<br><span class="hljs-meta prompt_"># </span><span class="language-bash">允许其他机器远程登录，记得把密码改成自己的</span><br>GRANT ALL PRIVILEGES ON *.* TO &#x27;root&#x27;@&#x27;%&#x27; IDENTIFIED BY &#x27;yourpassword&#x27;;<br>FLUSH PRIVILEGES;<br><span class="hljs-meta prompt_"># </span><span class="language-bash">退出mysql命令行</span><br>exit<br></code></pre></td></tr></table></figure>
+
+<h3 id="2-5-修改配置文件"><a href="#2-5-修改配置文件" class="headerlink" title="2.5 修改配置文件"></a>2.5 修改配置文件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">vim /etc/my.cnf<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs cnf">[mysql]<br>default-character-set=utf8<br><br>[mysqld]<br>datadir=/var/lib/mysql<br>socket=/var/lib/mysql/mysql.sock<br>default-storage-engine=INNODB<br>character_set_server=utf8<br><br>symbolic-links=0<br><br>log-error=/var/log/mysqld.log<br>pid-file=/var/run/mysqld/mysqld.pid<br><br>sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION<br>lower_case_table_names=1<br></code></pre></td></tr></table></figure>
+
+<p>重启mysql</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">service mysqld restart<br></code></pre></td></tr></table></figure>
+
+<h3 id="2-6-防火墙开放3306端口"><a href="#2-6-防火墙开放3306端口" class="headerlink" title="2.6 防火墙开放3306端口"></a>2.6 防火墙开放3306端口</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">查看状态</span><br>firewall-cmd --state<br><span class="hljs-meta prompt_"># </span><span class="language-bash">开放端口</span><br>firewall-cmd --zone=public --add-port=3306/tcp --permanent<br><span class="hljs-meta prompt_"># </span><span class="language-bash">重载</span><br>firewall-cmd --reload<br></code></pre></td></tr></table></figure>
+
+<h3 id="2-7-创建用户"><a href="#2-7-创建用户" class="headerlink" title="2.7 创建用户"></a>2.7 创建用户</h3><p>创建数据库并创建用户授权该数据库（先进入mysql命令行）</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">set</span> <span class="hljs-keyword">global</span> validate_password_policy<span class="hljs-operator">=</span><span class="hljs-number">0</span>;<br><span class="hljs-keyword">set</span> <span class="hljs-keyword">global</span> validate_password_length<span class="hljs-operator">=</span><span class="hljs-number">1</span>;<br><br><span class="hljs-keyword">create</span> database nacos;<br># 改为自己的密码<br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">USER</span> <span class="hljs-string">&#x27;nacos&#x27;</span>@<span class="hljs-string">&#x27;%&#x27;</span> IDENTIFIED <span class="hljs-keyword">BY</span> <span class="hljs-string">&#x27;yourpassword&#x27;</span>;<br><span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">all</span> privileges <span class="hljs-keyword">ON</span> `nacos`.<span class="hljs-operator">*</span> <span class="hljs-keyword">TO</span> <span class="hljs-string">&#x27;nacos&#x27;</span>@<span class="hljs-string">&#x27;%&#x27;</span>;<br># 如果需要创建其他用户以及数据库，可以在此一并创建<br></code></pre></td></tr></table></figure>
+
+
+<h2 id="3、naocs"><a href="#3、naocs" class="headerlink" title="3、naocs"></a>3、naocs</h2><p>下载链接：<a target="_blank" rel="noopener" href="https://github.com/alibaba/nacos/releases">Releases · alibaba/nacos · GitHub</a></p>
+<p><strong>推荐2.1.1版本，2.2之后的版本需要额外的秘钥配置</strong></p>
+<h3 id="3-1-解压并移动"><a href="#3-1-解压并移动" class="headerlink" title="3.1 解压并移动"></a>3.1 解压并移动</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">tar -zxvf nacos-server-2.1.1.tar.gz<br>mv nacos /usr/local/nacos<br>cd /usr/local/nacos<br></code></pre></td></tr></table></figure>
+
+<h3 id="3-2-初始化nacos数据库"><a href="#3-2-初始化nacos数据库" class="headerlink" title="3.2 初始化nacos数据库"></a>3.2 初始化nacos数据库</h3><p>进入mysql命令行，sql文件在<code>/usr/local/nacos/conf/nacos-mysql.sql</code></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql">use naocs;<br>source <span class="hljs-operator">/</span>usr<span class="hljs-operator">/</span><span class="hljs-keyword">local</span><span class="hljs-operator">/</span>nacos<span class="hljs-operator">/</span>conf<span class="hljs-operator">/</span>nacos<span class="hljs-operator">-</span>mysql.sql<br>exit<br></code></pre></td></tr></table></figure>
+
+<h3 id="3-3-修改配置"><a href="#3-3-修改配置" class="headerlink" title="3.3 修改配置"></a>3.3 修改配置</h3><p><code>vi conf/application.properties</code>，把其中以下行解开注释，并配置自己的mysql信息</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs shell">db.num=1<br><br>db.url.0=jdbc:mysql...<br>db.user.0=xxx<br>db.password.0=xxx<br><br>nacos.core.auth.enabled=true<br></code></pre></td></tr></table></figure>
+
+<h3 id="3-4-把nacos做成服务并开机自启"><a href="#3-4-把nacos做成服务并开机自启" class="headerlink" title="3.4 把nacos做成服务并开机自启"></a>3.4 把nacos做成服务并开机自启</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">vim /lib/systemd/system/nacos.service<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs systemd">[Unit]<br>Description=nacos<br>After=network.target<br><br>[Service]<br>Type=forking<br>ExecStart=/usr/local/nacos/bin/startup.sh -m standalone<br>ExecReload=/usr/local/nacos/bin/shutdown.sh<br>ExecStop=/usr/local/nacos/bin/shutdown.sh<br>PrivateTmp=true<br><br>[Install]  <br>WantedBy=multi-user.target<br></code></pre></td></tr></table></figure>
+
+<p>设置开机自启并启动</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">systemctl daemon-reload<br>systemctl enable nacos<br>systemctl start nacos<br></code></pre></td></tr></table></figure>
+
+<h3 id="3-5-放开8848端口"><a href="#3-5-放开8848端口" class="headerlink" title="3.5 放开8848端口"></a>3.5 放开8848端口</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">开放端口</span><br>firewall-cmd --zone=public --add-port=8848/tcp --permanent<br><span class="hljs-meta prompt_"># </span><span class="language-bash">重载</span><br>firewall-cmd --reload<br></code></pre></td></tr></table></figure>
+
+<h2 id="4、redis"><a href="#4、redis" class="headerlink" title="4、redis"></a>4、redis</h2><p>在线安装</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell">yum install -y epel-release<br>yum -y update<br>yum install -y redis<br><span class="hljs-meta prompt_"># </span><span class="language-bash">常用命令 启动/停止/重启/设置开机自启</span><br>systemctl start/stop/restart/enable redis<br></code></pre></td></tr></table></figure>
+
+<p>配置文件在<code>/etc/redis.conf</code></p>
+<p>以下为普通安装，如果使用在线安装，只需要做4.3、4.5和4.6</p>
+<p>下载链接：<a target="_blank" rel="noopener" href="https://redis.io/download/">Download | Redis</a></p>
+<p><strong>推荐5.0.14版本</strong></p>
+<h3 id="4-1-解压并移动"><a href="#4-1-解压并移动" class="headerlink" title="4.1 解压并移动"></a>4.1 解压并移动</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">tar -zxvf redis-5.0.14.tar.gz<br>mv redis-5.0.14 /usr/local/redis<br>cd /usr/local/redis<br></code></pre></td></tr></table></figure>
+
+<h3 id="4-2-安装依赖并编译"><a href="#4-2-安装依赖并编译" class="headerlink" title="4.2 安装依赖并编译"></a>4.2 安装依赖并编译</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">yum -y install gcc automake autoconf libtool make<br>make &amp;&amp; make install<br></code></pre></td></tr></table></figure>
+
+<h3 id="4-3-修改配置文件"><a href="#4-3-修改配置文件" class="headerlink" title="4.3 修改配置文件"></a>4.3 修改配置文件</h3><p><code>vim /usr/local/redis/redis.conf</code>，其他保持默认</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs conf">bind 0.0.0.0<br>protected-mode no<br>daemonize yes<br>requirepass 你的密码<br></code></pre></td></tr></table></figure>
+
+<h3 id="4-4-把redis做成服务"><a href="#4-4-把redis做成服务" class="headerlink" title="4.4 把redis做成服务"></a>4.4 把redis做成服务</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">vim /usr/lib/systemd/system/redis.service<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs systemd">[Unit]<br>Description=redis<br>After=network.target<br><br>[Service]<br>Type=forking<br>PIDFile=/var/run/redis_6379.pid<br>ExecStart=/usr/local/redis/src/redis-server /usr/local/redis/redis.conf<br>ExecReload=/bin/kill -s HUP $MAINPID<br>ExecStop=/bin/kill -s QUIT $MAINPID<br>PrivateTmp=true<br><br>[Install]<br>WantedBy=multi-user.target<br></code></pre></td></tr></table></figure>
+
+<h3 id="4-5-设置开机自启并启动"><a href="#4-5-设置开机自启并启动" class="headerlink" title="4.5 设置开机自启并启动"></a>4.5 设置开机自启并启动</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">systemctl daemon-reload<br>systemctl enable redis<br>systemctl start redis<br></code></pre></td></tr></table></figure>
+
+<h3 id="4-6-放开6379端口"><a href="#4-6-放开6379端口" class="headerlink" title="4.6 放开6379端口"></a>4.6 放开6379端口</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">开放端口</span><br>firewall-cmd --zone=public --add-port=6379/tcp --permanent<br><span class="hljs-meta prompt_"># </span><span class="language-bash">重载</span><br>firewall-cmd --reload<br></code></pre></td></tr></table></figure>
+
+<h2 id="5、nginx"><a href="#5、nginx" class="headerlink" title="5、nginx"></a>5、nginx</h2><h3 id="5-1-安装"><a href="#5-1-安装" class="headerlink" title="5.1 安装"></a>5.1 安装</h3><p>配置EPEL源</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">yum install -y epel-release<br>yum -y update<br></code></pre></td></tr></table></figure>
+
+<p>安装nginx</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">yum install -y nginx<br></code></pre></td></tr></table></figure>
+
+<p>安装完成后：</p>
+<ul>
+<li><p>默认网站目录为<code>/usr/share/nginx/html</code></p>
+</li>
+<li><p>默认配置文件在<code>/etc/nginx/nginx.conf</code></p>
+</li>
+<li><p>自定义配置文件目录为<code>/etc/nginx/conf.d/</code></p>
+</li>
+</ul>
+<h3 id="5-2-设置开机自启并启动"><a href="#5-2-设置开机自启并启动" class="headerlink" title="5.2 设置开机自启并启动"></a>5.2 设置开机自启并启动</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">systemctl enable nginx<br>systemctl start nginx<br></code></pre></td></tr></table></figure>
+
+<h3 id="5-3-放开端口"><a href="#5-3-放开端口" class="headerlink" title="5.3 放开端口"></a>5.3 放开端口</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">开放端口</span><br>firewall-cmd --zone=public --add-port=80/tcp --permanent<br>firewall-cmd --zone=public --add-port=443/tcp --permanent<br><span class="hljs-meta prompt_"># </span><span class="language-bash">重载</span><br>firewall-cmd --reload<br></code></pre></td></tr></table></figure>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E8%BF%90%E7%BB%B4/" class="print-no-link">#运维</a>
+      
+        <a href="/tags/%E7%BB%8F%E9%AA%8C/" class="print-no-link">#经验</a>
+      
+        <a href="/tags/Nginx/" class="print-no-link">#Nginx</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>CentOS 7.9 安装基础开发环境jdk redis nacos nginx mysql</div>
+      <div>https://blog.ctftools.com/2023/05/newpost-51/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Dr3@m</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年5月10日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="NC - 非商业性使用">
+                    <i class="iconfont icon-cc-nc"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                    <i class="iconfont icon-cc-sa"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/09/newpost-52/" title="内网穿透工具frp快速使用">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">内网穿透工具frp快速使用</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/10/newpost-50/" title="Pyinstaller 逆向">
+                        <span class="hidden-mobile">Pyinstaller 逆向</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"dr34m-cn/dr34m-cn.github.io","repo-id":"MDEwOlJlcG9zaXRvcnkxMTI4MDcyODI=","category":"Announcements","category-id":"DIC_kwDOBrlNcs4Cibmt","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":1,"input-position":"top","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       &copy; <span id="nowYear">2021</span> Dr3@m | Power by  <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> Theme <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/assets/js/foot.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      冀ICP备16028844号
+    </a>
+  </span>
+  
+</div>
+
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="/assets/static/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="/assets/static/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="/assets/static/jquery.min.js" ></script>
+<script  src="/assets/static/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="/assets/static/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('/assets/static/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=/assets/static/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('/assets/static/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('/assets/static/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

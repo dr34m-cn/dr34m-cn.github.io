@@ -1,0 +1,848 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/favicon.ico">
+  <link rel="icon" href="/assets/img/favicon.ico">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Dr3@m">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="目标实现官方案例，训练一个神经网络模型，对运动鞋和衬衫等服装图像进行分类，数据集来自Fashion-MNIST 样本 本文环境为Python3 x64，windows系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TensorFlow入门">
+<meta property="og:url" content="https://blog.ctftools.com/2022/02/newpost-33/index.html">
+<meta property="og:site_name" content="Dr34m&#39;s Blog">
+<meta property="og:description" content="目标实现官方案例，训练一个神经网络模型，对运动鞋和衬衫等服装图像进行分类，数据集来自Fashion-MNIST 样本 本文环境为Python3 x64，windows系统">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.ctftools.com/assets/headImg/tensorflow.png">
+<meta property="article:published_time" content="2022-02-08T08:19:08.000Z">
+<meta property="article:modified_time" content="2024-09-29T06:58:21.688Z">
+<meta property="article:author" content="Dr3@m">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="机器学习">
+<meta property="article:tag" content="TensorFlow">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://blog.ctftools.com/assets/headImg/tensorflow.png">
+  
+  
+  
+  <title>TensorFlow入门 - Dr34m&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="/assets/static/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="/assets/static/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="/assets/static/hint.min.css" />
+
+  <link  rel="stylesheet" href="/assets/static/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.ctftools.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":3},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"2e56a139382ea7b1de5ebe406db45f54","google":{"measurement_id":"G-J17J3L2RWK"},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"bxnYbxGO1K0yILGbts7KVLhK-gzGzoHsz","app_key":"zbvF6NeggGIbfjNdAVb1kG6I","server_url":"https://bxnybxgo.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"woyaola":null,"cnzz":1261417535},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?2e56a139382ea7b1de5ebe406db45f54";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=G-J17J3L2RWK", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', 'G-J17J3L2RWK');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Dr34m's Blog" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="Dr34m's Blog" type="application/rss+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Dr34m&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/assets/img/dojm2h.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="TensorFlow入门"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Dr3@m
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-02-08 16:19" pubdate>
+          2022年2月8日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          877 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          8 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">TensorFlow入门</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><p>实现<a target="_blank" rel="noopener" href="https://www.tensorflow.org/tutorials/keras/classification?hl=zh_cn">官方案例</a>，训练一个神经网络模型，对运动鞋和衬衫等服装图像进行分类，数据集来自<a target="_blank" rel="noopener" href="https://github.com/zalandoresearch/fashion-mnist">Fashion-MNIST 样本</a></p>
+<p>本文环境为Python3 x64，windows系统</p>
+<span id="more"></span>
+
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><h2 id="一、使用前准备"><a href="#一、使用前准备" class="headerlink" title="一、使用前准备"></a>一、使用前准备</h2><h3 id="1-安装依赖"><a href="#1-安装依赖" class="headerlink" title="1. 安装依赖"></a>1. 安装依赖</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">pip install numpy==1.18.5<br>pip install tensorflow==2.3.0<br></code></pre></td></tr></table></figure>
+
+<p>会自动安装相关依赖</p>
+<blockquote>
+<p>Successfully installed tensorboard-2.8.0 tensorboard-data-server-0.6.1 tensorflow-2.3.0 tensorflow-estimator-2.3.0</p>
+</blockquote>
+<h3 id="2-在项目中引用"><a href="#2-在项目中引用" class="headerlink" title="2. 在项目中引用"></a>2. 在项目中引用</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># TensorFlow and tf.keras</span><br><span class="hljs-keyword">import</span> tensorflow <span class="hljs-keyword">as</span> tf<br><span class="hljs-keyword">from</span> tensorflow <span class="hljs-keyword">import</span> keras<br><br><span class="hljs-comment"># Helper libraries</span><br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br></code></pre></td></tr></table></figure>
+
+<p>如果需要在matplotlib显示中文，可以添加如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 解决中文乱码问题需要用到的</span><br><span class="hljs-keyword">from</span> matplotlib.font_manager <span class="hljs-keyword">import</span> FontProperties<br>font_set = FontProperties(fname=<span class="hljs-string">r&quot;C:\windows\fonts\simsun.ttc&quot;</span>, size=<span class="hljs-number">12</span>)<br></code></pre></td></tr></table></figure>
+
+<p>之后再需要显示中文的地方加上<code>fontproperties=font_set</code>参数</p>
+<h2 id="二、使用"><a href="#二、使用" class="headerlink" title="二、使用"></a>二、使用</h2><h3 id="1-导入-Fashion-MNIST-数据集"><a href="#1-导入-Fashion-MNIST-数据集" class="headerlink" title="1. 导入 Fashion MNIST 数据集"></a>1. 导入 Fashion MNIST 数据集</h3><ul>
+<li> 直接从 TensorFlow 中导入和加载 Fashion MNIST 数据</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">fashion_mnist = keras.datasets.fashion_mnist<br>(train_images, train_labels), (test_images, test_labels) = fashion_mnist.load_data()<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>定义类名，方便后边使用</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">class_names = [<span class="hljs-string">&#x27;T恤/上衣&#x27;</span>, <span class="hljs-string">&#x27;裤子&#x27;</span>, <span class="hljs-string">&#x27;套头衫&#x27;</span>, <span class="hljs-string">&#x27;连衣裙&#x27;</span>, <span class="hljs-string">&#x27;外套&#x27;</span>,<br>               <span class="hljs-string">&#x27;凉鞋&#x27;</span>, <span class="hljs-string">&#x27;衬衫&#x27;</span>, <span class="hljs-string">&#x27;运动鞋&#x27;</span>, <span class="hljs-string">&#x27;包&#x27;</span>, <span class="hljs-string">&#x27;短靴&#x27;</span>]<br></code></pre></td></tr></table></figure>
+
+<h3 id="2-浏览数据"><a href="#2-浏览数据" class="headerlink" title="2. 浏览数据"></a>2. 浏览数据</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-built_in">print</span>(train_images.shape)<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>(60000, 28, 28)</p>
+</blockquote>
+<p>可知train_images中有60000个28x28像素的图片</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-built_in">print</span>(<span class="hljs-built_in">len</span>(train_labels))<br><span class="hljs-built_in">print</span>(train_labels)<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>60000</p>
+<p>[9 0 0 … 3 0 5]</p>
+</blockquote>
+<p>可知train_labels是一个数组，由60000个0-9之间的数字组成</p>
+<p>同理可知test_images中有10000个28x28像素的图片，test_labels是一个数组，由10000个0-9之间的数字组成</p>
+<h3 id="3-预处理数据"><a href="#3-预处理数据" class="headerlink" title="3. 预处理数据"></a>3. 预处理数据</h3><p>在训练网络之前，必须对数据进行预处理。如果您检查训练集中的第一个图像，您会看到像素值处于 0 到 255 之间</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python">plt.figure()<br>plt.imshow(train_images[<span class="hljs-number">0</span>])<br>plt.colorbar()<br>plt.grid(<span class="hljs-literal">False</span>)<br>plt.show()<br></code></pre></td></tr></table></figure>
+
+<img src="/2022/02/newpost-33/image-20220209100457541.png" srcset="/img/loading.gif" lazyload class="" title="image-20220209100457541">
+
+<p>将其除以 255，可使值范围在0-1之间</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">train_images = train_images / <span class="hljs-number">255.0</span><br>test_images = test_images / <span class="hljs-number">255.0</span><br></code></pre></td></tr></table></figure>
+
+<p>可通过以下方式验证</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python">plt.figure(figsize=(<span class="hljs-number">10</span>,<span class="hljs-number">10</span>))<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">25</span>):<br>    plt.subplot(<span class="hljs-number">5</span>,<span class="hljs-number">5</span>,i+<span class="hljs-number">1</span>)<br>    plt.xticks([])<br>    plt.yticks([])<br>    plt.grid(<span class="hljs-literal">False</span>)<br>    plt.imshow(train_images[i], cmap=plt.cm.binary)<br>    plt.xlabel(class_names[train_labels[i]], fontproperties=font_set)<br>plt.show()<br></code></pre></td></tr></table></figure>
+
+<img src="/2022/02/newpost-33/image-20220209101053731.png" srcset="/img/loading.gif" lazyload class="" title="image-20220209101053731">
+
+<h3 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># TensorFlow and tf.keras</span><br><span class="hljs-keyword">import</span> tensorflow <span class="hljs-keyword">as</span> tf<br><span class="hljs-keyword">from</span> tensorflow <span class="hljs-keyword">import</span> keras<br><br><span class="hljs-keyword">from</span> matplotlib.font_manager <span class="hljs-keyword">import</span> FontProperties<br>font_set = FontProperties(fname=<span class="hljs-string">r&quot;C:\windows\fonts\simsun.ttc&quot;</span>, size=<span class="hljs-number">12</span>)<br><br><span class="hljs-comment"># Helper libraries</span><br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><br><span class="hljs-comment"># 直接从 TensorFlow 中导入和加载 Fashion MNIST 数据</span><br>fashion_mnist = keras.datasets.fashion_mnist<br>(train_images, train_labels), (test_images, test_labels) = fashion_mnist.load_data()<br><span class="hljs-comment"># 定义类名，方便后边使用</span><br>class_names = [<span class="hljs-string">&#x27;T恤/上衣&#x27;</span>, <span class="hljs-string">&#x27;裤子&#x27;</span>, <span class="hljs-string">&#x27;套头衫&#x27;</span>, <span class="hljs-string">&#x27;连衣裙&#x27;</span>, <span class="hljs-string">&#x27;外套&#x27;</span>,<br>               <span class="hljs-string">&#x27;凉鞋&#x27;</span>, <span class="hljs-string">&#x27;衬衫&#x27;</span>, <span class="hljs-string">&#x27;运动鞋&#x27;</span>, <span class="hljs-string">&#x27;包&#x27;</span>, <span class="hljs-string">&#x27;短靴&#x27;</span>]<br><br><span class="hljs-comment"># print(train_images.shape)</span><br><span class="hljs-comment"># print(len(train_labels))</span><br><span class="hljs-comment"># print(train_labels)</span><br><br><span class="hljs-comment"># plt.figure()</span><br><span class="hljs-comment"># plt.imshow(train_images[0])</span><br><span class="hljs-comment"># plt.colorbar()</span><br><span class="hljs-comment"># plt.grid(False)</span><br><span class="hljs-comment"># plt.show()</span><br><br>train_images = train_images / <span class="hljs-number">255.0</span><br>test_images = test_images / <span class="hljs-number">255.0</span><br><br><span class="hljs-comment"># plt.figure(figsize=(10,10))</span><br><span class="hljs-comment"># for i in range(25):</span><br><span class="hljs-comment">#     plt.subplot(5,5,i+1)</span><br><span class="hljs-comment">#     plt.xticks([])</span><br><span class="hljs-comment">#     plt.yticks([])</span><br><span class="hljs-comment">#     plt.grid(False)</span><br><span class="hljs-comment">#     plt.imshow(train_images[i], cmap=plt.cm.binary)</span><br><span class="hljs-comment">#     plt.xlabel(class_names[train_labels[i]], fontproperties=font_set)</span><br><span class="hljs-comment"># plt.show()</span><br><br><span class="hljs-comment"># 模型配置</span><br>model = keras.Sequential([<br>    keras.layers.Flatten(input_shape=(<span class="hljs-number">28</span>, <span class="hljs-number">28</span>)),<br>    keras.layers.Dense(<span class="hljs-number">128</span>, activation=<span class="hljs-string">&#x27;relu&#x27;</span>),<br>    keras.layers.Dense(<span class="hljs-number">10</span>)<br>])<br><br>model.<span class="hljs-built_in">compile</span>(optimizer=<span class="hljs-string">&#x27;adam&#x27;</span>,<br>              loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=<span class="hljs-literal">True</span>),<br>              metrics=[<span class="hljs-string">&#x27;accuracy&#x27;</span>])<br><br><span class="hljs-comment"># 训练</span><br>model.fit(train_images, train_labels, epochs=<span class="hljs-number">10</span>)<br><br><span class="hljs-comment"># test_loss, test_acc = model.evaluate(test_images,  test_labels, verbose=2)</span><br><br><span class="hljs-comment"># print(&#x27;\nTest accuracy:&#x27;, test_acc)</span><br><br>probability_model = tf.keras.Sequential([model, <br>                                         tf.keras.layers.Softmax()])<br><br>predictions = probability_model.predict(test_images)<br><br><span class="hljs-comment"># print(predictions[0])</span><br><br><span class="hljs-comment"># 图片与标签</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">plot_image</span>(<span class="hljs-params">i, predictions_array, true_label, img</span>):<br>  predictions_array, true_label, img = predictions_array, true_label[i], img[i]<br>  plt.grid(<span class="hljs-literal">False</span>)<br>  plt.xticks([])<br>  plt.yticks([])<br><br>  plt.imshow(img, cmap=plt.cm.binary)<br><br>  predicted_label = np.argmax(predictions_array)<br>  <span class="hljs-keyword">if</span> predicted_label == true_label:<br>    color = <span class="hljs-string">&#x27;blue&#x27;</span><br>  <span class="hljs-keyword">else</span>:<br>    color = <span class="hljs-string">&#x27;red&#x27;</span><br><br>  plt.xlabel(<span class="hljs-string">&quot;&#123;&#125; &#123;:2.0f&#125;% (&#123;&#125;)&quot;</span>.<span class="hljs-built_in">format</span>(class_names[predicted_label],<br>                                <span class="hljs-number">100</span>*np.<span class="hljs-built_in">max</span>(predictions_array),<br>                                class_names[true_label]),<br>                                color=color,<br>                                fontproperties=font_set)<br><br><span class="hljs-comment"># 表</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">plot_value_array</span>(<span class="hljs-params">i, predictions_array, true_label</span>):<br>  predictions_array, true_label = predictions_array, true_label[i]<br>  plt.grid(<span class="hljs-literal">False</span>)<br>  plt.xticks(<span class="hljs-built_in">range</span>(<span class="hljs-number">10</span>))<br>  plt.yticks([])<br>  thisplot = plt.bar(<span class="hljs-built_in">range</span>(<span class="hljs-number">10</span>), predictions_array, color=<span class="hljs-string">&quot;#777777&quot;</span>)<br>  plt.ylim([<span class="hljs-number">0</span>, <span class="hljs-number">1</span>])<br>  predicted_label = np.argmax(predictions_array)<br><br>  thisplot[predicted_label].set_color(<span class="hljs-string">&#x27;red&#x27;</span>)<br>  thisplot[true_label].set_color(<span class="hljs-string">&#x27;blue&#x27;</span>)<br><br><br><span class="hljs-comment"># Plot the first X test images, their predicted labels, and the true labels.</span><br><span class="hljs-comment"># Color correct predictions in blue and incorrect predictions in red.</span><br>num_rows = <span class="hljs-number">5</span><br>num_cols = <span class="hljs-number">3</span><br>num_images = num_rows*num_cols<br>plt.figure(figsize=(<span class="hljs-number">2</span>*<span class="hljs-number">2</span>*num_cols, <span class="hljs-number">2</span>*num_rows))<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(num_images):<br>  plt.subplot(num_rows, <span class="hljs-number">2</span>*num_cols, <span class="hljs-number">2</span>*i+<span class="hljs-number">1</span>)<br>  plot_image(i, predictions[i], test_labels, test_images)<br>  plt.subplot(num_rows, <span class="hljs-number">2</span>*num_cols, <span class="hljs-number">2</span>*i+<span class="hljs-number">2</span>)<br>  plot_value_array(i, predictions[i], test_labels)<br>plt.tight_layout()<br>plt.show()<br></code></pre></td></tr></table></figure>
+
+<p>训练结果</p>
+<img src="/2022/02/newpost-33/image-20220209101637672.png" srcset="/img/loading.gif" lazyload class="" title="image-20220209101637672">
+
+<p>预测结果</p>
+<img src="/2022/02/newpost-33/image-20220209101620384.png" srcset="/img/loading.gif" lazyload class="" title="image-20220209101620384">
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Python/" class="print-no-link">#Python</a>
+      
+        <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="print-no-link">#机器学习</a>
+      
+        <a href="/tags/TensorFlow/" class="print-no-link">#TensorFlow</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>TensorFlow入门</div>
+      <div>https://blog.ctftools.com/2022/02/newpost-33/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Dr3@m</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年2月8日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="NC - 非商业性使用">
+                    <i class="iconfont icon-cc-nc"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                    <i class="iconfont icon-cc-sa"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/02/newpost-35/" title="Python http.server 本地服务支持跨域">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Python http.server 本地服务支持跨域</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/01/newpost-32/" title="Flink学习笔记">
+                        <span class="hidden-mobile">Flink学习笔记</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"dr34m-cn/dr34m-cn.github.io","repo-id":"MDEwOlJlcG9zaXRvcnkxMTI4MDcyODI=","category":"Announcements","category-id":"DIC_kwDOBrlNcs4Cibmt","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":1,"input-position":"top","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       &copy; <span id="nowYear">2021</span> Dr3@m | Power by  <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> Theme <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/assets/js/foot.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      冀ICP备16028844号
+    </a>
+  </span>
+  
+</div>
+
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="/assets/static/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="/assets/static/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="/assets/static/jquery.min.js" ></script>
+<script  src="/assets/static/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="/assets/static/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('/assets/static/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=/assets/static/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('/assets/static/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('/assets/static/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

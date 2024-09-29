@@ -1,0 +1,975 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/favicon.ico">
+  <link rel="icon" href="/assets/img/favicon.ico">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Dr3@m">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="目标记录GB28181交互过程，以便相关开发研究">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GB28181抓包记录">
+<meta property="og:url" content="https://blog.ctftools.com/2024/05/newpost-56/index.html">
+<meta property="og:site_name" content="Dr34m&#39;s Blog">
+<meta property="og:description" content="目标记录GB28181交互过程，以便相关开发研究">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.ctftools.com/assets/headImg/gb28181.png">
+<meta property="article:published_time" content="2024-05-17T08:18:45.000Z">
+<meta property="article:modified_time" content="2024-09-29T06:58:21.695Z">
+<meta property="article:author" content="Dr3@m">
+<meta property="article:tag" content="运维">
+<meta property="article:tag" content="经验">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://blog.ctftools.com/assets/headImg/gb28181.png">
+  
+  
+  
+  <title>GB28181抓包记录 - Dr34m&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="/assets/static/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="/assets/static/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="/assets/static/hint.min.css" />
+
+  <link  rel="stylesheet" href="/assets/static/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.ctftools.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":3},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"2e56a139382ea7b1de5ebe406db45f54","google":{"measurement_id":"G-J17J3L2RWK"},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"bxnYbxGO1K0yILGbts7KVLhK-gzGzoHsz","app_key":"zbvF6NeggGIbfjNdAVb1kG6I","server_url":"https://bxnybxgo.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"woyaola":null,"cnzz":1261417535},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?2e56a139382ea7b1de5ebe406db45f54";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=G-J17J3L2RWK", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', 'G-J17J3L2RWK');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Dr34m's Blog" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="Dr34m's Blog" type="application/rss+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Dr34m&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/assets/img/dojm2h.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="GB28181抓包记录"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Dr3@m
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-05-17 16:18" pubdate>
+          2024年5月17日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          43 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">GB28181抓包记录</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><p>记录GB28181交互过程，以便相关开发研究</p>
+<span id="more"></span>
+
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><h2 id="一-环境"><a href="#一-环境" class="headerlink" title="一. 环境"></a>一. 环境</h2><h4 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h4><p>地址：192.168.6.71</p>
+<p>端口：5060</p>
+<p>编码：34020000001320000002</p>
+<p>通道编号：34020000001310000001</p>
+<p>报警通道编号：34020000001340000001</p>
+<h4 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h4><p>地址：192.168.6.106</p>
+<p>端口：5062</p>
+<p>编码：34020000002000000010</p>
+<p>域：3402000000</p>
+<h2 id="二、抓包报文"><a href="#二、抓包报文" class="headerlink" title="二、抓包报文"></a>二、抓包报文</h2><h3 id="1-注册相关"><a href="#1-注册相关" class="headerlink" title="1. 注册相关"></a>1. 注册相关</h3><h4 id="1-1-注册"><a href="#1-1-注册" class="headerlink" title="1.1 注册"></a>1.1 注册</h4><p>客户端-&gt;服务端</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs sip">REGISTER sip:34020000002000000010@192.168.6.106:5062 SIP/2.0<br>Via: SIP/2.0/UDP 192.168.6.71:5060;rport;branch=z9hG4bK1251336551<br>Route: &lt;sip:34020000001320000002@192.168.6.106:5062;lr&gt;<br>From: &lt;sip:34020000001320000002@192.168.6.71:5060&gt;;tag=2088733642<br>To: &lt;sip:34020000001320000002@192.168.6.71:5060&gt;<br>Call-ID: 1881196343@192.168.6.71<br>CSeq: 1 REGISTER<br>Contact: &lt;sip:34020000001320000002@192.168.6.71:5060&gt;<br>Max-Forwards: 70<br>User-Agent: SIP UAS V3.0.0.675168<br>Expires: 3600<br>Content-Length: 0<br><br><br></code></pre></td></tr></table></figure>
+
+<p>服务端-&gt;客户端</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">SIP</span>/<span class="hljs-number">2</span>.<span class="hljs-number">0</span> <span class="hljs-number">401</span> Unauthorized<br><span class="hljs-attribute">Via</span>: SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span>/UDP <span class="hljs-number">192.168.6.71:5060</span>;rport=<span class="hljs-number">5060</span>;branch=z9hG4bK1251336551<br><span class="hljs-attribute">From</span>: &lt;sip:<span class="hljs-number">34020000001320000002</span>@<span class="hljs-number">192.168.6.71:5060</span>&gt;;tag=<span class="hljs-number">2088733642</span><br><span class="hljs-attribute">To</span>: &lt;sip:<span class="hljs-number">34020000001320000002</span>@<span class="hljs-number">192.168.6.71:5060</span>&gt;;tag=<span class="hljs-number">3241172924</span><br><span class="hljs-attribute">Call</span>-ID: <span class="hljs-number">1881196343</span>@<span class="hljs-number">192.168.6.71</span><br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">1</span> REGISTER<br><span class="hljs-attribute">User</span>-Agent: eXosip/<span class="hljs-number">4</span>.<span class="hljs-number">1</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">WWW</span>-Authenticate: Digest realm=<span class="hljs-string">&quot;34020000&quot;</span>,algorithm=MD5,nonce=<span class="hljs-string">&quot;1715926053&quot;</span><br><span class="hljs-attribute">Date</span>: <span class="hljs-number">2024</span>-<span class="hljs-number">05</span>-<span class="hljs-number">17</span>T14:<span class="hljs-number">07</span>:<span class="hljs-number">33</span>.<span class="hljs-number">232</span><br><span class="hljs-attribute">Content</span>-Length: <span class="hljs-number">0</span><br><br><br></code></pre></td></tr></table></figure>
+
+<p>客户端-&gt;服务端</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">REGISTER</span> sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span> SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">Via</span>: SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span>/UDP <span class="hljs-number">192.168.6.71:5060</span>;rport;branch=z9hG4bK1442331620<br><span class="hljs-attribute">Route</span>: &lt;sip:<span class="hljs-number">34020000001320000002</span>@<span class="hljs-number">192.168.6.106:5062</span>;lr&gt;<br><span class="hljs-attribute">From</span>: &lt;sip:<span class="hljs-number">34020000001320000002</span>@<span class="hljs-number">192.168.6.71:5060</span>&gt;;tag=<span class="hljs-number">2088733642</span><br><span class="hljs-attribute">To</span>: &lt;sip:<span class="hljs-number">34020000001320000002</span>@<span class="hljs-number">192.168.6.71:5060</span>&gt;<br><span class="hljs-attribute">Call</span>-ID: <span class="hljs-number">1881196343</span>@<span class="hljs-number">192.168.6.71</span><br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">2</span> REGISTER<br><span class="hljs-attribute">Contact</span>: &lt;sip:<span class="hljs-number">34020000001320000002</span>@<span class="hljs-number">192.168.6.71:5060</span>&gt;<br><span class="hljs-attribute">Authorization</span>: Digest username=<span class="hljs-string">&quot;34020000001320000002&quot;</span>, realm=<span class="hljs-string">&quot;34020000&quot;</span>, nonce=<span class="hljs-string">&quot;1715926053&quot;</span>, uri=<span class="hljs-string">&quot;sip:34020000002000000010@192.168.6.106:5062&quot;</span>, response=<span class="hljs-string">&quot;fa983ee8abd2b6ff36b857c660b06f67&quot;</span>, algorithm=MD5<br><span class="hljs-attribute">Max</span>-Forwards: <span class="hljs-number">70</span><br><span class="hljs-attribute">User</span>-Agent: SIP UAS V<span class="hljs-number">3.0.0.675</span>168<br><span class="hljs-attribute">Expires</span>: <span class="hljs-number">3600</span><br><span class="hljs-attribute">Content</span>-Length: <span class="hljs-number">0</span><br><br><br></code></pre></td></tr></table></figure>
+
+<p>服务端-&gt;客户端</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">SIP</span>/<span class="hljs-number">2</span>.<span class="hljs-number">0</span> <span class="hljs-number">200</span> OK<br><span class="hljs-attribute">Via</span>: SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span>/UDP <span class="hljs-number">192.168.6.71:5060</span>;rport=<span class="hljs-number">5060</span>;branch=z9hG4bK1442331620<br><span class="hljs-attribute">From</span>: &lt;sip:<span class="hljs-number">34020000001320000002</span>@<span class="hljs-number">192.168.6.71:5060</span>&gt;;tag=<span class="hljs-number">2088733642</span><br><span class="hljs-attribute">To</span>: &lt;sip:<span class="hljs-number">34020000001320000002</span>@<span class="hljs-number">192.168.6.71:5060</span>&gt;;tag=<span class="hljs-number">3666500293</span><br><span class="hljs-attribute">Call</span>-ID: <span class="hljs-number">1881196343</span>@<span class="hljs-number">192.168.6.71</span><br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">2</span> REGISTER<br><span class="hljs-attribute">User</span>-Agent: eXosip/<span class="hljs-number">4</span>.<span class="hljs-number">1</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">Date</span>: <span class="hljs-number">2024</span>-<span class="hljs-number">05</span>-<span class="hljs-number">17</span>T14:<span class="hljs-number">07</span>:<span class="hljs-number">33</span>.<span class="hljs-number">263</span><br><span class="hljs-attribute">Content</span>-Length: <span class="hljs-number">0</span><br><br><br></code></pre></td></tr></table></figure>
+
+<h4 id="1-2-心跳"><a href="#1-2-心跳" class="headerlink" title="1.2 心跳"></a>1.2 心跳</h4><p>客户端-&gt;服务端</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">MESSAGE</span> sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span> SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">Via</span>: SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span>/UDP <span class="hljs-number">192.168.6.71:5060</span>;rport;branch=z9hG4bK677047196<br><span class="hljs-attribute">From</span>: &lt;sip:<span class="hljs-number">34020000001320000002</span>@<span class="hljs-number">192.168.6.71:5060</span>&gt;;tag=<span class="hljs-number">1166693770</span><br><span class="hljs-attribute">To</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;<br><span class="hljs-attribute">Call</span>-ID: <span class="hljs-number">632317300</span>@<span class="hljs-number">192.168.6.71</span><br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">20</span> MESSAGE<br><span class="hljs-attribute">Max</span>-Forwards: <span class="hljs-number">70</span><br><span class="hljs-attribute">User</span>-Agent: SIP UAS V<span class="hljs-number">3.0.0.675</span>168<br><span class="hljs-attribute">Content</span>-Type: Application/MANSCDP+xml<br><span class="hljs-attribute">Content</span>-Length:   <span class="hljs-number">180</span><br><br><span class="hljs-section">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;GB2312&quot;</span> ?&gt;</span><br><span class="hljs-section">&lt;Notify&gt;</span><br>    <span class="hljs-section">&lt;CmdType&gt;</span><span class="hljs-attribute">Keepalive</span>&lt;/CmdType&gt;<br>    <span class="hljs-section">&lt;SN&gt;</span><span class="hljs-attribute">539</span>&lt;/SN&gt;<br>    <span class="hljs-section">&lt;DeviceID&gt;</span><span class="hljs-attribute">34020000001320000002</span>&lt;/DeviceID&gt;<br>    <span class="hljs-section">&lt;Status&gt;</span><span class="hljs-attribute">OK</span>&lt;/Status&gt;<br><span class="hljs-section">&lt;/Notify&gt;</span><br><br></code></pre></td></tr></table></figure>
+
+<p>服务端-&gt;客户端</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">SIP</span>/<span class="hljs-number">2</span>.<span class="hljs-number">0</span> <span class="hljs-number">200</span> OK<br><span class="hljs-attribute">Via</span>: SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span>/UDP <span class="hljs-number">192.168.6.71:5060</span>;rport=<span class="hljs-number">5060</span>;branch=z9hG4bK677047196<br><span class="hljs-attribute">From</span>: &lt;sip:<span class="hljs-number">34020000001320000002</span>@<span class="hljs-number">192.168.6.71:5060</span>&gt;;tag=<span class="hljs-number">1166693770</span><br><span class="hljs-attribute">To</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;;tag=<span class="hljs-number">2798064128</span><br><span class="hljs-attribute">Call</span>-ID: <span class="hljs-number">632317300</span>@<span class="hljs-number">192.168.6.71</span><br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">20</span> MESSAGE<br><span class="hljs-attribute">User</span>-Agent: eXosip/<span class="hljs-number">4</span>.<span class="hljs-number">1</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">Content</span>-Length: <span class="hljs-number">0</span><br><br><br></code></pre></td></tr></table></figure>
+
+<h3 id="2-设备查询"><a href="#2-设备查询" class="headerlink" title="2. 设备查询"></a>2. 设备查询</h3><h4 id="2-1-Catalog"><a href="#2-1-Catalog" class="headerlink" title="2.1 Catalog"></a>2.1 Catalog</h4><p>服务端-&gt;客户端</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">MESSAGE</span> sip:<span class="hljs-number">34020000001320000002</span>@<span class="hljs-number">192.168.6.71:5060</span> SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">Via</span>: SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span>/UDP <span class="hljs-number">192.168.6.106:5062</span>;rport;branch=z9hG4bK3012865820<br><span class="hljs-attribute">From</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;;tag=<span class="hljs-number">842983226</span><br><span class="hljs-attribute">To</span>: &lt;sip:<span class="hljs-number">34020000001320000002</span>@<span class="hljs-number">192.168.6.71:5060</span>&gt;<br><span class="hljs-attribute">Call</span>-ID: <span class="hljs-number">2898046025</span><br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">20</span> MESSAGE<br><span class="hljs-attribute">Content</span>-Type: application/MANSCDP+xml<br><span class="hljs-attribute">Max</span>-Forwards: <span class="hljs-number">70</span><br><span class="hljs-attribute">User</span>-Agent: eXosip/<span class="hljs-number">4</span>.<span class="hljs-number">1</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">Date</span>: <span class="hljs-number">2024</span>-<span class="hljs-number">05</span>-<span class="hljs-number">17</span>T14:<span class="hljs-number">18</span>:<span class="hljs-number">02</span>.<span class="hljs-number">573</span><br><span class="hljs-attribute">Content</span>-Length:   <span class="hljs-number">125</span><br><br><span class="hljs-section">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span>?&gt;</span><br><span class="hljs-section">&lt;Query&gt;</span><br><span class="hljs-section">&lt;CmdType&gt;</span><span class="hljs-attribute">Catalog</span>&lt;/CmdType&gt;<br><span class="hljs-section">&lt;SN&gt;</span><span class="hljs-attribute">7</span>&lt;/SN&gt;<br><span class="hljs-section">&lt;DeviceID&gt;</span><span class="hljs-attribute">34020000001320000002</span>&lt;/DeviceID&gt;<br><span class="hljs-section">&lt;/Query&gt;</span><br><br></code></pre></td></tr></table></figure>
+
+<p>客户端-&gt;服务端</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">SIP</span>/<span class="hljs-number">2</span>.<span class="hljs-number">0</span> <span class="hljs-number">200</span> OK<br><span class="hljs-attribute">Via</span>: SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span>/UDP <span class="hljs-number">192.168.6.106:5062</span>;rport=<span class="hljs-number">5062</span>;branch=z9hG4bK3012865820<br><span class="hljs-attribute">From</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;;tag=<span class="hljs-number">842983226</span><br><span class="hljs-attribute">To</span>: &lt;sip:<span class="hljs-number">34020000001320000002</span>@<span class="hljs-number">192.168.6.71:5060</span>&gt;;tag=<span class="hljs-number">1838534428</span><br><span class="hljs-attribute">Call</span>-ID: <span class="hljs-number">2898046025</span><br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">20</span> MESSAGE<br><span class="hljs-attribute">User</span>-Agent: SIP UAS V<span class="hljs-number">3.0.0.675</span>168<br><span class="hljs-attribute">Content</span>-Length: <span class="hljs-number">0</span><br><br><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs xml">MESSAGE sip:34020000002000000010@192.168.6.106:5062 SIP/2.0<br>Via: SIP/2.0/UDP 192.168.6.71:5060;rport;branch=z9hG4bK1121513722<br>From: &lt;sip:34020000001320000002@192.168.6.71:5060&gt;;tag=616675198<br>To: &lt;sip:34020000002000000010@192.168.6.106:5062&gt;<br>Call-ID: 140588148@192.168.6.71<br>CSeq: 20 MESSAGE<br>Max-Forwards: 70<br>User-Agent: SIP UAS V3.0.0.675168<br>Content-Type: Application/MANSCDP+xml<br>Content-Length:   898<br><br><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;GB2312&quot;</span> ?&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">Response</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">CmdType</span>&gt;</span>Catalog<span class="hljs-tag">&lt;/<span class="hljs-name">CmdType</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">SN</span>&gt;</span>7<span class="hljs-tag">&lt;/<span class="hljs-name">SN</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">DeviceID</span>&gt;</span>34020000001320000002<span class="hljs-tag">&lt;/<span class="hljs-name">DeviceID</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">SumNum</span>&gt;</span>1<span class="hljs-tag">&lt;/<span class="hljs-name">SumNum</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">DeviceList</span> <span class="hljs-attr">Num</span>=<span class="hljs-string">&quot;1&quot;</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">Item</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">DeviceID</span>&gt;</span>34020000001310000001<span class="hljs-tag">&lt;/<span class="hljs-name">DeviceID</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">Name</span>&gt;</span>DH71<span class="hljs-tag">&lt;/<span class="hljs-name">Name</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">Manufacturer</span>&gt;</span>Dahua<span class="hljs-tag">&lt;/<span class="hljs-name">Manufacturer</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">Model</span>&gt;</span>DH-SD-6C3230UE-HN<span class="hljs-tag">&lt;/<span class="hljs-name">Model</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">Owner</span>&gt;</span>0<span class="hljs-tag">&lt;/<span class="hljs-name">Owner</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">CivilCode</span>&gt;</span>340200<span class="hljs-tag">&lt;/<span class="hljs-name">CivilCode</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">Address</span>&gt;</span>axy<span class="hljs-tag">&lt;/<span class="hljs-name">Address</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">Parental</span>&gt;</span>0<span class="hljs-tag">&lt;/<span class="hljs-name">Parental</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">ParentID</span>&gt;</span>34020000001320000002<span class="hljs-tag">&lt;/<span class="hljs-name">ParentID</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">RegisterWay</span>&gt;</span>1<span class="hljs-tag">&lt;/<span class="hljs-name">RegisterWay</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">Secrecy</span>&gt;</span>0<span class="hljs-tag">&lt;/<span class="hljs-name">Secrecy</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">StreamNum</span>&gt;</span>2<span class="hljs-tag">&lt;/<span class="hljs-name">StreamNum</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">Status</span>&gt;</span>ON<span class="hljs-tag">&lt;/<span class="hljs-name">Status</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">Info</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">PTZType</span>&gt;</span>3<span class="hljs-tag">&lt;/<span class="hljs-name">PTZType</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">DownloadSpeed</span>&gt;</span>1/2/4/8<span class="hljs-tag">&lt;/<span class="hljs-name">DownloadSpeed</span>&gt;</span><br>            <span class="hljs-tag">&lt;/<span class="hljs-name">Info</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">Item</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">DeviceList</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">Response</span>&gt;</span><br><br></code></pre></td></tr></table></figure>
+
+<p>服务端-&gt;客户端</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">SIP</span>/<span class="hljs-number">2</span>.<span class="hljs-number">0</span> <span class="hljs-number">200</span> OK<br><span class="hljs-attribute">Via</span>: SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span>/UDP <span class="hljs-number">192.168.6.71:5060</span>;rport=<span class="hljs-number">5060</span>;branch=z9hG4bK1121513722<br><span class="hljs-attribute">From</span>: &lt;sip:<span class="hljs-number">34020000001320000002</span>@<span class="hljs-number">192.168.6.71:5060</span>&gt;;tag=<span class="hljs-number">616675198</span><br><span class="hljs-attribute">To</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;;tag=<span class="hljs-number">1904472289</span><br><span class="hljs-attribute">Call</span>-ID: <span class="hljs-number">140588148</span>@<span class="hljs-number">192.168.6.71</span><br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">20</span> MESSAGE<br><span class="hljs-attribute">User</span>-Agent: eXosip/<span class="hljs-number">4</span>.<span class="hljs-number">1</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">Content</span>-Length: <span class="hljs-number">0</span><br><br><br></code></pre></td></tr></table></figure>
+
+<h4 id="2-2-DeviceInfo"><a href="#2-2-DeviceInfo" class="headerlink" title="2.2 DeviceInfo"></a>2.2 DeviceInfo</h4><p>服务端-&gt;客户端</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">MESSAGE</span> sip:<span class="hljs-number">34020000001320000002</span>@<span class="hljs-number">192.168.6.71:5060</span> SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">Via</span>: SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span>/UDP <span class="hljs-number">192.168.6.106:5062</span>;rport;branch=z9hG4bK2342238638<br><span class="hljs-attribute">From</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;;tag=<span class="hljs-number">1499615989</span><br><span class="hljs-attribute">To</span>: &lt;sip:<span class="hljs-number">34020000001320000002</span>@<span class="hljs-number">192.168.6.71:5060</span>&gt;<br><span class="hljs-attribute">Call</span>-ID: <span class="hljs-number">2283720204</span><br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">20</span> MESSAGE<br><span class="hljs-attribute">Content</span>-Type: application/MANSCDP+xml<br><span class="hljs-attribute">Max</span>-Forwards: <span class="hljs-number">70</span><br><span class="hljs-attribute">User</span>-Agent: eXosip/<span class="hljs-number">4</span>.<span class="hljs-number">1</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">Date</span>: <span class="hljs-number">2024</span>-<span class="hljs-number">05</span>-<span class="hljs-number">17</span>T14:<span class="hljs-number">22</span>:<span class="hljs-number">30</span>.<span class="hljs-number">292</span><br><span class="hljs-attribute">Content</span>-Length:   <span class="hljs-number">128</span><br><br><span class="hljs-section">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span>?&gt;</span><br><span class="hljs-section">&lt;Query&gt;</span><br><span class="hljs-section">&lt;CmdType&gt;</span><span class="hljs-attribute">DeviceInfo</span>&lt;/CmdType&gt;<br><span class="hljs-section">&lt;SN&gt;</span><span class="hljs-attribute">9</span>&lt;/SN&gt;<br><span class="hljs-section">&lt;DeviceID&gt;</span><span class="hljs-attribute">34020000001320000002</span>&lt;/DeviceID&gt;<br><span class="hljs-section">&lt;/Query&gt;</span><br><br></code></pre></td></tr></table></figure>
+
+<p>客户端-&gt;服务端</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">SIP</span>/<span class="hljs-number">2</span>.<span class="hljs-number">0</span> <span class="hljs-number">200</span> OK<br><span class="hljs-attribute">Via</span>: SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span>/UDP <span class="hljs-number">192.168.6.106:5062</span>;rport=<span class="hljs-number">5062</span>;branch=z9hG4bK2342238638<br><span class="hljs-attribute">From</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;;tag=<span class="hljs-number">1499615989</span><br><span class="hljs-attribute">To</span>: &lt;sip:<span class="hljs-number">34020000001320000002</span>@<span class="hljs-number">192.168.6.71:5060</span>&gt;;tag=<span class="hljs-number">1276142286</span><br><span class="hljs-attribute">Call</span>-ID: <span class="hljs-number">2283720204</span><br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">20</span> MESSAGE<br><span class="hljs-attribute">User</span>-Agent: SIP UAS V<span class="hljs-number">3.0.0.675</span>168<br><span class="hljs-attribute">Content</span>-Length: <span class="hljs-number">0</span><br><br><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs xml">MESSAGE sip:34020000002000000010@192.168.6.106:5062 SIP/2.0<br>Via: SIP/2.0/UDP 192.168.6.71:5060;rport;branch=z9hG4bK1885711354<br>From: &lt;sip:34020000001320000002@192.168.6.71:5060&gt;;tag=164383918<br>To: &lt;sip:34020000002000000010@192.168.6.106:5062&gt;<br>Call-ID: 107554108@192.168.6.71<br>CSeq: 20 MESSAGE<br>Max-Forwards: 70<br>User-Agent: SIP UAS V3.0.0.675168<br>Content-Type: Application/MANSCDP+xml<br>Content-Length:   559<br><br><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;GB2312&quot;</span> ?&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">Response</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">CmdType</span>&gt;</span>DeviceInfo<span class="hljs-tag">&lt;/<span class="hljs-name">CmdType</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">SN</span>&gt;</span>9<span class="hljs-tag">&lt;/<span class="hljs-name">SN</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">DeviceID</span>&gt;</span>34020000001320000002<span class="hljs-tag">&lt;/<span class="hljs-name">DeviceID</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">DeviceName</span>&gt;</span>DH-SD-6C3230UE-HN<span class="hljs-tag">&lt;/<span class="hljs-name">DeviceName</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Result</span>&gt;</span>OK<span class="hljs-tag">&lt;/<span class="hljs-name">Result</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">DeviceType</span>&gt;</span>SD<span class="hljs-tag">&lt;/<span class="hljs-name">DeviceType</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Manufacturer</span>&gt;</span>Dahua<span class="hljs-tag">&lt;/<span class="hljs-name">Manufacturer</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Model</span>&gt;</span>DH-SD-6C3230UE-HN<span class="hljs-tag">&lt;/<span class="hljs-name">Model</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Firmware</span>&gt;</span>2.623.0000000.17.R,2019-01-19<span class="hljs-tag">&lt;/<span class="hljs-name">Firmware</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">MaxCamera</span>&gt;</span>1<span class="hljs-tag">&lt;/<span class="hljs-name">MaxCamera</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">MaxAlarm</span>&gt;</span>2<span class="hljs-tag">&lt;/<span class="hljs-name">MaxAlarm</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Channel</span>&gt;</span>1<span class="hljs-tag">&lt;/<span class="hljs-name">Channel</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Port</span>&gt;</span>80<span class="hljs-tag">&lt;/<span class="hljs-name">Port</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">LoginName</span>&gt;</span>admin<span class="hljs-tag">&lt;/<span class="hljs-name">LoginName</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Password</span>&gt;</span>******<span class="hljs-tag">&lt;/<span class="hljs-name">Password</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">Response</span>&gt;</span><br><br></code></pre></td></tr></table></figure>
+
+<p>服务端-&gt;客户端</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">SIP</span>/<span class="hljs-number">2</span>.<span class="hljs-number">0</span> <span class="hljs-number">200</span> OK<br><span class="hljs-attribute">Via</span>: SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span>/UDP <span class="hljs-number">192.168.6.71:5060</span>;rport=<span class="hljs-number">5060</span>;branch=z9hG4bK1885711354<br><span class="hljs-attribute">From</span>: &lt;sip:<span class="hljs-number">34020000001320000002</span>@<span class="hljs-number">192.168.6.71:5060</span>&gt;;tag=<span class="hljs-number">164383918</span><br><span class="hljs-attribute">To</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;;tag=<span class="hljs-number">3627078230</span><br><span class="hljs-attribute">Call</span>-ID: <span class="hljs-number">107554108</span>@<span class="hljs-number">192.168.6.71</span><br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">20</span> MESSAGE<br><span class="hljs-attribute">User</span>-Agent: eXosip/<span class="hljs-number">4</span>.<span class="hljs-number">1</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">Content</span>-Length: <span class="hljs-number">0</span><br><br><br></code></pre></td></tr></table></figure>
+
+<h4 id="2-3-DeviceStatus"><a href="#2-3-DeviceStatus" class="headerlink" title="2.3 DeviceStatus"></a>2.3 DeviceStatus</h4><p>服务端-&gt;客户端</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">MESSAGE</span> sip:<span class="hljs-number">34020000001320000002</span>@<span class="hljs-number">192.168.6.71:5060</span> SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">Via</span>: SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span>/UDP <span class="hljs-number">192.168.6.106:5062</span>;rport;branch=z9hG4bK1466769672<br><span class="hljs-attribute">From</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;;tag=<span class="hljs-number">793798457</span><br><span class="hljs-attribute">To</span>: &lt;sip:<span class="hljs-number">34020000001320000002</span>@<span class="hljs-number">192.168.6.71:5060</span>&gt;<br><span class="hljs-attribute">Call</span>-ID: <span class="hljs-number">639275922</span><br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">20</span> MESSAGE<br><span class="hljs-attribute">Content</span>-Type: application/MANSCDP+xml<br><span class="hljs-attribute">Max</span>-Forwards: <span class="hljs-number">70</span><br><span class="hljs-attribute">User</span>-Agent: eXosip/<span class="hljs-number">4</span>.<span class="hljs-number">1</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">Date</span>: <span class="hljs-number">2024</span>-<span class="hljs-number">05</span>-<span class="hljs-number">17</span>T14:<span class="hljs-number">24</span>:<span class="hljs-number">54</span>.<span class="hljs-number">979</span><br><span class="hljs-attribute">Content</span>-Length:   <span class="hljs-number">131</span><br><br><span class="hljs-section">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span>?&gt;</span><br><span class="hljs-section">&lt;Query&gt;</span><br><span class="hljs-section">&lt;CmdType&gt;</span><span class="hljs-attribute">DeviceStatus</span>&lt;/CmdType&gt;<br><span class="hljs-section">&lt;SN&gt;</span><span class="hljs-attribute">10</span>&lt;/SN&gt;<br><span class="hljs-section">&lt;DeviceID&gt;</span><span class="hljs-attribute">34020000001320000002</span>&lt;/DeviceID&gt;<br><span class="hljs-section">&lt;/Query&gt;</span><br><br></code></pre></td></tr></table></figure>
+
+<p>客户端-&gt;服务端</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">SIP</span>/<span class="hljs-number">2</span>.<span class="hljs-number">0</span> <span class="hljs-number">200</span> OK<br><span class="hljs-attribute">Via</span>: SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span>/UDP <span class="hljs-number">192.168.6.106:5062</span>;rport=<span class="hljs-number">5062</span>;branch=z9hG4bK1466769672<br><span class="hljs-attribute">From</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;;tag=<span class="hljs-number">793798457</span><br><span class="hljs-attribute">To</span>: &lt;sip:<span class="hljs-number">34020000001320000002</span>@<span class="hljs-number">192.168.6.71:5060</span>&gt;;tag=<span class="hljs-number">1375134481</span><br><span class="hljs-attribute">Call</span>-ID: <span class="hljs-number">639275922</span><br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">20</span> MESSAGE<br><span class="hljs-attribute">User</span>-Agent: SIP UAS V<span class="hljs-number">3.0.0.675</span>168<br><span class="hljs-attribute">Content</span>-Length: <span class="hljs-number">0</span><br><br><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs xml">MESSAGE sip:34020000002000000010@192.168.6.106:5062 SIP/2.0<br>Via: SIP/2.0/UDP 192.168.6.71:5060;rport;branch=z9hG4bK1852218770<br>From: &lt;sip:34020000001320000002@192.168.6.71:5060&gt;;tag=2099459286<br>To: &lt;sip:34020000002000000010@192.168.6.106:5062&gt;<br>Call-ID: 1675775636@192.168.6.71<br>CSeq: 20 MESSAGE<br>Max-Forwards: 70<br>User-Agent: SIP UAS V3.0.0.675168<br>Content-Type: Application/MANSCDP+xml<br>Content-Length:   639<br><br><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;GB2312&quot;</span> ?&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">Response</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">CmdType</span>&gt;</span>DeviceStatus<span class="hljs-tag">&lt;/<span class="hljs-name">CmdType</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">SN</span>&gt;</span>10<span class="hljs-tag">&lt;/<span class="hljs-name">SN</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">DeviceID</span>&gt;</span>34020000001320000002<span class="hljs-tag">&lt;/<span class="hljs-name">DeviceID</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Result</span>&gt;</span>OK<span class="hljs-tag">&lt;/<span class="hljs-name">Result</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Online</span>&gt;</span>ONLINE<span class="hljs-tag">&lt;/<span class="hljs-name">Online</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Status</span>&gt;</span>OK<span class="hljs-tag">&lt;/<span class="hljs-name">Status</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">DeviceTime</span>&gt;</span>2024-05-17T14:24:54<span class="hljs-tag">&lt;/<span class="hljs-name">DeviceTime</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Encode</span>&gt;</span>ON<span class="hljs-tag">&lt;/<span class="hljs-name">Encode</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Record</span>&gt;</span>OFF<span class="hljs-tag">&lt;/<span class="hljs-name">Record</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Alarmstatus</span> <span class="hljs-attr">Num</span>=<span class="hljs-string">&quot;2&quot;</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">Item</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">DeviceID</span>&gt;</span>34020000001340000001<span class="hljs-tag">&lt;/<span class="hljs-name">DeviceID</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">DutyStatus</span>&gt;</span>ONDUTY<span class="hljs-tag">&lt;/<span class="hljs-name">DutyStatus</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">Item</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">Item</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">DeviceID</span>&gt;</span>34020000001340000002<span class="hljs-tag">&lt;/<span class="hljs-name">DeviceID</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">DutyStatus</span>&gt;</span>ONDUTY<span class="hljs-tag">&lt;/<span class="hljs-name">DutyStatus</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">Item</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">Alarmstatus</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">Response</span>&gt;</span><br><br></code></pre></td></tr></table></figure>
+
+<p>服务端-&gt;客户端</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">SIP</span>/<span class="hljs-number">2</span>.<span class="hljs-number">0</span> <span class="hljs-number">200</span> OK<br><span class="hljs-attribute">Via</span>: SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span>/UDP <span class="hljs-number">192.168.6.71:5060</span>;rport=<span class="hljs-number">5060</span>;branch=z9hG4bK1852218770<br><span class="hljs-attribute">From</span>: &lt;sip:<span class="hljs-number">34020000001320000002</span>@<span class="hljs-number">192.168.6.71:5060</span>&gt;;tag=<span class="hljs-number">2099459286</span><br><span class="hljs-attribute">To</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;;tag=<span class="hljs-number">3863402345</span><br><span class="hljs-attribute">Call</span>-ID: <span class="hljs-number">1675775636</span>@<span class="hljs-number">192.168.6.71</span><br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">20</span> MESSAGE<br><span class="hljs-attribute">User</span>-Agent: eXosip/<span class="hljs-number">4</span>.<span class="hljs-number">1</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">Content</span>-Length: <span class="hljs-number">0</span><br><br><br></code></pre></td></tr></table></figure>
+
+<h3 id="3-设备点播"><a href="#3-设备点播" class="headerlink" title="3. 设备点播"></a>3. 设备点播</h3><h4 id="3-1-播放"><a href="#3-1-播放" class="headerlink" title="3.1 播放"></a>3.1 播放</h4><p>服务端-&gt;客户端</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">INVITE</span> sip:<span class="hljs-number">34020000001310000001</span>@<span class="hljs-number">192.168.6.71:5060</span> SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">Via</span>: SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span>/UDP <span class="hljs-number">192.168.6.106:5062</span>;rport;branch=z9hG4bK2420824424<br><span class="hljs-attribute">From</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;;tag=<span class="hljs-number">4086715875</span><br><span class="hljs-attribute">To</span>: &lt;sip:<span class="hljs-number">34020000001310000001</span>@<span class="hljs-number">192.168.6.71:5060</span>&gt;<br><span class="hljs-attribute">Call</span>-ID: <span class="hljs-number">1316183468</span><br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">20</span> INVITE<br><span class="hljs-attribute">Contact</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;<br><span class="hljs-attribute">Content</span>-Type: application/sdp<br><span class="hljs-attribute">Max</span>-Forwards: <span class="hljs-number">70</span><br><span class="hljs-attribute">User</span>-Agent: eXosip/<span class="hljs-number">4</span>.<span class="hljs-number">1</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">Date</span>: <span class="hljs-number">2024</span>-<span class="hljs-number">05</span>-<span class="hljs-number">17</span>T14:<span class="hljs-number">32</span>:<span class="hljs-number">48</span>.<span class="hljs-number">919</span><br><span class="hljs-attribute">Subject</span>: <span class="hljs-number">34020000001320000002</span>:<span class="hljs-number">04020000001320000002</span>,<span class="hljs-number">34020000002000000010</span>:<span class="hljs-number">1002</span><br><span class="hljs-attribute">Content</span>-Length:   <span class="hljs-number">226</span><br><br><span class="hljs-attribute">v</span>=<span class="hljs-number">0</span><br><span class="hljs-attribute">o</span>=<span class="hljs-number">34020000002000000010</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> IN IP4 <span class="hljs-number">192.168.6.106</span><br><span class="hljs-attribute">s</span>=Play<br><span class="hljs-attribute">c</span>=IN IP4 <span class="hljs-number">192.168.6.106</span><br><span class="hljs-attribute">t</span>=<span class="hljs-number">0</span> <span class="hljs-number">0</span><br><span class="hljs-attribute">m</span>=video <span class="hljs-number">45056</span> RTP/AVP <span class="hljs-number">96</span> <span class="hljs-number">98</span> <span class="hljs-number">97</span><br><span class="hljs-attribute">a</span>=recvonly<br><span class="hljs-attribute">a</span>=rtpmap:<span class="hljs-number">96</span> PS/<span class="hljs-number">90000</span><br><span class="hljs-attribute">a</span>=rtpmap:<span class="hljs-number">98</span> H264/<span class="hljs-number">90000</span><br><span class="hljs-attribute">a</span>=rtpmap:<span class="hljs-number">97</span> MPEG4/<span class="hljs-number">90000</span><br><span class="hljs-attribute">y</span>=<span class="hljs-number">0000001002</span><br><span class="hljs-attribute">f</span>=<br><br></code></pre></td></tr></table></figure>
+
+<p>客户端-&gt;服务端</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">SIP</span>/<span class="hljs-number">2</span>.<span class="hljs-number">0</span> <span class="hljs-number">100</span> Trying<br><span class="hljs-attribute">Via</span>: SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span>/UDP <span class="hljs-number">192.168.6.106:5062</span>;rport=<span class="hljs-number">5062</span>;branch=z9hG4bK2420824424<br><span class="hljs-attribute">From</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;;tag=<span class="hljs-number">4086715875</span><br><span class="hljs-attribute">To</span>: &lt;sip:<span class="hljs-number">34020000001310000001</span>@<span class="hljs-number">192.168.6.71:5060</span>&gt;<br><span class="hljs-attribute">Call</span>-ID: <span class="hljs-number">1316183468</span><br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">20</span> INVITE<br><span class="hljs-attribute">User</span>-Agent: SIP UAS V<span class="hljs-number">3.0.0.675</span>168<br><span class="hljs-attribute">Content</span>-Length: <span class="hljs-number">0</span><br><br><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">SIP</span>/<span class="hljs-number">2</span>.<span class="hljs-number">0</span> <span class="hljs-number">101</span> Dialog Establishement<br><span class="hljs-attribute">Via</span>: SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span>/UDP <span class="hljs-number">192.168.6.106:5062</span>;rport=<span class="hljs-number">5062</span>;branch=z9hG4bK2420824424<br><span class="hljs-attribute">From</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;;tag=<span class="hljs-number">4086715875</span><br><span class="hljs-attribute">To</span>: &lt;sip:<span class="hljs-number">34020000001310000001</span>@<span class="hljs-number">192.168.6.71:5060</span>&gt;;tag=<span class="hljs-number">1504032660</span><br><span class="hljs-attribute">Call</span>-ID: <span class="hljs-number">1316183468</span><br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">20</span> INVITE<br><span class="hljs-attribute">Contact</span>: &lt;sip:<span class="hljs-number">34020000001310000001</span>@<span class="hljs-number">192.168.6.71:5060</span>&gt;<br><span class="hljs-attribute">User</span>-Agent: SIP UAS V<span class="hljs-number">3.0.0.675</span>168<br><span class="hljs-attribute">Content</span>-Length: <span class="hljs-number">0</span><br><br><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">SIP</span>/<span class="hljs-number">2</span>.<span class="hljs-number">0</span> <span class="hljs-number">200</span> OK<br><span class="hljs-attribute">Via</span>: SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span>/UDP <span class="hljs-number">192.168.6.106:5062</span>;rport=<span class="hljs-number">5062</span>;branch=z9hG4bK2420824424<br><span class="hljs-attribute">From</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;;tag=<span class="hljs-number">4086715875</span><br><span class="hljs-attribute">To</span>: &lt;sip:<span class="hljs-number">34020000001310000001</span>@<span class="hljs-number">192.168.6.71:5060</span>&gt;;tag=<span class="hljs-number">1504032660</span><br><span class="hljs-attribute">Call</span>-ID: <span class="hljs-number">1316183468</span><br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">20</span> INVITE<br><span class="hljs-attribute">Contact</span>: &lt;sip:<span class="hljs-number">34020000001310000001</span>@<span class="hljs-number">192.168.6.71:5060</span>&gt;<br><span class="hljs-attribute">User</span>-Agent: SIP UAS V<span class="hljs-number">3.0.0.675</span>168<br><span class="hljs-attribute">Content</span>-Type: application/sdp<br><span class="hljs-attribute">Content</span>-Length:   <span class="hljs-number">224</span><br><br><span class="hljs-attribute">v</span>=<span class="hljs-number">0</span><br><span class="hljs-attribute">o</span>=<span class="hljs-number">34020000001310000001</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> IN IP4 <span class="hljs-number">192.168.6.71</span><br><span class="hljs-attribute">s</span>=Play<br><span class="hljs-attribute">i</span>=VCam Live Video<br><span class="hljs-attribute">c</span>=IN IP4 <span class="hljs-number">192.168.6.71</span><br><span class="hljs-attribute">t</span>=<span class="hljs-number">0</span> <span class="hljs-number">0</span><br><span class="hljs-attribute">m</span>=video <span class="hljs-number">9712</span> RTP/AVP <span class="hljs-number">96</span><br><span class="hljs-attribute">a</span>=sendonly<br><span class="hljs-attribute">a</span>=rtpmap:<span class="hljs-number">96</span> PS/<span class="hljs-number">90000</span><br><span class="hljs-attribute">a</span>=streamprofile:<span class="hljs-number">0</span><br><span class="hljs-attribute">y</span>=<span class="hljs-number">0000001002</span><br><span class="hljs-attribute">f</span>=v/<span class="hljs-number">0</span>/<span class="hljs-number">0</span>/<span class="hljs-number">0</span>/<span class="hljs-number">0</span>/<span class="hljs-number">0</span>a/<span class="hljs-number">0</span>/<span class="hljs-number">0</span>/<span class="hljs-number">0</span><br><br></code></pre></td></tr></table></figure>
+
+<p>服务端-&gt;客户端</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">ACK</span> sip:<span class="hljs-number">34020000001310000001</span>@<span class="hljs-number">192.168.6.71:5060</span> SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">Via</span>: SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span>/UDP <span class="hljs-number">192.168.6.106:5062</span>;rport;branch=z9hG4bK1703481534<br><span class="hljs-attribute">From</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;;tag=<span class="hljs-number">4086715875</span><br><span class="hljs-attribute">To</span>: &lt;sip:<span class="hljs-number">34020000001310000001</span>@<span class="hljs-number">192.168.6.71:5060</span>&gt;;tag=<span class="hljs-number">1504032660</span><br><span class="hljs-attribute">Call</span>-ID: <span class="hljs-number">1316183468</span><br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">20</span> ACK<br><span class="hljs-attribute">Contact</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;<br><span class="hljs-attribute">Max</span>-Forwards: <span class="hljs-number">70</span><br><span class="hljs-attribute">User</span>-Agent: eXosip/<span class="hljs-number">4</span>.<span class="hljs-number">1</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">Content</span>-Length: <span class="hljs-number">0</span><br><br><br></code></pre></td></tr></table></figure>
+
+<p>然后就是媒体推流</p>
+<h4 id="3-2-停止播放"><a href="#3-2-停止播放" class="headerlink" title="3.2 停止播放"></a>3.2 停止播放</h4><p>服务端-&gt;客户端</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">BYE</span> sip:<span class="hljs-number">34020000001310000001</span>@<span class="hljs-number">192.168.6.71:5060</span> SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">Via</span>: SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span>/UDP <span class="hljs-number">192.168.6.106:5062</span>;rport;branch=z9hG4bK3131645526<br><span class="hljs-attribute">From</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;;tag=<span class="hljs-number">4086715875</span><br><span class="hljs-attribute">To</span>: &lt;sip:<span class="hljs-number">34020000001310000001</span>@<span class="hljs-number">192.168.6.71:5060</span>&gt;;tag=<span class="hljs-number">1504032660</span><br><span class="hljs-attribute">Call</span>-ID: <span class="hljs-number">1316183468</span><br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">21</span> BYE<br><span class="hljs-attribute">Contact</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;<br><span class="hljs-attribute">Max</span>-Forwards: <span class="hljs-number">70</span><br><span class="hljs-attribute">User</span>-Agent: eXosip/<span class="hljs-number">4</span>.<span class="hljs-number">1</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">Content</span>-Length: <span class="hljs-number">0</span><br><br><br></code></pre></td></tr></table></figure>
+
+<p>客户端-&gt;服务端</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">SIP</span>/<span class="hljs-number">2</span>.<span class="hljs-number">0</span> <span class="hljs-number">200</span> OK<br><span class="hljs-attribute">Via</span>: SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span>/UDP <span class="hljs-number">192.168.6.106:5062</span>;rport=<span class="hljs-number">5062</span>;branch=z9hG4bK3131645526<br><span class="hljs-attribute">From</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;;tag=<span class="hljs-number">4086715875</span><br><span class="hljs-attribute">To</span>: &lt;sip:<span class="hljs-number">34020000001310000001</span>@<span class="hljs-number">192.168.6.71:5060</span>&gt;;tag=<span class="hljs-number">1504032660</span><br><span class="hljs-attribute">Call</span>-ID: <span class="hljs-number">1316183468</span><br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">21</span> BYE<br><span class="hljs-attribute">User</span>-Agent: SIP UAS V<span class="hljs-number">3.0.0.675</span>168<br><span class="hljs-attribute">Content</span>-Length: <span class="hljs-number">0</span><br><br><br></code></pre></td></tr></table></figure>
+
+<h3 id="4-云台控制"><a href="#4-云台控制" class="headerlink" title="4. 云台控制"></a>4. 云台控制</h3><h4 id="4-1-PTZ指令（上开始，速度100）"><a href="#4-1-PTZ指令（上开始，速度100）" class="headerlink" title="4.1 PTZ指令（上开始，速度100）"></a>4.1 PTZ指令（上开始，速度100）</h4><p>服务端-&gt;客户端</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">MESSAGE</span> sip:<span class="hljs-number">34020000001320000002</span>@<span class="hljs-number">192.168.6.71:5060</span> SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">Via</span>: SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span>/UDP <span class="hljs-number">192.168.6.106:5062</span>;rport;branch=z9hG4bK3624414955<br><span class="hljs-attribute">From</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;;tag=<span class="hljs-number">3814588192</span><br><span class="hljs-attribute">To</span>: &lt;sip:<span class="hljs-number">34020000001320000002</span>@<span class="hljs-number">192.168.6.71:5060</span>&gt;<br><span class="hljs-attribute">Call</span>-ID: <span class="hljs-number">1922970359</span><br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">20</span> MESSAGE<br><span class="hljs-attribute">Content</span>-Type: application/MANSCDP+xml<br><span class="hljs-attribute">Max</span>-Forwards: <span class="hljs-number">70</span><br><span class="hljs-attribute">User</span>-Agent: eXosip/<span class="hljs-number">4</span>.<span class="hljs-number">1</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">Date</span>: <span class="hljs-number">2024</span>-<span class="hljs-number">05</span>-<span class="hljs-number">17</span>T14:<span class="hljs-number">36</span>:<span class="hljs-number">53</span>.<span class="hljs-number">107</span><br><span class="hljs-attribute">Content</span>-Length:   <span class="hljs-number">171</span><br><br><span class="hljs-section">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span>?&gt;</span><br><span class="hljs-section">&lt;Control&gt;</span><br><span class="hljs-section">&lt;CmdType&gt;</span><span class="hljs-attribute">DeviceControl</span>&lt;/CmdType&gt;<br><span class="hljs-section">&lt;SN&gt;</span><span class="hljs-attribute">16</span>&lt;/SN&gt;<br><span class="hljs-section">&lt;DeviceID&gt;</span><span class="hljs-attribute">34020000001310000001</span>&lt;/DeviceID&gt;<br><span class="hljs-section">&lt;PTZCmd&gt;</span><span class="hljs-attribute">A50F000800640020</span>&lt;/PTZCmd&gt;<br><span class="hljs-section">&lt;/Control&gt;</span><br><br></code></pre></td></tr></table></figure>
+
+<p>客户端-&gt;服务端</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">SIP</span>/<span class="hljs-number">2</span>.<span class="hljs-number">0</span> <span class="hljs-number">200</span> OK<br><span class="hljs-attribute">Via</span>: SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span>/UDP <span class="hljs-number">192.168.6.106:5062</span>;rport=<span class="hljs-number">5062</span>;branch=z9hG4bK3624414955<br><span class="hljs-attribute">From</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;;tag=<span class="hljs-number">3814588192</span><br><span class="hljs-attribute">To</span>: &lt;sip:<span class="hljs-number">34020000001320000002</span>@<span class="hljs-number">192.168.6.71:5060</span>&gt;;tag=<span class="hljs-number">861562331</span><br><span class="hljs-attribute">Call</span>-ID: <span class="hljs-number">1922970359</span><br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">20</span> MESSAGE<br><span class="hljs-attribute">User</span>-Agent: SIP UAS V<span class="hljs-number">3.0.0.675</span>168<br><span class="hljs-attribute">Content</span>-Length: <span class="hljs-number">0</span><br><br><br></code></pre></td></tr></table></figure>
+
+<h4 id="4-2-PTZ指令（停止）"><a href="#4-2-PTZ指令（停止）" class="headerlink" title="4.2 PTZ指令（停止）"></a>4.2 PTZ指令（停止）</h4><p>服务端-&gt;客户端</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">MESSAGE</span> sip:<span class="hljs-number">34020000001320000002</span>@<span class="hljs-number">192.168.6.71:5060</span> SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">Via</span>: SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span>/UDP <span class="hljs-number">192.168.6.106:5062</span>;rport;branch=z9hG4bK653231184<br><span class="hljs-attribute">From</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;;tag=<span class="hljs-number">3593600802</span><br><span class="hljs-attribute">To</span>: &lt;sip:<span class="hljs-number">34020000001320000002</span>@<span class="hljs-number">192.168.6.71:5060</span>&gt;<br><span class="hljs-attribute">Call</span>-ID: <span class="hljs-number">3688133832</span><br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">20</span> MESSAGE<br><span class="hljs-attribute">Content</span>-Type: application/MANSCDP+xml<br><span class="hljs-attribute">Max</span>-Forwards: <span class="hljs-number">70</span><br><span class="hljs-attribute">User</span>-Agent: eXosip/<span class="hljs-number">4</span>.<span class="hljs-number">1</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">Date</span>: <span class="hljs-number">2024</span>-<span class="hljs-number">05</span>-<span class="hljs-number">17</span>T14:<span class="hljs-number">36</span>:<span class="hljs-number">54</span>.<span class="hljs-number">107</span><br><span class="hljs-attribute">Content</span>-Length:   <span class="hljs-number">171</span><br><br><span class="hljs-section">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span>?&gt;</span><br><span class="hljs-section">&lt;Control&gt;</span><br><span class="hljs-section">&lt;CmdType&gt;</span><span class="hljs-attribute">DeviceControl</span>&lt;/CmdType&gt;<br><span class="hljs-section">&lt;SN&gt;</span><span class="hljs-attribute">17</span>&lt;/SN&gt;<br><span class="hljs-section">&lt;DeviceID&gt;</span><span class="hljs-attribute">34020000001310000001</span>&lt;/DeviceID&gt;<br><span class="hljs-section">&lt;PTZCmd&gt;</span><span class="hljs-attribute">A50F0000000000B4</span>&lt;/PTZCmd&gt;<br><span class="hljs-section">&lt;/Control&gt;</span><br><br></code></pre></td></tr></table></figure>
+
+<p>客户端-&gt;服务端</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">SIP</span>/<span class="hljs-number">2</span>.<span class="hljs-number">0</span> <span class="hljs-number">200</span> OK<br><span class="hljs-attribute">Via</span>: SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span>/UDP <span class="hljs-number">192.168.6.106:5062</span>;rport=<span class="hljs-number">5062</span>;branch=z9hG4bK653231184<br><span class="hljs-attribute">From</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;;tag=<span class="hljs-number">3593600802</span><br><span class="hljs-attribute">To</span>: &lt;sip:<span class="hljs-number">34020000001320000002</span>@<span class="hljs-number">192.168.6.71:5060</span>&gt;;tag=<span class="hljs-number">1071595393</span><br><span class="hljs-attribute">Call</span>-ID: <span class="hljs-number">3688133832</span><br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">20</span> MESSAGE<br><span class="hljs-attribute">User</span>-Agent: SIP UAS V<span class="hljs-number">3.0.0.675</span>168<br><span class="hljs-attribute">Content</span>-Length: <span class="hljs-number">0</span><br><br><br></code></pre></td></tr></table></figure>
+
+<h4 id="4-3-PTZCmd值的解释"><a href="#4-3-PTZCmd值的解释" class="headerlink" title="4.3 PTZCmd值的解释"></a>4.3 <code>PTZCmd</code>值的解释</h4><p>摘自GB/T 28181-2016，以下为图片，不可复制</p>
+<img src="/2024/05/newpost-56/image-20240517150405575.png" srcset="/img/loading.gif" lazyload class="" title="image-20240517150405575">
+
+<img src="/2024/05/newpost-56/image-20240517150449404.png" srcset="/img/loading.gif" lazyload class="" title="image-20240517150449404">
+
+<h4 id="4-4-FI指令（聚焦-）"><a href="#4-4-FI指令（聚焦-）" class="headerlink" title="4.4 FI指令（聚焦+）"></a>4.4 FI指令（聚焦+）</h4><p>服务端-&gt;客户端</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">MESSAGE</span> sip:<span class="hljs-number">34020000001320000002</span>@<span class="hljs-number">192.168.6.71:5060</span> SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">Via</span>: SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span>/UDP <span class="hljs-number">192.168.6.106:5062</span>;rport;branch=z9hG4bK1893957204<br><span class="hljs-attribute">From</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;;tag=<span class="hljs-number">83028286</span><br><span class="hljs-attribute">To</span>: &lt;sip:<span class="hljs-number">34020000001320000002</span>@<span class="hljs-number">192.168.6.71:5060</span>&gt;<br><span class="hljs-attribute">Call</span>-ID: <span class="hljs-number">3665056612</span><br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">20</span> MESSAGE<br><span class="hljs-attribute">Content</span>-Type: application/MANSCDP+xml<br><span class="hljs-attribute">Max</span>-Forwards: <span class="hljs-number">70</span><br><span class="hljs-attribute">User</span>-Agent: eXosip/<span class="hljs-number">4</span>.<span class="hljs-number">1</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">Date</span>: <span class="hljs-number">2024</span>-<span class="hljs-number">05</span>-<span class="hljs-number">17</span>T15:<span class="hljs-number">05</span>:<span class="hljs-number">55</span>.<span class="hljs-number">294</span><br><span class="hljs-attribute">Content</span>-Length:   <span class="hljs-number">171</span><br><br><span class="hljs-section">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span>?&gt;</span><br><span class="hljs-section">&lt;Control&gt;</span><br><span class="hljs-section">&lt;CmdType&gt;</span><span class="hljs-attribute">DeviceControl</span>&lt;/CmdType&gt;<br><span class="hljs-section">&lt;SN&gt;</span><span class="hljs-attribute">24</span>&lt;/SN&gt;<br><span class="hljs-section">&lt;DeviceID&gt;</span><span class="hljs-attribute">34020000001310000001</span>&lt;/DeviceID&gt;<br><span class="hljs-section">&lt;PTZCmd&gt;</span><span class="hljs-attribute">A50F004100640059</span>&lt;/PTZCmd&gt;<br><span class="hljs-section">&lt;/Control&gt;</span><br><br></code></pre></td></tr></table></figure>
+
+<p>客户端-&gt;服务端</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">SIP</span>/<span class="hljs-number">2</span>.<span class="hljs-number">0</span> <span class="hljs-number">200</span> OK<br><span class="hljs-attribute">Via</span>: SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span>/UDP <span class="hljs-number">192.168.6.106:5062</span>;rport=<span class="hljs-number">5062</span>;branch=z9hG4bK1893957204<br><span class="hljs-attribute">From</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;;tag=<span class="hljs-number">83028286</span><br><span class="hljs-attribute">To</span>: &lt;sip:<span class="hljs-number">34020000001320000002</span>@<span class="hljs-number">192.168.6.71:5060</span>&gt;;tag=<span class="hljs-number">1815986646</span><br><span class="hljs-attribute">Call</span>-ID: <span class="hljs-number">3665056612</span><br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">20</span> MESSAGE<br><span class="hljs-attribute">User</span>-Agent: SIP UAS V<span class="hljs-number">3.0.0.675</span>168<br><span class="hljs-attribute">Content</span>-Length: <span class="hljs-number">0</span><br><br><br></code></pre></td></tr></table></figure>
+
+<h4 id="4-5-FI指令（停止）"><a href="#4-5-FI指令（停止）" class="headerlink" title="4.5 FI指令（停止）"></a>4.5 FI指令（停止）</h4><p>服务端-&gt;客户端</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">MESSAGE</span> sip:<span class="hljs-number">34020000001320000002</span>@<span class="hljs-number">192.168.6.71:5060</span> SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">Via</span>: SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span>/UDP <span class="hljs-number">192.168.6.106:5062</span>;rport;branch=z9hG4bK1990600059<br><span class="hljs-attribute">From</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;;tag=<span class="hljs-number">2805834034</span><br><span class="hljs-attribute">To</span>: &lt;sip:<span class="hljs-number">34020000001320000002</span>@<span class="hljs-number">192.168.6.71:5060</span>&gt;<br><span class="hljs-attribute">Call</span>-ID: <span class="hljs-number">3546884413</span><br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">20</span> MESSAGE<br><span class="hljs-attribute">Content</span>-Type: application/MANSCDP+xml<br><span class="hljs-attribute">Max</span>-Forwards: <span class="hljs-number">70</span><br><span class="hljs-attribute">User</span>-Agent: eXosip/<span class="hljs-number">4</span>.<span class="hljs-number">1</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">Date</span>: <span class="hljs-number">2024</span>-<span class="hljs-number">05</span>-<span class="hljs-number">17</span>T15:<span class="hljs-number">05</span>:<span class="hljs-number">56</span>.<span class="hljs-number">294</span><br><span class="hljs-attribute">Content</span>-Length:   <span class="hljs-number">171</span><br><br><span class="hljs-section">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span>?&gt;</span><br><span class="hljs-section">&lt;Control&gt;</span><br><span class="hljs-section">&lt;CmdType&gt;</span><span class="hljs-attribute">DeviceControl</span>&lt;/CmdType&gt;<br><span class="hljs-section">&lt;SN&gt;</span><span class="hljs-attribute">25</span>&lt;/SN&gt;<br><span class="hljs-section">&lt;DeviceID&gt;</span><span class="hljs-attribute">34020000001310000001</span>&lt;/DeviceID&gt;<br><span class="hljs-section">&lt;PTZCmd&gt;</span><span class="hljs-attribute">A50F0000000000B4</span>&lt;/PTZCmd&gt;<br><span class="hljs-section">&lt;/Control&gt;</span><br><br></code></pre></td></tr></table></figure>
+
+<p>客户端-&gt;服务端</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">SIP</span>/<span class="hljs-number">2</span>.<span class="hljs-number">0</span> <span class="hljs-number">200</span> OK<br><span class="hljs-attribute">Via</span>: SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span>/UDP <span class="hljs-number">192.168.6.106:5062</span>;rport=<span class="hljs-number">5062</span>;branch=z9hG4bK1990600059<br><span class="hljs-attribute">From</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;;tag=<span class="hljs-number">2805834034</span><br><span class="hljs-attribute">To</span>: &lt;sip:<span class="hljs-number">34020000001320000002</span>@<span class="hljs-number">192.168.6.71:5060</span>&gt;;tag=<span class="hljs-number">1218760507</span><br><span class="hljs-attribute">Call</span>-ID: <span class="hljs-number">3546884413</span><br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">20</span> MESSAGE<br><span class="hljs-attribute">User</span>-Agent: SIP UAS V<span class="hljs-number">3.0.0.675</span>168<br><span class="hljs-attribute">Content</span>-Length: <span class="hljs-number">0</span><br><br><br></code></pre></td></tr></table></figure>
+
+<h4 id="4-6-FI指令解释"><a href="#4-6-FI指令解释" class="headerlink" title="4.6 FI指令解释"></a>4.6 <code>FI</code>指令解释</h4><p>摘自GB/T 28181-2016，以下为图片，不可复制</p>
+<img src="/2024/05/newpost-56/image-20240517151307986.png" srcset="/img/loading.gif" lazyload class="" title="image-20240517151307986">
+
+<img src="/2024/05/newpost-56/image-20240517151435540.png" srcset="/img/loading.gif" lazyload class="" title="image-20240517151435540">
+
+<h4 id="4-7-其他指令解析"><a href="#4-7-其他指令解析" class="headerlink" title="4.7 其他指令解析"></a>4.7 其他指令解析</h4><p>摘自GB/T 28181-2016，以下为图片，不可复制</p>
+<img src="/2024/05/newpost-56/image-20240517152147795.png" srcset="/img/loading.gif" lazyload class="" title="image-20240517152147795">
+
+<img src="/2024/05/newpost-56/image-20240517152513155.png" srcset="/img/loading.gif" lazyload class="" title="image-20240517152513155">
+
+<img src="/2024/05/newpost-56/image-20240517152536092.png" srcset="/img/loading.gif" lazyload class="" title="image-20240517152536092">
+
+<h3 id="5-录像相关"><a href="#5-录像相关" class="headerlink" title="5. 录像相关"></a>5. 录像相关</h3><p>前面的客户端不支持录像，故客户端更改如下</p>
+<p>地址：192.168.6.60</p>
+<p>端口：5060</p>
+<p>编码：34020000001110000001</p>
+<p>通道编号：34020000001310000001</p>
+<h4 id="5-1-查询录像"><a href="#5-1-查询录像" class="headerlink" title="5.1 查询录像"></a>5.1 查询录像</h4><p>服务端-&gt;客户端</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">MESSAGE</span> sip:<span class="hljs-number">34020000001110000001</span>@<span class="hljs-number">192.168.6.60:5060</span> SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">Via</span>: SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span>/UDP <span class="hljs-number">192.168.6.106:5062</span>;rport;branch=z9hG4bK1014846848<br><span class="hljs-attribute">From</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;;tag=<span class="hljs-number">1030020984</span><br><span class="hljs-attribute">To</span>: &lt;sip:<span class="hljs-number">34020000001110000001</span>@<span class="hljs-number">192.168.6.60:5060</span>&gt;<br><span class="hljs-attribute">Call</span>-ID: <span class="hljs-number">455132672</span><br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">20</span> MESSAGE<br><span class="hljs-attribute">Content</span>-Type: application/MANSCDP+xml<br><span class="hljs-attribute">Max</span>-Forwards: <span class="hljs-number">70</span><br><span class="hljs-attribute">User</span>-Agent: eXosip/<span class="hljs-number">4</span>.<span class="hljs-number">1</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">Date</span>: <span class="hljs-number">2024</span>-<span class="hljs-number">05</span>-<span class="hljs-number">17</span>T15:<span class="hljs-number">49</span>:<span class="hljs-number">01</span>.<span class="hljs-number">451</span><br><span class="hljs-attribute">Content</span>-Length:   <span class="hljs-number">324</span><br><br><span class="hljs-section">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span>?&gt;</span><br><span class="hljs-section">&lt;Query&gt;</span><br><span class="hljs-section">&lt;CmdType&gt;</span><span class="hljs-attribute">RecordInfo</span>&lt;/CmdType&gt;<br><span class="hljs-section">&lt;SN&gt;</span><span class="hljs-attribute">18</span>&lt;/SN&gt;<br><span class="hljs-section">&lt;DeviceID&gt;</span><span class="hljs-attribute">34020000001310000001</span>&lt;/DeviceID&gt;<br><span class="hljs-section">&lt;StartTime&gt;</span><span class="hljs-attribute">2024</span>-<span class="hljs-number">05</span>-<span class="hljs-number">01</span>T00:<span class="hljs-number">00</span>:<span class="hljs-number">00</span>&lt;/StartTime&gt;<br><span class="hljs-section">&lt;EndTime&gt;</span><span class="hljs-attribute">2024</span>-<span class="hljs-number">05</span>-<span class="hljs-number">04</span>T15:<span class="hljs-number">41</span>:<span class="hljs-number">00</span>&lt;/EndTime&gt;<br><span class="hljs-section">&lt;FilePath&gt;</span><span class="hljs-section">&lt;/FilePath&gt;</span><br><span class="hljs-section">&lt;Address&gt;</span><span class="hljs-section">&lt;/Address&gt;</span><br><span class="hljs-section">&lt;Secrecy&gt;</span><span class="hljs-attribute">0</span>&lt;/Secrecy&gt;<br><span class="hljs-section">&lt;Type&gt;</span><span class="hljs-attribute">all</span>&lt;/Type&gt;<br><span class="hljs-section">&lt;RecorderID&gt;</span><span class="hljs-section">&lt;/RecorderID&gt;</span><br><span class="hljs-section">&lt;/Query&gt;</span><br><br></code></pre></td></tr></table></figure>
+
+<p>客户端-&gt;服务端</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">SIP</span>/<span class="hljs-number">2</span>.<span class="hljs-number">0</span> <span class="hljs-number">200</span> OK<br><span class="hljs-attribute">Via</span>: SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span>/UDP <span class="hljs-number">192.168.6.106:5062</span>;rport=<span class="hljs-number">5062</span>;branch=z9hG4bK1014846848<br><span class="hljs-attribute">From</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;;tag=<span class="hljs-number">1030020984</span><br><span class="hljs-attribute">To</span>: &lt;sip:<span class="hljs-number">34020000001110000001</span>@<span class="hljs-number">192.168.6.60:5060</span>&gt;;tag=<span class="hljs-number">134054297</span><br><span class="hljs-attribute">Call</span>-ID: <span class="hljs-number">455132672</span><br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">20</span> MESSAGE<br><span class="hljs-attribute">User</span>-Agent: Embedded Net DVR/NVR/DVS<br><span class="hljs-attribute">Content</span>-Length: <span class="hljs-number">0</span><br><br><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">MESSAGE</span> sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">3402000000</span> SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">Via</span>: SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span>/UDP <span class="hljs-number">192.168.6.60:5060</span>;rport;branch=z9hG4bK1849801968<br><span class="hljs-attribute">From</span>: &lt;sip:<span class="hljs-number">34020000001110000001</span>@<span class="hljs-number">3402000000</span>&gt;;tag=<span class="hljs-number">992677514</span><br><span class="hljs-attribute">To</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">3402000000</span>&gt;<br><span class="hljs-attribute">Call</span>-ID: <span class="hljs-number">2058944946</span><br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">20</span> MESSAGE<br><span class="hljs-attribute">Content</span>-Type: Application/MANSCDP+xml<br><span class="hljs-attribute">Max</span>-Forwards: <span class="hljs-number">70</span><br><span class="hljs-attribute">User</span>-Agent: Embedded Net DVR/NVR/DVS<br><span class="hljs-attribute">Content</span>-Length:   <span class="hljs-number">777</span><br><br><span class="hljs-section">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;gb2312&quot;</span>?&gt;</span><br><span class="hljs-section">&lt;Response&gt;</span><br><span class="hljs-section">&lt;CmdType&gt;</span><span class="hljs-attribute">RecordInfo</span>&lt;/CmdType&gt;<br><span class="hljs-section">&lt;SN&gt;</span><span class="hljs-attribute">18</span>&lt;/SN&gt;<br><span class="hljs-section">&lt;DeviceID&gt;</span><span class="hljs-attribute">34020000001310000001</span>&lt;/DeviceID&gt;<br><span class="hljs-section">&lt;Name&gt;</span><span class="hljs-attribute">IPCamera</span> <span class="hljs-number">01</span>&lt;/Name&gt;<br><span class="hljs-section">&lt;SumNum&gt;</span><span class="hljs-attribute">2</span>&lt;/SumNum&gt;<br><span class="hljs-section">&lt;RecordList Num=<span class="hljs-string">&quot;2&quot;</span>&gt;</span><br><span class="hljs-section">&lt;Item&gt;</span><br><span class="hljs-section">&lt;DeviceID&gt;</span><span class="hljs-attribute">34020000001310000001</span>&lt;/DeviceID&gt;<br><span class="hljs-section">&lt;Name&gt;</span><span class="hljs-attribute">IPCamera</span> <span class="hljs-number">01</span>&lt;/Name&gt;<br><span class="hljs-section">&lt;FilePath&gt;</span><span class="hljs-attribute">1714804996_1714806986</span>&lt;/FilePath&gt;<br><span class="hljs-section">&lt;Address&gt;</span><span class="hljs-attribute">Address</span> <span class="hljs-number">1</span>&lt;/Address&gt;<br><span class="hljs-section">&lt;StartTime&gt;</span><span class="hljs-attribute">2024</span>-<span class="hljs-number">05</span>-<span class="hljs-number">04</span>T14:<span class="hljs-number">43</span>:<span class="hljs-number">16</span>&lt;/StartTime&gt;<br><span class="hljs-section">&lt;EndTime&gt;</span><span class="hljs-attribute">2024</span>-<span class="hljs-number">05</span>-<span class="hljs-number">04</span>T15:<span class="hljs-number">16</span>:<span class="hljs-number">26</span>&lt;/EndTime&gt;<br><span class="hljs-section">&lt;Secrecy&gt;</span><span class="hljs-attribute">0</span>&lt;/Secrecy&gt;<br><span class="hljs-section">&lt;Type&gt;</span><span class="hljs-attribute">time</span>&lt;/Type&gt;<br><span class="hljs-section">&lt;/Item&gt;</span><br><span class="hljs-section">&lt;Item&gt;</span><br><span class="hljs-section">&lt;DeviceID&gt;</span><span class="hljs-attribute">34020000001310000001</span>&lt;/DeviceID&gt;<br><span class="hljs-section">&lt;Name&gt;</span><span class="hljs-attribute">IPCamera</span> <span class="hljs-number">01</span>&lt;/Name&gt;<br><span class="hljs-section">&lt;FilePath&gt;</span><span class="hljs-attribute">1714806986_1714808977</span>&lt;/FilePath&gt;<br><span class="hljs-section">&lt;Address&gt;</span><span class="hljs-attribute">Address</span> <span class="hljs-number">1</span>&lt;/Address&gt;<br><span class="hljs-section">&lt;StartTime&gt;</span><span class="hljs-attribute">2024</span>-<span class="hljs-number">05</span>-<span class="hljs-number">04</span>T15:<span class="hljs-number">16</span>:<span class="hljs-number">26</span>&lt;/StartTime&gt;<br><span class="hljs-section">&lt;EndTime&gt;</span><span class="hljs-attribute">2024</span>-<span class="hljs-number">05</span>-<span class="hljs-number">04</span>T15:<span class="hljs-number">49</span>:<span class="hljs-number">37</span>&lt;/EndTime&gt;<br><span class="hljs-section">&lt;Secrecy&gt;</span><span class="hljs-attribute">0</span>&lt;/Secrecy&gt;<br><span class="hljs-section">&lt;Type&gt;</span><span class="hljs-attribute">time</span>&lt;/Type&gt;<br><span class="hljs-section">&lt;/Item&gt;</span><br><span class="hljs-section">&lt;/RecordList&gt;</span><br><span class="hljs-section">&lt;/Response&gt;</span><br><br></code></pre></td></tr></table></figure>
+
+<p>服务端-&gt;客户端</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">SIP</span>/<span class="hljs-number">2</span>.<span class="hljs-number">0</span> <span class="hljs-number">200</span> OK<br><span class="hljs-attribute">Via</span>: SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span>/UDP <span class="hljs-number">192.168.6.60:5060</span>;rport=<span class="hljs-number">5060</span>;branch=z9hG4bK1849801968<br><span class="hljs-attribute">From</span>: &lt;sip:<span class="hljs-number">34020000001110000001</span>@<span class="hljs-number">3402000000</span>&gt;;tag=<span class="hljs-number">992677514</span><br><span class="hljs-attribute">To</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">3402000000</span>&gt;;tag=<span class="hljs-number">2312042141</span><br><span class="hljs-attribute">Call</span>-ID: <span class="hljs-number">2058944946</span><br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">20</span> MESSAGE<br><span class="hljs-attribute">User</span>-Agent: eXosip/<span class="hljs-number">4</span>.<span class="hljs-number">1</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">Content</span>-Length: <span class="hljs-number">0</span><br><br><br></code></pre></td></tr></table></figure>
+
+<h4 id="5-2-播放录像"><a href="#5-2-播放录像" class="headerlink" title="5.2 播放录像"></a>5.2 播放录像</h4><h5 id="5-2-1-播放"><a href="#5-2-1-播放" class="headerlink" title="5.2.1 播放"></a>5.2.1 播放</h5><p>服务端-&gt;客户端</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">INVITE</span> sip:<span class="hljs-number">34020000001310000001</span>@<span class="hljs-number">192.168.6.60:5060</span> SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">Via</span>: SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span>/UDP <span class="hljs-number">192.168.6.106:5062</span>;rport;branch=z9hG4bK925030664<br><span class="hljs-attribute">From</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;;tag=<span class="hljs-number">1990264104</span><br><span class="hljs-attribute">To</span>: &lt;sip:<span class="hljs-number">34020000001310000001</span>@<span class="hljs-number">192.168.6.60:5060</span>&gt;<br><span class="hljs-attribute">Call</span>-ID: <span class="hljs-number">2293065782</span><br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">20</span> INVITE<br><span class="hljs-attribute">Contact</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;<br><span class="hljs-attribute">Content</span>-Type: application/sdp<br><span class="hljs-attribute">Max</span>-Forwards: <span class="hljs-number">70</span><br><span class="hljs-attribute">User</span>-Agent: eXosip/<span class="hljs-number">4</span>.<span class="hljs-number">1</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">Date</span>: <span class="hljs-number">2024</span>-<span class="hljs-number">05</span>-<span class="hljs-number">17</span>T15:<span class="hljs-number">52</span>:<span class="hljs-number">21</span>.<span class="hljs-number">529</span><br><span class="hljs-attribute">Subject</span>: <span class="hljs-number">34020000001110000001</span>:<span class="hljs-number">10000000000000000041</span>,<span class="hljs-number">34020000002000000010</span>:<span class="hljs-number">2000</span><br><span class="hljs-attribute">Content</span>-Length:   <span class="hljs-number">272</span><br><br><span class="hljs-attribute">v</span>=<span class="hljs-number">0</span><br><span class="hljs-attribute">o</span>=<span class="hljs-number">34020000002000000010</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> IN IP4 <span class="hljs-number">192.168.6.106</span><br><span class="hljs-attribute">s</span>=Playback<br><span class="hljs-attribute">u</span>=<span class="hljs-number">34020000001310000001</span>:<span class="hljs-number">3</span><br><span class="hljs-attribute">c</span>=IN IP4 <span class="hljs-number">192.168.6.106</span><br><span class="hljs-attribute">t</span>=<span class="hljs-number">1714804996</span> <span class="hljs-number">1714806986</span><br><span class="hljs-attribute">m</span>=video <span class="hljs-number">45056</span> RTP/AVP <span class="hljs-number">96</span> <span class="hljs-number">98</span> <span class="hljs-number">97</span><br><span class="hljs-attribute">a</span>=recvonly<br><span class="hljs-attribute">a</span>=rtpmap:<span class="hljs-number">96</span> PS/<span class="hljs-number">90000</span><br><span class="hljs-attribute">a</span>=rtpmap:<span class="hljs-number">98</span> H264/<span class="hljs-number">90000</span><br><span class="hljs-attribute">a</span>=rtpmap:<span class="hljs-number">97</span> MPEG4/<span class="hljs-number">90000</span><br><span class="hljs-attribute">y</span>=<span class="hljs-number">0000002000</span><br><span class="hljs-attribute">f</span>=<br></code></pre></td></tr></table></figure>
+
+<p>客户端-&gt;服务端</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">SIP</span>/<span class="hljs-number">2</span>.<span class="hljs-number">0</span> <span class="hljs-number">200</span> OK<br><span class="hljs-attribute">Via</span>: SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span>/UDP <span class="hljs-number">192.168.6.106:5062</span>;rport=<span class="hljs-number">5062</span>;branch=z9hG4bK925030664<br><span class="hljs-attribute">From</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;;tag=<span class="hljs-number">1990264104</span><br><span class="hljs-attribute">To</span>: &lt;sip:<span class="hljs-number">34020000001310000001</span>@<span class="hljs-number">192.168.6.60:5060</span>&gt;;tag=<span class="hljs-number">2049052006</span><br><span class="hljs-attribute">Call</span>-ID: <span class="hljs-number">2293065782</span><br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">20</span> INVITE<br><span class="hljs-attribute">Contact</span>: &lt;sip:<span class="hljs-number">34020000001310000001</span>@<span class="hljs-number">192.168.6.60:5060</span>&gt;<br><span class="hljs-attribute">Content</span>-Type: application/SDP<br><span class="hljs-attribute">User</span>-Agent: Embedded Net DVR/NVR/DVS<br><span class="hljs-attribute">Content</span>-Length:   <span class="hljs-number">282</span><br><br><span class="hljs-attribute">v</span>=<span class="hljs-number">0</span><br><span class="hljs-attribute">o</span>=<span class="hljs-number">34020000001110000001</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> IN IP4 <span class="hljs-number">192.168.6.60</span><br><span class="hljs-attribute">s</span>=Network Video Recorder<br><span class="hljs-attribute">c</span>=IN IP4 <span class="hljs-number">192.168.6.60</span><br><span class="hljs-attribute">t</span>=<span class="hljs-number">1714833796</span> <span class="hljs-number">1714835786</span><br><span class="hljs-attribute">m</span>=video <span class="hljs-number">62000</span> RTP/AVP <span class="hljs-number">96</span><br><span class="hljs-attribute">a</span>=sendonly<br><span class="hljs-attribute">a</span>=rtpmap:<span class="hljs-number">96</span> PS/<span class="hljs-number">90000</span><br><span class="hljs-attribute">a</span>=username:<span class="hljs-number">34020000001110000001</span><br><span class="hljs-attribute">a</span>=password:zzgd1234<br><span class="hljs-attribute">a</span>=filesize:<span class="hljs-number">2124794308</span><br><span class="hljs-attribute">y</span>=<span class="hljs-number">0000002000</span><br><span class="hljs-attribute">f</span>=<br><br></code></pre></td></tr></table></figure>
+
+<p>服务端-&gt;客户端</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">ACK</span> sip:<span class="hljs-number">34020000001310000001</span>@<span class="hljs-number">192.168.6.60:5060</span> SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">Via</span>: SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span>/UDP <span class="hljs-number">192.168.6.106:5062</span>;rport;branch=z9hG4bK1836836056<br><span class="hljs-attribute">From</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;;tag=<span class="hljs-number">1990264104</span><br><span class="hljs-attribute">To</span>: &lt;sip:<span class="hljs-number">34020000001310000001</span>@<span class="hljs-number">192.168.6.60:5060</span>&gt;;tag=<span class="hljs-number">2049052006</span><br><span class="hljs-attribute">Call</span>-ID: <span class="hljs-number">2293065782</span><br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">20</span> ACK<br><span class="hljs-attribute">Contact</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;<br><span class="hljs-attribute">Max</span>-Forwards: <span class="hljs-number">70</span><br><span class="hljs-attribute">User</span>-Agent: eXosip/<span class="hljs-number">4</span>.<span class="hljs-number">1</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">Content</span>-Length: <span class="hljs-number">0</span><br><br><br></code></pre></td></tr></table></figure>
+
+<p>然后是推流播放</p>
+<h5 id="5-2-2-暂停播放"><a href="#5-2-2-暂停播放" class="headerlink" title="5.2.2 暂停播放"></a>5.2.2 暂停播放</h5><p>服务端-&gt;客户端</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">INFO</span> sip:<span class="hljs-number">34020000001310000001</span>@<span class="hljs-number">192.168.6.60:5060</span> SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">Via</span>: SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span>/UDP <span class="hljs-number">192.168.6.106:5062</span>;rport;branch=z9hG4bK1187559455<br><span class="hljs-attribute">From</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;;tag=<span class="hljs-number">1990264104</span><br><span class="hljs-attribute">To</span>: &lt;sip:<span class="hljs-number">34020000001310000001</span>@<span class="hljs-number">192.168.6.60:5060</span>&gt;;tag=<span class="hljs-number">2049052006</span><br><span class="hljs-attribute">Call</span>-ID: <span class="hljs-number">2293065782</span><br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">21</span> INFO<br><span class="hljs-attribute">Contact</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;<br><span class="hljs-attribute">Content</span>-Type: application/RTSP<br><span class="hljs-attribute">Max</span>-Forwards: <span class="hljs-number">70</span><br><span class="hljs-attribute">User</span>-Agent: eXosip/<span class="hljs-number">4</span>.<span class="hljs-number">1</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">Date</span>: <span class="hljs-number">2024</span>-<span class="hljs-number">05</span>-<span class="hljs-number">17</span>T15:<span class="hljs-number">52</span>:<span class="hljs-number">29</span>.<span class="hljs-number">076</span><br><span class="hljs-attribute">Content</span>-Length:    <span class="hljs-number">40</span><br><br><span class="hljs-attribute">PAUSE</span> RTSP/<span class="hljs-number">1</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">20</span><br><span class="hljs-attribute">PauseTime</span>: <span class="hljs-number">0</span><br><br></code></pre></td></tr></table></figure>
+
+<p>客户端-&gt;服务端</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">SIP</span>/<span class="hljs-number">2</span>.<span class="hljs-number">0</span> <span class="hljs-number">200</span> OK<br><span class="hljs-attribute">Via</span>: SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span>/UDP <span class="hljs-number">192.168.6.106:5062</span>;rport=<span class="hljs-number">5062</span>;branch=z9hG4bK1187559455<br><span class="hljs-attribute">From</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;;tag=<span class="hljs-number">1990264104</span><br><span class="hljs-attribute">To</span>: &lt;sip:<span class="hljs-number">34020000001310000001</span>@<span class="hljs-number">192.168.6.60:5060</span>&gt;;tag=<span class="hljs-number">2049052006</span><br><span class="hljs-attribute">Call</span>-ID: <span class="hljs-number">2293065782</span><br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">21</span> INFO<br><span class="hljs-attribute">Contact</span>: &lt;sip:<span class="hljs-number">34020000001310000001</span>@<span class="hljs-number">192.168.6.60:5060</span>&gt;<br><span class="hljs-attribute">Content</span>-Type: Application/RTSP<br><span class="hljs-attribute">User</span>-Agent: Embedded Net DVR/NVR/DVS<br><span class="hljs-attribute">Content</span>-Length:    <span class="hljs-number">66</span><br><br><span class="hljs-attribute">RTSP</span>/<span class="hljs-number">1</span>.<span class="hljs-number">0</span> <span class="hljs-number">200</span> OK<br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">20</span><br><span class="hljs-attribute">RTP</span>-Info: seq=<span class="hljs-number">9810092</span>;rtptime=<span class="hljs-number">3450012</span><br><br></code></pre></td></tr></table></figure>
+
+<h5 id="5-2-3-继续播放"><a href="#5-2-3-继续播放" class="headerlink" title="5.2.3 继续播放"></a>5.2.3 继续播放</h5><p>服务端-&gt;客户端</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">INFO</span> sip:<span class="hljs-number">34020000001310000001</span>@<span class="hljs-number">192.168.6.60:5060</span> SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">Via</span>: SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span>/UDP <span class="hljs-number">192.168.6.106:5062</span>;rport;branch=z9hG4bK498785409<br><span class="hljs-attribute">From</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;;tag=<span class="hljs-number">1990264104</span><br><span class="hljs-attribute">To</span>: &lt;sip:<span class="hljs-number">34020000001310000001</span>@<span class="hljs-number">192.168.6.60:5060</span>&gt;;tag=<span class="hljs-number">2049052006</span><br><span class="hljs-attribute">Call</span>-ID: <span class="hljs-number">2293065782</span><br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">22</span> INFO<br><span class="hljs-attribute">Contact</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;<br><span class="hljs-attribute">Content</span>-Type: application/RTSP<br><span class="hljs-attribute">Max</span>-Forwards: <span class="hljs-number">70</span><br><span class="hljs-attribute">User</span>-Agent: eXosip/<span class="hljs-number">4</span>.<span class="hljs-number">1</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">Date</span>: <span class="hljs-number">2024</span>-<span class="hljs-number">05</span>-<span class="hljs-number">17</span>T15:<span class="hljs-number">52</span>:<span class="hljs-number">31</span>.<span class="hljs-number">946</span><br><span class="hljs-attribute">Content</span>-Length:    <span class="hljs-number">57</span><br><br><span class="hljs-attribute">PLAY</span> RTSP/<span class="hljs-number">1</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">21</span><br><span class="hljs-attribute">Scale</span>: <span class="hljs-number">1</span>.<span class="hljs-number">000000</span><br><span class="hljs-attribute">Range</span>: npt=<span class="hljs-number">0</span>-<br><br></code></pre></td></tr></table></figure>
+
+<p>客户端-&gt;服务端</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">SIP</span>/<span class="hljs-number">2</span>.<span class="hljs-number">0</span> <span class="hljs-number">200</span> OK<br><span class="hljs-attribute">Via</span>: SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span>/UDP <span class="hljs-number">192.168.6.106:5062</span>;rport=<span class="hljs-number">5062</span>;branch=z9hG4bK498785409<br><span class="hljs-attribute">From</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;;tag=<span class="hljs-number">1990264104</span><br><span class="hljs-attribute">To</span>: &lt;sip:<span class="hljs-number">34020000001310000001</span>@<span class="hljs-number">192.168.6.60:5060</span>&gt;;tag=<span class="hljs-number">2049052006</span><br><span class="hljs-attribute">Call</span>-ID: <span class="hljs-number">2293065782</span><br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">22</span> INFO<br><span class="hljs-attribute">Contact</span>: &lt;sip:<span class="hljs-number">34020000001310000001</span>@<span class="hljs-number">192.168.6.60:5060</span>&gt;<br><span class="hljs-attribute">Content</span>-Type: Application/RTSP<br><span class="hljs-attribute">User</span>-Agent: Embedded Net DVR/NVR/DVS<br><span class="hljs-attribute">Content</span>-Length:    <span class="hljs-number">66</span><br><br><span class="hljs-attribute">RTSP</span>/<span class="hljs-number">1</span>.<span class="hljs-number">0</span> <span class="hljs-number">200</span> OK<br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">21</span><br><span class="hljs-attribute">RTP</span>-Info: seq=<span class="hljs-number">9810092</span>;rtptime=<span class="hljs-number">3450012</span><br></code></pre></td></tr></table></figure>
+
+<h5 id="5-2-4-调整倍速-时间"><a href="#5-2-4-调整倍速-时间" class="headerlink" title="5.2.4 调整倍速/时间"></a>5.2.4 调整倍速/时间</h5><p>服务端-&gt;客户端</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">INFO</span> sip:<span class="hljs-number">34020000001310000001</span>@<span class="hljs-number">192.168.6.60:5060</span> SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">Via</span>: SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span>/UDP <span class="hljs-number">192.168.6.106:5062</span>;rport;branch=z9hG4bK1720900866<br><span class="hljs-attribute">From</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;;tag=<span class="hljs-number">1990264104</span><br><span class="hljs-attribute">To</span>: &lt;sip:<span class="hljs-number">34020000001310000001</span>@<span class="hljs-number">192.168.6.60:5060</span>&gt;;tag=<span class="hljs-number">2049052006</span><br><span class="hljs-attribute">Call</span>-ID: <span class="hljs-number">2293065782</span><br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">23</span> INFO<br><span class="hljs-attribute">Contact</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;<br><span class="hljs-attribute">Content</span>-Type: application/RTSP<br><span class="hljs-attribute">Max</span>-Forwards: <span class="hljs-number">70</span><br><span class="hljs-attribute">User</span>-Agent: eXosip/<span class="hljs-number">4</span>.<span class="hljs-number">1</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">Date</span>: <span class="hljs-number">2024</span>-<span class="hljs-number">05</span>-<span class="hljs-number">17</span>T15:<span class="hljs-number">52</span>:<span class="hljs-number">36</span>.<span class="hljs-number">954</span><br><span class="hljs-attribute">Content</span>-Length:    <span class="hljs-number">58</span><br><br><span class="hljs-attribute">PLAY</span> RTSP/<span class="hljs-number">1</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">22</span><br><span class="hljs-attribute">Scale</span>: <span class="hljs-number">2</span>.<span class="hljs-number">000000</span><br><span class="hljs-attribute">Range</span>: npt=<span class="hljs-number">11</span>-<br><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>其中<code>Scale</code>是倍速，<code>Range</code>是距离该文件开始时间的相差时间</p>
+</blockquote>
+<p>客户端-&gt;服务端</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">SIP</span>/<span class="hljs-number">2</span>.<span class="hljs-number">0</span> <span class="hljs-number">200</span> OK<br><span class="hljs-attribute">Via</span>: SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span>/UDP <span class="hljs-number">192.168.6.106:5062</span>;rport=<span class="hljs-number">5062</span>;branch=z9hG4bK1720900866<br><span class="hljs-attribute">From</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;;tag=<span class="hljs-number">1990264104</span><br><span class="hljs-attribute">To</span>: &lt;sip:<span class="hljs-number">34020000001310000001</span>@<span class="hljs-number">192.168.6.60:5060</span>&gt;;tag=<span class="hljs-number">2049052006</span><br><span class="hljs-attribute">Call</span>-ID: <span class="hljs-number">2293065782</span><br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">23</span> INFO<br><span class="hljs-attribute">Contact</span>: &lt;sip:<span class="hljs-number">34020000001310000001</span>@<span class="hljs-number">192.168.6.60:5060</span>&gt;<br><span class="hljs-attribute">Content</span>-Type: Application/RTSP<br><span class="hljs-attribute">User</span>-Agent: Embedded Net DVR/NVR/DVS<br><span class="hljs-attribute">Content</span>-Length:    <span class="hljs-number">66</span><br><br><span class="hljs-attribute">RTSP</span>/<span class="hljs-number">1</span>.<span class="hljs-number">0</span> <span class="hljs-number">200</span> OK<br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">22</span><br><span class="hljs-attribute">RTP</span>-Info: seq=<span class="hljs-number">9810092</span>;rtptime=<span class="hljs-number">3450012</span><br><br></code></pre></td></tr></table></figure>
+
+<h5 id="5-2-5-结束播放"><a href="#5-2-5-结束播放" class="headerlink" title="5.2.5 结束播放"></a>5.2.5 结束播放</h5><p>服务端-&gt;客户端</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">BYE</span> sip:<span class="hljs-number">34020000001310000001</span>@<span class="hljs-number">192.168.6.60:5060</span> SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">Via</span>: SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span>/UDP <span class="hljs-number">192.168.6.106:5062</span>;rport;branch=z9hG4bK2449791157<br><span class="hljs-attribute">From</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;;tag=<span class="hljs-number">1990264104</span><br><span class="hljs-attribute">To</span>: &lt;sip:<span class="hljs-number">34020000001310000001</span>@<span class="hljs-number">192.168.6.60:5060</span>&gt;;tag=<span class="hljs-number">2049052006</span><br><span class="hljs-attribute">Call</span>-ID: <span class="hljs-number">2293065782</span><br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">24</span> BYE<br><span class="hljs-attribute">Contact</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;<br><span class="hljs-attribute">Max</span>-Forwards: <span class="hljs-number">70</span><br><span class="hljs-attribute">User</span>-Agent: eXosip/<span class="hljs-number">4</span>.<span class="hljs-number">1</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">Content</span>-Length: <span class="hljs-number">0</span><br><br><br></code></pre></td></tr></table></figure>
+
+<p>客户端-&gt;服务端</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">SIP</span>/<span class="hljs-number">2</span>.<span class="hljs-number">0</span> <span class="hljs-number">200</span> OK<br><span class="hljs-attribute">Via</span>: SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span>/UDP <span class="hljs-number">192.168.6.106:5062</span>;rport=<span class="hljs-number">5062</span>;branch=z9hG4bK2449791157<br><span class="hljs-attribute">From</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;;tag=<span class="hljs-number">1990264104</span><br><span class="hljs-attribute">To</span>: &lt;sip:<span class="hljs-number">34020000001310000001</span>@<span class="hljs-number">192.168.6.60:5060</span>&gt;;tag=<span class="hljs-number">2049052006</span><br><span class="hljs-attribute">Call</span>-ID: <span class="hljs-number">2293065782</span><br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">24</span> BYE<br><span class="hljs-attribute">User</span>-Agent: Embedded Net DVR/NVR/DVS<br><span class="hljs-attribute">Content</span>-Length: <span class="hljs-number">0</span><br><br><br></code></pre></td></tr></table></figure>
+
+<h4 id="5-3-下载录像"><a href="#5-3-下载录像" class="headerlink" title="5.3 下载录像"></a>5.3 下载录像</h4><h5 id="5-3-1-下载"><a href="#5-3-1-下载" class="headerlink" title="5.3.1 下载"></a>5.3.1 下载</h5><p>服务端-&gt;客户端</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">INVITE</span> sip:<span class="hljs-number">34020000001310000001</span>@<span class="hljs-number">192.168.6.60:5060</span> SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">Via</span>: SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span>/UDP <span class="hljs-number">192.168.6.106:5062</span>;rport;branch=z9hG4bK1956839953<br><span class="hljs-attribute">From</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;;tag=<span class="hljs-number">2542309601</span><br><span class="hljs-attribute">To</span>: &lt;sip:<span class="hljs-number">34020000001310000001</span>@<span class="hljs-number">192.168.6.60:5060</span>&gt;<br><span class="hljs-attribute">Call</span>-ID: <span class="hljs-number">2112998906</span><br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">20</span> INVITE<br><span class="hljs-attribute">Contact</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;<br><span class="hljs-attribute">Content</span>-Type: application/sdp<br><span class="hljs-attribute">Max</span>-Forwards: <span class="hljs-number">70</span><br><span class="hljs-attribute">User</span>-Agent: eXosip/<span class="hljs-number">4</span>.<span class="hljs-number">1</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">Date</span>: <span class="hljs-number">2024</span>-<span class="hljs-number">05</span>-<span class="hljs-number">17</span>T16:<span class="hljs-number">04</span>:<span class="hljs-number">18</span>.<span class="hljs-number">763</span><br><span class="hljs-attribute">Subject</span>: <span class="hljs-number">34020000001110000001</span>:<span class="hljs-number">10000000000000018467</span>,<span class="hljs-number">34020000002000000010</span>:<span class="hljs-number">3000</span><br><span class="hljs-attribute">Content</span>-Length:   <span class="hljs-number">272</span><br><br><span class="hljs-attribute">v</span>=<span class="hljs-number">0</span><br><span class="hljs-attribute">o</span>=<span class="hljs-number">34020000002000000010</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> IN IP4 <span class="hljs-number">192.168.6.106</span><br><span class="hljs-attribute">s</span>=Download<br><span class="hljs-attribute">u</span>=<span class="hljs-number">34020000001310000001</span>:<span class="hljs-number">3</span><br><span class="hljs-attribute">c</span>=IN IP4 <span class="hljs-number">192.168.6.106</span><br><span class="hljs-attribute">t</span>=<span class="hljs-number">1714804996</span> <span class="hljs-number">1714806986</span><br><span class="hljs-attribute">m</span>=video <span class="hljs-number">45056</span> RTP/AVP <span class="hljs-number">96</span> <span class="hljs-number">98</span> <span class="hljs-number">97</span><br><span class="hljs-attribute">a</span>=recvonly<br><span class="hljs-attribute">a</span>=rtpmap:<span class="hljs-number">96</span> PS/<span class="hljs-number">90000</span><br><span class="hljs-attribute">a</span>=rtpmap:<span class="hljs-number">98</span> H264/<span class="hljs-number">90000</span><br><span class="hljs-attribute">a</span>=rtpmap:<span class="hljs-number">97</span> MPEG4/<span class="hljs-number">90000</span><br><span class="hljs-attribute">y</span>=<span class="hljs-number">0000003000</span><br><span class="hljs-attribute">f</span>=<br></code></pre></td></tr></table></figure>
+
+<p>客户端-&gt;服务端</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">SIP</span>/<span class="hljs-number">2</span>.<span class="hljs-number">0</span> <span class="hljs-number">200</span> OK<br><span class="hljs-attribute">Via</span>: SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span>/UDP <span class="hljs-number">192.168.6.106:5062</span>;rport=<span class="hljs-number">5062</span>;branch=z9hG4bK1956839953<br><span class="hljs-attribute">From</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;;tag=<span class="hljs-number">2542309601</span><br><span class="hljs-attribute">To</span>: &lt;sip:<span class="hljs-number">34020000001310000001</span>@<span class="hljs-number">192.168.6.60:5060</span>&gt;;tag=<span class="hljs-number">776353021</span><br><span class="hljs-attribute">Call</span>-ID: <span class="hljs-number">2112998906</span><br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">20</span> INVITE<br><span class="hljs-attribute">Contact</span>: &lt;sip:<span class="hljs-number">34020000001310000001</span>@<span class="hljs-number">192.168.6.60:5060</span>&gt;<br><span class="hljs-attribute">Content</span>-Type: application/SDP<br><span class="hljs-attribute">User</span>-Agent: Embedded Net DVR/NVR/DVS<br><span class="hljs-attribute">Content</span>-Length:   <span class="hljs-number">282</span><br><br><span class="hljs-attribute">v</span>=<span class="hljs-number">0</span><br><span class="hljs-attribute">o</span>=<span class="hljs-number">34020000001110000001</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> IN IP4 <span class="hljs-number">192.168.6.60</span><br><span class="hljs-attribute">s</span>=Network Video Recorder<br><span class="hljs-attribute">c</span>=IN IP4 <span class="hljs-number">192.168.6.60</span><br><span class="hljs-attribute">t</span>=<span class="hljs-number">1714833796</span> <span class="hljs-number">1714835786</span><br><span class="hljs-attribute">m</span>=video <span class="hljs-number">62002</span> RTP/AVP <span class="hljs-number">96</span><br><span class="hljs-attribute">a</span>=sendonly<br><span class="hljs-attribute">a</span>=rtpmap:<span class="hljs-number">96</span> PS/<span class="hljs-number">90000</span><br><span class="hljs-attribute">a</span>=username:<span class="hljs-number">34020000001110000001</span><br><span class="hljs-attribute">a</span>=password:zzgd1234<br><span class="hljs-attribute">a</span>=filesize:<span class="hljs-number">2124794308</span><br><span class="hljs-attribute">y</span>=<span class="hljs-number">0000003000</span><br><span class="hljs-attribute">f</span>=<br><br></code></pre></td></tr></table></figure>
+
+<p>服务端-&gt;客户端</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">ACK</span> sip:<span class="hljs-number">34020000001310000001</span>@<span class="hljs-number">192.168.6.60:5060</span> SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">Via</span>: SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span>/UDP <span class="hljs-number">192.168.6.106:5062</span>;rport;branch=z9hG4bK4134523750<br><span class="hljs-attribute">From</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;;tag=<span class="hljs-number">2542309601</span><br><span class="hljs-attribute">To</span>: &lt;sip:<span class="hljs-number">34020000001310000001</span>@<span class="hljs-number">192.168.6.60:5060</span>&gt;;tag=<span class="hljs-number">776353021</span><br><span class="hljs-attribute">Call</span>-ID: <span class="hljs-number">2112998906</span><br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">20</span> ACK<br><span class="hljs-attribute">Contact</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;<br><span class="hljs-attribute">Max</span>-Forwards: <span class="hljs-number">70</span><br><span class="hljs-attribute">User</span>-Agent: eXosip/<span class="hljs-number">4</span>.<span class="hljs-number">1</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">Content</span>-Length: <span class="hljs-number">0</span><br><br><br></code></pre></td></tr></table></figure>
+
+<p>然后是推流</p>
+<h5 id="5-3-2-停止下载"><a href="#5-3-2-停止下载" class="headerlink" title="5.3.2 停止下载"></a>5.3.2 停止下载</h5><p>服务端-&gt;客户端</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">BYE</span> sip:<span class="hljs-number">34020000001310000001</span>@<span class="hljs-number">192.168.6.60:5060</span> SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">Via</span>: SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span>/UDP <span class="hljs-number">192.168.6.106:5062</span>;rport;branch=z9hG4bK303163387<br><span class="hljs-attribute">From</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;;tag=<span class="hljs-number">2542309601</span><br><span class="hljs-attribute">To</span>: &lt;sip:<span class="hljs-number">34020000001310000001</span>@<span class="hljs-number">192.168.6.60:5060</span>&gt;;tag=<span class="hljs-number">776353021</span><br><span class="hljs-attribute">Call</span>-ID: <span class="hljs-number">2112998906</span><br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">21</span> BYE<br><span class="hljs-attribute">Contact</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;<br><span class="hljs-attribute">Max</span>-Forwards: <span class="hljs-number">70</span><br><span class="hljs-attribute">User</span>-Agent: eXosip/<span class="hljs-number">4</span>.<span class="hljs-number">1</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">Content</span>-Length: <span class="hljs-number">0</span><br><br><br></code></pre></td></tr></table></figure>
+
+<p>客户端-&gt;服务端</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">SIP</span>/<span class="hljs-number">2</span>.<span class="hljs-number">0</span> <span class="hljs-number">200</span> OK<br><span class="hljs-attribute">Via</span>: SIP/<span class="hljs-number">2</span>.<span class="hljs-number">0</span>/UDP <span class="hljs-number">192.168.6.106:5062</span>;rport=<span class="hljs-number">5062</span>;branch=z9hG4bK303163387<br><span class="hljs-attribute">From</span>: &lt;sip:<span class="hljs-number">34020000002000000010</span>@<span class="hljs-number">192.168.6.106:5062</span>&gt;;tag=<span class="hljs-number">2542309601</span><br><span class="hljs-attribute">To</span>: &lt;sip:<span class="hljs-number">34020000001310000001</span>@<span class="hljs-number">192.168.6.60:5060</span>&gt;;tag=<span class="hljs-number">776353021</span><br><span class="hljs-attribute">Call</span>-ID: <span class="hljs-number">2112998906</span><br><span class="hljs-attribute">CSeq</span>: <span class="hljs-number">21</span> BYE<br><span class="hljs-attribute">User</span>-Agent: Embedded Net DVR/NVR/DVS<br><span class="hljs-attribute">Content</span>-Length: <span class="hljs-number">0</span><br><br><br></code></pre></td></tr></table></figure>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E8%BF%90%E7%BB%B4/" class="print-no-link">#运维</a>
+      
+        <a href="/tags/%E7%BB%8F%E9%AA%8C/" class="print-no-link">#经验</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>GB28181抓包记录</div>
+      <div>https://blog.ctftools.com/2024/05/newpost-56/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Dr3@m</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年5月17日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="NC - 非商业性使用">
+                    <i class="iconfont icon-cc-nc"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                    <i class="iconfont icon-cc-sa"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/07/newpost-57/" title="如何在绿联NAS中使用TaoSync同步我的文件到各个网盘">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">如何在绿联NAS中使用TaoSync同步我的文件到各个网盘</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/04/newpost-55/" title="JS计算字节大小，把字节转换为KB/MB/GB/TB等">
+                        <span class="hidden-mobile">JS计算字节大小，把字节转换为KB/MB/GB/TB等</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"dr34m-cn/dr34m-cn.github.io","repo-id":"MDEwOlJlcG9zaXRvcnkxMTI4MDcyODI=","category":"Announcements","category-id":"DIC_kwDOBrlNcs4Cibmt","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":1,"input-position":"top","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       &copy; <span id="nowYear">2021</span> Dr3@m | Power by  <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> Theme <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/assets/js/foot.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      冀ICP备16028844号
+    </a>
+  </span>
+  
+</div>
+
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="/assets/static/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="/assets/static/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="/assets/static/jquery.min.js" ></script>
+<script  src="/assets/static/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="/assets/static/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('/assets/static/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=/assets/static/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('/assets/static/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('/assets/static/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

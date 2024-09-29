@@ -1,0 +1,868 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/favicon.ico">
+  <link rel="icon" href="/assets/img/favicon.ico">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Dr3@m">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="目标在绿联NAS中使用TaoSync自动定时同步我的文件到各个网盘。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何在绿联NAS中使用TaoSync同步我的文件到各个网盘">
+<meta property="og:url" content="https://blog.ctftools.com/2024/07/newpost-57/index.html">
+<meta property="og:site_name" content="Dr34m&#39;s Blog">
+<meta property="og:description" content="目标在绿联NAS中使用TaoSync自动定时同步我的文件到各个网盘。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.ctftools.com/assets/headImg/tao-alist-docker.png">
+<meta property="article:published_time" content="2024-07-16T12:39:26.000Z">
+<meta property="article:modified_time" content="2024-09-29T06:58:21.700Z">
+<meta property="article:author" content="Dr3@m">
+<meta property="article:tag" content="经验">
+<meta property="article:tag" content="分享">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://blog.ctftools.com/assets/headImg/tao-alist-docker.png">
+  
+  
+  
+  <title>如何在绿联NAS中使用TaoSync同步我的文件到各个网盘 - Dr34m&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="/assets/static/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="/assets/static/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="/assets/static/hint.min.css" />
+
+  <link  rel="stylesheet" href="/assets/static/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.ctftools.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":3},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"2e56a139382ea7b1de5ebe406db45f54","google":{"measurement_id":"G-J17J3L2RWK"},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"bxnYbxGO1K0yILGbts7KVLhK-gzGzoHsz","app_key":"zbvF6NeggGIbfjNdAVb1kG6I","server_url":"https://bxnybxgo.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"woyaola":null,"cnzz":1261417535},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?2e56a139382ea7b1de5ebe406db45f54";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=G-J17J3L2RWK", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', 'G-J17J3L2RWK');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Dr34m's Blog" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="Dr34m's Blog" type="application/rss+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Dr34m&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/assets/img/dojm2h.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="如何在绿联NAS中使用TaoSync同步我的文件到各个网盘"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Dr3@m
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-07-16 20:39" pubdate>
+          2024年7月16日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          785 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          7 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">如何在绿联NAS中使用TaoSync同步我的文件到各个网盘</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><p>在绿联NAS中使用<a target="_blank" rel="noopener" href="https://github.com/dr34m-cn/taosync">TaoSync</a>自动定时同步我的文件到各个网盘。</p>
+<span id="more"></span>
+
+<p><strong>如果好用欢迎Star：<a target="_blank" rel="noopener" href="https://github.com/dr34m-cn/taosync">https://github.com/dr34m-cn/taosync</a>，非常感谢！</strong></p>
+<p>TaoSync基于<a target="_blank" rel="noopener" href="https://alist.nn.ci/zh/">AList</a>实现自动同步功能，可以实现以下不同网盘或存储之间的自动定时同步。</p>
+<ul>
+<li>本地存储</li>
+<li><a target="_blank" rel="noopener" href="https://www.alipan.com/">阿里云盘</a></li>
+<li>OneDrive / Sharepoint（<a target="_blank" rel="noopener" href="https://www.office.com/">国际版</a>, <a target="_blank" rel="noopener" href="https://portal.partner.microsoftonline.cn/">世纪互联</a>,de,us）</li>
+<li> <a target="_blank" rel="noopener" href="https://cloud.189.cn/">天翼云盘</a> (个人云, 家庭云)</li>
+<li><a target="_blank" rel="noopener" href="https://drive.google.com/">GoogleDrive</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.123pan.com/">123云盘</a></li>
+<li>FTP / SFTP</li>
+<li><a target="_blank" rel="noopener" href="https://www.mypikpak.com/">PikPak</a></li>
+<li><a target="_blank" rel="noopener" href="https://aws.amazon.com/cn/s3/">S3</a></li>
+<li><a target="_blank" rel="noopener" href="https://seafile.com/">Seafile</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.upyun.com/products/file-storage">又拍云对象存储</a></li>
+<li>WebDav(支持无API的OneDrive/SharePoint)</li>
+<li>Teambition（<a target="_blank" rel="noopener" href="https://www.teambition.com/">中国</a>，<a target="_blank" rel="noopener" href="https://us.teambition.com/">国际</a>）</li>
+<li><a target="_blank" rel="noopener" href="https://www.mediatrack.cn/">分秒帧</a></li>
+<li><a target="_blank" rel="noopener" href="https://yun.139.com/">和彩云</a> (个人云, 家庭云)</li>
+<li><a target="_blank" rel="noopener" href="https://disk.yandex.com/">Yandex.Disk</a></li>
+<li><a target="_blank" rel="noopener" href="http://pan.baidu.com/">百度网盘</a></li>
+<li><a target="_blank" rel="noopener" href="https://drive.uc.cn/">UC网盘</a></li>
+<li><a target="_blank" rel="noopener" href="https://pan.quark.cn/">夸克网盘</a></li>
+<li><a target="_blank" rel="noopener" href="https://pan.xunlei.com/">迅雷网盘</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.lanzou.com/">蓝奏云</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.ilanzou.com/">蓝奏云优享版</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.alipan.com/">阿里云盘分享</a></li>
+<li><a target="_blank" rel="noopener" href="https://photos.google.com/">谷歌相册</a></li>
+<li><a target="_blank" rel="noopener" href="https://mega.nz/">Mega.nz</a></li>
+<li><a target="_blank" rel="noopener" href="https://photo.baidu.com/">一刻相册</a></li>
+<li>SMB</li>
+<li><a target="_blank" rel="noopener" href="https://115.com/">115</a></li>
+<li>Cloudreve</li>
+<li><a target="_blank" rel="noopener" href="https://www.dropbox.com/">Dropbox</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.feijipan.com/">飞机盘</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.dogecloud.com/product/oss">多吉云</a></li>
+</ul>
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><p>由于国内Docker镜像被墙，各大加速镜像站也不可用，需要你自行解决这个问题。目前可以通过在加速器URL中添加下边的链接实现，但随着时间的推移此链接可能随时失效。</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs avrasm"><span class="hljs-symbol">https:</span>//docker.hlyun<span class="hljs-meta">.org</span><br></code></pre></td></tr></table></figure>
+
+<img src="/2024/07/newpost-57/image-20240716205710076.png" srcset="/img/loading.gif" lazyload class="" title="image-20240716205710076">
+
+<h2 id="一、AList安装"><a href="#一、AList安装" class="headerlink" title="一、AList安装"></a>一、AList安装</h2><p>镜像仓库搜索<code>alist</code>，找到下边的下载</p>
+<img src="/2024/07/newpost-57/image-20240716205824967.png" srcset="/img/loading.gif" lazyload class="" title="image-20240716205824967">
+
+<p>到镜像页面确认其下载完成后，点击后边的新建，参考配置如下</p>
+<img src="/2024/07/newpost-57/image-20240717164050496.png" srcset="/img/loading.gif" lazyload class="" title="image-20240717164050496">
+
+<p>创建之后，点击左侧容器菜单，找到创建的容器点击名字进去，点开日志可以看到密码</p>
+<img src="/2024/07/newpost-57/image-20240716211206710.png" srcset="/img/loading.gif" lazyload class="" title="image-20240716211206710">
+
+<p>通过下边的地址即可访问，输入账号<code>admin</code>，密码上边获取的，进去后点下边的管理，点左侧存储，点添加，然后按照<a target="_blank" rel="noopener" href="https://alist.nn.ci/zh/guide/drivers/">官方文档</a>添加存储</p>
+<img src="/2024/07/newpost-57/image-20240716212528308.png" srcset="/img/loading.gif" lazyload class="" title="image-20240716212528308">
+
+<p>如果要添加本地存储，建议可以通过smb的方式添加，地址为NAS的IP地址，例如我是<code>192.168.31.2</code>，用户名密码就是你绿联的用户名密码，分享名称如果是个人文件夹是<code>personal_folder</code>，更多可以在电脑地址栏输入<code>\\192.168.x.x</code>查看，如下图</p>
+<img src="/2024/07/newpost-57/image-20240716212001394.png" srcset="/img/loading.gif" lazyload class="" title="image-20240716212001394">
+
+<h2 id="二、TaoSync安装"><a href="#二、TaoSync安装" class="headerlink" title="二、TaoSync安装"></a>二、TaoSync安装</h2><p>镜像仓库搜索<code>tao-sync</code>，找到下边的下载</p>
+<img src="/2024/07/newpost-57/image-20240716212227217.png" srcset="/img/loading.gif" lazyload class="" title="image-20240716212227217">
+
+<p>下载完成后在镜像仓库点新建，可以参考下边的配置</p>
+<img src="/2024/07/newpost-57/image-20240717163924294.png" srcset="/img/loading.gif" lazyload class="" title="image-20240717163924294">
+
+<p>点开容器在日志中可以看到admin的密码</p>
+<img src="/2024/07/newpost-57/image-20240716212442276.png" srcset="/img/loading.gif" lazyload class="" title="image-20240716212442276">
+
+<p>通过下边的地址访问后，输入用户名admin以及上边的密码进入</p>
+<blockquote>
+<p>如果日志中没有输出密码，也可以到挂载路径的/log/sys_xxxx.log文件查看密码，通常在第一行</p>
+<p>或者进入docker命令行，cd /app/data/log/，然后ls获取到文件名，cat sys_xxxx.log查看</p>
+</blockquote>
+<img src="/2024/07/newpost-57/image-20240716212552081.png" srcset="/img/loading.gif" lazyload class="" title="image-20240716212552081">
+
+<p>然后创建引擎，输入AList地址（例如我的是<code>http://192.168.31.2:5244</code>，请改为你自己的）与令牌（到AList管理-设置-其他中复制，截图中的令牌已经被重置了，不要动歪心思）</p>
+<img src="/2024/07/newpost-57/image-20240722164129944.png" srcset="/img/loading.gif" lazyload class="" title="image-20240722164129944">
+
+<img src="/2024/07/newpost-57/image-20240722164022473.png" srcset="/img/loading.gif" lazyload class="" title="image-20240722164022473">
+
+<p>然后可以进入作业管理新建作业啦，先选择引擎，然后选择你要备份的目录（来源目录），与你想要备份到哪里（目标目录，可以选择多个），点击确定，备份即可开始！</p>
+<img src="/2024/07/newpost-57/image-20240716213109202.png" srcset="/img/loading.gif" lazyload class="" title="image-20240716213109202">
+
+<p>你可以随时点进作业详情查看进度，如果文件较多较大，可能会很耗时间，建议刚开始不要操作以免加重负担</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E7%BB%8F%E9%AA%8C/" class="print-no-link">#经验</a>
+      
+        <a href="/tags/%E5%88%86%E4%BA%AB/" class="print-no-link">#分享</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>如何在绿联NAS中使用TaoSync同步我的文件到各个网盘</div>
+      <div>https://blog.ctftools.com/2024/07/newpost-57/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Dr3@m</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年7月16日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="NC - 非商业性使用">
+                    <i class="iconfont icon-cc-nc"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                    <i class="iconfont icon-cc-sa"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/08/newpost-58/" title="apscheduler的cron配置项">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">apscheduler的cron配置项</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/05/newpost-56/" title="GB28181抓包记录">
+                        <span class="hidden-mobile">GB28181抓包记录</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"dr34m-cn/dr34m-cn.github.io","repo-id":"MDEwOlJlcG9zaXRvcnkxMTI4MDcyODI=","category":"Announcements","category-id":"DIC_kwDOBrlNcs4Cibmt","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":1,"input-position":"top","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       &copy; <span id="nowYear">2021</span> Dr3@m | Power by  <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> Theme <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/assets/js/foot.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      冀ICP备16028844号
+    </a>
+  </span>
+  
+</div>
+
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="/assets/static/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="/assets/static/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="/assets/static/jquery.min.js" ></script>
+<script  src="/assets/static/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="/assets/static/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('/assets/static/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=/assets/static/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('/assets/static/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('/assets/static/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

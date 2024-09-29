@@ -1,0 +1,806 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/favicon.ico">
+  <link rel="icon" href="/assets/img/favicon.ico">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Dr3@m">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="目标使用Python管理支持ONVIF的设备。支持：  设备发现 获取RTSP地址 获取设备信息 截图 云台控制、缩放与聚焦 设置时间">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在Python中使用onvif管理摄像头，包括设备发现，获取RTSP地址，获取设备信息，截图，云台控制与缩放，设置时间">
+<meta property="og:url" content="https://blog.ctftools.com/2023/12/newpost-54/index.html">
+<meta property="og:site_name" content="Dr34m&#39;s Blog">
+<meta property="og:description" content="目标使用Python管理支持ONVIF的设备。支持：  设备发现 获取RTSP地址 获取设备信息 截图 云台控制、缩放与聚焦 设置时间">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.ctftools.com/assets/headImg/onvif&python.png">
+<meta property="article:published_time" content="2023-12-14T07:26:20.000Z">
+<meta property="article:modified_time" content="2024-09-29T06:58:21.695Z">
+<meta property="article:author" content="Dr3@m">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Onvif">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://blog.ctftools.com/assets/headImg/onvif&python.png">
+  
+  
+  
+  <title>在Python中使用onvif管理摄像头，包括设备发现，获取RTSP地址，获取设备信息，截图，云台控制与缩放，设置时间 - Dr34m&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="/assets/static/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="/assets/static/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="/assets/static/hint.min.css" />
+
+  <link  rel="stylesheet" href="/assets/static/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.ctftools.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":3},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"2e56a139382ea7b1de5ebe406db45f54","google":{"measurement_id":"G-J17J3L2RWK"},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"bxnYbxGO1K0yILGbts7KVLhK-gzGzoHsz","app_key":"zbvF6NeggGIbfjNdAVb1kG6I","server_url":"https://bxnybxgo.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"woyaola":null,"cnzz":1261417535},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?2e56a139382ea7b1de5ebe406db45f54";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=G-J17J3L2RWK", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', 'G-J17J3L2RWK');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Dr34m's Blog" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="Dr34m's Blog" type="application/rss+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Dr34m&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/assets/img/dojm2h.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="在Python中使用onvif管理摄像头，包括设备发现，获取RTSP地址，获取设备信息，截图，云台控制与缩放，设置时间"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Dr3@m
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-12-14 15:26" pubdate>
+          2023年12月14日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          1.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          17 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">在Python中使用onvif管理摄像头，包括设备发现，获取RTSP地址，获取设备信息，截图，云台控制与缩放，设置时间</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><p>使用Python管理支持<code>ONVIF</code>的设备。支持：</p>
+<ul>
+<li>设备发现</li>
+<li>获取RTSP地址</li>
+<li>获取设备信息</li>
+<li>截图</li>
+<li>云台控制、缩放与聚焦</li>
+<li>设置时间</li>
+</ul>
+<span id="more"></span>
+
+<p>参考文档：<a target="_blank" rel="noopener" href="https://www.onvif.org/onvif/ver20/util/operationIndex.html">wsdl文档</a>、<a target="_blank" rel="noopener" href="https://pypi.org/project/onvif/">Python API</a> 本文严重参考并感谢：<a target="_blank" rel="noopener" href="https://blog.csdn.net/u010881576/article/details/116885774">《ONVIF with python》</a></p>
+<p>本文在上边的基础上，支持了多画面多码流的摄像头与NVR，并对更多功能做了详细说明，以下均基于<code>Python3.11</code>，其他版本可能略有不同</p>
+<p>2024/1/23更新：适配NVR（多摄像头模式，可以独立控制每个摄像头），兼容了更多设备（部分设备的ONVIF有些限制，现在做了兼容）</p>
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><h3 id="一、安装包"><a href="#一、安装包" class="headerlink" title="一、安装包"></a>一、安装包</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell">pip install onvif-zeep<br><span class="hljs-meta prompt_"># </span><span class="language-bash">WSDiscovery 用于设备发现，不用则不再需要安装</span><br>pip install WSDiscovery<br><span class="hljs-meta prompt_"># </span><span class="language-bash">requests 用于截图获取，不用则不需要安装</span><br>pip install requests<br></code></pre></td></tr></table></figure>
+
+<h3 id="二、使用"><a href="#二、使用" class="headerlink" title="二、使用"></a>二、使用</h3><p>基本类</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> base64<br><span class="hljs-keyword">import</span> datetime<br><span class="hljs-keyword">from</span> itertools <span class="hljs-keyword">import</span> groupby<br><br><span class="hljs-keyword">import</span> pytz<br><span class="hljs-keyword">import</span> requests<br><span class="hljs-keyword">from</span> onvif <span class="hljs-keyword">import</span> ONVIFCamera<br><span class="hljs-keyword">from</span> requests.auth <span class="hljs-keyword">import</span> HTTPDigestAuth<br><span class="hljs-keyword">from</span> wsdiscovery.discovery <span class="hljs-keyword">import</span> ThreadedWSDiscovery <span class="hljs-keyword">as</span> WSDiscovery<br><span class="hljs-keyword">from</span> zeep.helpers <span class="hljs-keyword">import</span> serialize_object<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">checkPwdAndGetCam</span>(<span class="hljs-params">ip, port, usr, pwd</span>):<br>    <span class="hljs-keyword">try</span>:<br>        cam = ONVIFCamera(ip, port, usr, pwd)<br>        media = cam.create_media_service()<br>        profiles = media.GetProfiles()<br>    <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:<br>        <span class="hljs-keyword">if</span> <span class="hljs-string">&#x27;timed out&#x27;</span> <span class="hljs-keyword">in</span> <span class="hljs-built_in">str</span>(e):<br>            <span class="hljs-keyword">raise</span> Exception(<span class="hljs-string">&quot;连接超时，请检查地址以及端口是否正确&quot;</span>)<br>        <span class="hljs-keyword">elif</span> <span class="hljs-string">&#x27;HTTPConnectionPool&#x27;</span> <span class="hljs-keyword">in</span> <span class="hljs-built_in">str</span>(e):<br>            <span class="hljs-keyword">raise</span> Exception(<br>                <span class="hljs-string">&quot;连接失败，请检查地址以及端口是否正确。&quot;</span><br>                <span class="hljs-string">&quot;&lt;br/&gt;&lt;br/&gt;&lt;front style=&#x27;color: #aaa;&#x27;&gt;异常信息：%s&lt;/front&gt;&quot;</span> % <span class="hljs-built_in">str</span>(e))<br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-keyword">raise</span> Exception(<br>                <span class="hljs-string">&quot;请检查账号密码是否正确。&quot;</span><br>                <span class="hljs-string">&quot;&lt;br/&gt;&lt;br/&gt;&lt;front style=&#x27;color: #aaa;&#x27;&gt;异常信息：%s&lt;/front&gt;&quot;</span> % <span class="hljs-built_in">str</span>(e))<br>    <span class="hljs-keyword">return</span> &#123;<br>        <span class="hljs-string">&#x27;cam&#x27;</span>: cam,<br>        <span class="hljs-string">&#x27;media&#x27;</span>: media,<br>        <span class="hljs-string">&#x27;profiles&#x27;</span>: profiles<br>    &#125;<br><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">OnvifClient</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, ip, port: <span class="hljs-built_in">int</span>, usr, pwd, token=<span class="hljs-literal">None</span>, sourceToken=<span class="hljs-literal">None</span>, nodeToken=<span class="hljs-literal">False</span>, needSnapImg=<span class="hljs-literal">True</span>, needPtz=<span class="hljs-literal">True</span></span>):<br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        初始化参数</span><br><span class="hljs-string">        :param ip:</span><br><span class="hljs-string">        :param port:</span><br><span class="hljs-string">        :param usr:</span><br><span class="hljs-string">        :param pwd:</span><br><span class="hljs-string">        :param token: 每个码流都会有一个独立的token，通常一个画面会有2个或更多码流，例如主码流&amp;辅码流</span><br><span class="hljs-string">        :param sourceToken: 每个画面会有一个独立的sourceToken，通常一个摄像头只有一个画面，有些红外、双摄之类的摄像头会有多个画面</span><br><span class="hljs-string">        :param nodeToken: 用于获取PTZ控制信息的token，因为nodeToken有可能为None，所以用False表示没传</span><br><span class="hljs-string">        :param needSnapImg: 是否需要截图，选否会加快速度</span><br><span class="hljs-string">        :param needPtz: 是否需要PTZ控制，选否会加快速度，一般查摄像头列表时可以传False</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        <span class="hljs-variable language_">self</span>.usr = usr<br>        <span class="hljs-variable language_">self</span>.pwd = pwd<br>        result = checkPwdAndGetCam(ip, port, usr, pwd)<br>        <span class="hljs-variable language_">self</span>.profiles = result[<span class="hljs-string">&#x27;profiles&#x27;</span>]<br>        <span class="hljs-variable language_">self</span>.cam = result[<span class="hljs-string">&#x27;cam&#x27;</span>]<br>        <span class="hljs-variable language_">self</span>.media = result[<span class="hljs-string">&#x27;media&#x27;</span>]<br>        <span class="hljs-variable language_">self</span>.needSnapImg = needSnapImg<br>        <span class="hljs-comment"># 如果没传token，默认使用第一个token</span><br>        <span class="hljs-variable language_">self</span>.token = token <span class="hljs-keyword">if</span> token <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span> <span class="hljs-keyword">else</span> <span class="hljs-variable language_">self</span>.profiles[<span class="hljs-number">0</span>].token<br>        <span class="hljs-comment"># 如果没传sourceToken，默认使用第一个sourceToken</span><br>        <span class="hljs-variable language_">self</span>.sourceToken = sourceToken <span class="hljs-keyword">if</span> sourceToken <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span> \<br>            <span class="hljs-keyword">else</span> <span class="hljs-variable language_">self</span>.profiles[<span class="hljs-number">0</span>].VideoSourceConfiguration.SourceToken<br>        <span class="hljs-comment"># 如果没传nodeToken，默认使用第一个nodeToken</span><br>        PTZConfiguration = <span class="hljs-variable language_">self</span>.profiles[<span class="hljs-number">0</span>].PTZConfiguration<br>        <span class="hljs-variable language_">self</span>.nodeToken = nodeToken <span class="hljs-keyword">if</span> nodeToken <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">False</span> \<br>            <span class="hljs-keyword">else</span> (PTZConfiguration.NodeToken <span class="hljs-keyword">if</span> PTZConfiguration <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span> <span class="hljs-keyword">else</span> <span class="hljs-literal">None</span>)<br>        <span class="hljs-keyword">if</span> needPtz:<br>            <span class="hljs-variable language_">self</span>.ptz = <span class="hljs-variable language_">self</span>.cam.create_ptz_service() <span class="hljs-keyword">if</span> <span class="hljs-built_in">bool</span>(<span class="hljs-variable language_">self</span>.cam.devicemgmt.GetCapabilities().PTZ) <span class="hljs-keyword">else</span> <span class="hljs-literal">None</span><br>            <span class="hljs-variable language_">self</span>.imaging = <span class="hljs-variable language_">self</span>.cam.create_imaging_service()<br>            <span class="hljs-variable language_">self</span>.ptzNode = <span class="hljs-variable language_">self</span>.ptz.GetNode(&#123;<br>                <span class="hljs-string">&#x27;NodeToken&#x27;</span>: <span class="hljs-variable language_">self</span>.nodeToken<br>            &#125;) <span class="hljs-keyword">if</span> <span class="hljs-variable language_">self</span>.ptz <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span> <span class="hljs-keyword">and</span> <span class="hljs-variable language_">self</span>.nodeToken <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span> <span class="hljs-keyword">else</span> <span class="hljs-literal">None</span><br>            <span class="hljs-variable language_">self</span>.MoveOption = <span class="hljs-variable language_">self</span>.imaging.GetMoveOptions(&#123;<span class="hljs-string">&#x27;VideoSourceToken&#x27;</span>: <span class="hljs-variable language_">self</span>.sourceToken&#125;)<br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-variable language_">self</span>.cam = <span class="hljs-variable language_">self</span>.ptz = <span class="hljs-variable language_">self</span>.imaging = <span class="hljs-variable language_">self</span>.ptzNode = <span class="hljs-variable language_">self</span>.MoveOption = <span class="hljs-literal">None</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-variable language_">self</span>.ptzNode <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span>:<br>            SupportedPTZSpaces = <span class="hljs-variable language_">self</span>.ptzNode.SupportedPTZSpaces<br>            <span class="hljs-comment"># PTZ云台移动速度峰值</span><br>            <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(SupportedPTZSpaces.PanTiltSpeedSpace) &gt; <span class="hljs-number">0</span>:<br>                PanTiltSpeedSpace = SupportedPTZSpaces.PanTiltSpeedSpace<br>            <span class="hljs-keyword">elif</span> <span class="hljs-built_in">len</span>(SupportedPTZSpaces.ContinuousPanTiltVelocitySpace) &gt; <span class="hljs-number">0</span>:<br>                PanTiltSpeedSpace = SupportedPTZSpaces.ContinuousPanTiltVelocitySpace<br>            <span class="hljs-keyword">else</span>:<br>                PanTiltSpeedSpace = <span class="hljs-literal">None</span><br>            <span class="hljs-variable language_">self</span>.PanTiltSpeedMax = PanTiltSpeedSpace[<span class="hljs-number">0</span>].XRange.Max <span class="hljs-keyword">if</span> PanTiltSpeedSpace <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span> <span class="hljs-keyword">else</span> <span class="hljs-literal">None</span><br>            <span class="hljs-comment"># PTZ缩放速度峰值</span><br>            <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(SupportedPTZSpaces.ZoomSpeedSpace) &gt; <span class="hljs-number">0</span>:<br>                ZoomSpeedSpace = SupportedPTZSpaces.ZoomSpeedSpace<br>            <span class="hljs-keyword">elif</span> <span class="hljs-built_in">len</span>(SupportedPTZSpaces.ContinuousZoomVelocitySpace) &gt; <span class="hljs-number">0</span>:<br>                ZoomSpeedSpace = SupportedPTZSpaces.ContinuousZoomVelocitySpace<br>            <span class="hljs-keyword">else</span>:<br>                ZoomSpeedSpace = <span class="hljs-literal">None</span><br>            <span class="hljs-variable language_">self</span>.ZoomSpeedMax = ZoomSpeedSpace[<span class="hljs-number">0</span>].XRange.Max <span class="hljs-keyword">if</span> ZoomSpeedSpace <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span> <span class="hljs-keyword">else</span> <span class="hljs-literal">None</span><br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-variable language_">self</span>.PanTiltSpeedMax = <span class="hljs-variable language_">self</span>.ZoomSpeedMax = <span class="hljs-literal">None</span><br>        <span class="hljs-comment"># 聚焦移动速度峰值</span><br>        <span class="hljs-variable language_">self</span>.MoveSpeedMax = <span class="hljs-variable language_">self</span>.MoveOption.Continuous.Speed.Max \<br>            <span class="hljs-keyword">if</span> <span class="hljs-variable language_">self</span>.MoveOption <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span> <span class="hljs-keyword">else</span> <span class="hljs-literal">None</span><br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">get_rtsp</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        获取RTSP地址等</span><br><span class="hljs-string">        参考文档：https://www.onvif.org/onvif/ver10/media/wsdl/media.wsdl#op.GetStreamUri</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        result = []<br>        StreamSetup = &#123;<span class="hljs-string">&#x27;Stream&#x27;</span>: <span class="hljs-string">&#x27;RTP-Unicast&#x27;</span>, <span class="hljs-string">&#x27;Transport&#x27;</span>: &#123;<span class="hljs-string">&#x27;Protocol&#x27;</span>: <span class="hljs-string">&#x27;RTSP&#x27;</span>&#125;&#125;<br>        <span class="hljs-keyword">for</span> profile <span class="hljs-keyword">in</span> <span class="hljs-variable language_">self</span>.profiles:<br>            obj = <span class="hljs-variable language_">self</span>.media.create_type(<span class="hljs-string">&#x27;GetStreamUri&#x27;</span>)<br>            obj.StreamSetup = StreamSetup<br>            obj.ProfileToken = profile.token<br>            res_uri = <span class="hljs-variable language_">self</span>.media.GetStreamUri(obj)[<span class="hljs-string">&#x27;Uri&#x27;</span>]<br>            <span class="hljs-keyword">if</span> <span class="hljs-string">&#x27;rtsp://&#x27;</span> <span class="hljs-keyword">in</span> res_uri <span class="hljs-keyword">and</span> <span class="hljs-string">&#x27;@&#x27;</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> res_uri:<br>                res_uri = res_uri.replace(<span class="hljs-string">&#x27;rtsp://&#x27;</span>, <span class="hljs-string">&#x27;rtsp://%s:%s@&#x27;</span> % (<span class="hljs-variable language_">self</span>.usr, <span class="hljs-variable language_">self</span>.pwd))<br>            result.append(&#123;<br>                <span class="hljs-string">&#x27;source&#x27;</span>: profile.VideoSourceConfiguration.SourceToken,<br>                <span class="hljs-string">&#x27;node&#x27;</span>: profile.PTZConfiguration.NodeToken <span class="hljs-keyword">if</span> profile.PTZConfiguration <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span> <span class="hljs-keyword">else</span> <span class="hljs-literal">None</span>,<br>                <span class="hljs-string">&#x27;uri&#x27;</span>: res_uri,<br>                <span class="hljs-string">&#x27;token&#x27;</span>: profile.token,<br>                <span class="hljs-string">&#x27;videoEncoding&#x27;</span>: profile.VideoEncoderConfiguration.Encoding,<br>                <span class="hljs-string">&#x27;Resolution&#x27;</span>: serialize_object(profile.VideoEncoderConfiguration.Resolution),<br>                <span class="hljs-string">&#x27;img&#x27;</span>: <span class="hljs-variable language_">self</span>.snip_image(profile.token) <span class="hljs-keyword">if</span> <span class="hljs-variable language_">self</span>.needSnapImg <span class="hljs-keyword">else</span> <span class="hljs-literal">None</span><br>            &#125;)<br>        sortedResult = <span class="hljs-built_in">sorted</span>(result, key=<span class="hljs-keyword">lambda</span> d: d[<span class="hljs-string">&#x27;source&#x27;</span>])<br>        groupData = groupby(sortedResult, key=<span class="hljs-keyword">lambda</span> x: x[<span class="hljs-string">&#x27;source&#x27;</span>])<br>        <span class="hljs-keyword">return</span> [&#123;<span class="hljs-string">&#x27;source&#x27;</span>: key, <span class="hljs-string">&#x27;data&#x27;</span>: [item <span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> group]&#125; <span class="hljs-keyword">for</span> key, group <span class="hljs-keyword">in</span> groupData]<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">snip_image</span>(<span class="hljs-params">self, token=<span class="hljs-literal">None</span></span>):<br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        截图，如果在浏览器上访问，可在img的src填入[data:image/jpeg;base64,%s]，%s处填写return值</span><br><span class="hljs-string">        参考文档：https://www.onvif.org/onvif/ver10/media/wsdl/media.wsdl#op.GetSnapshotUri</span><br><span class="hljs-string">        :param token:</span><br><span class="hljs-string">        :return: base64转码之后的图片</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        token = token <span class="hljs-keyword">if</span> token <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span> <span class="hljs-keyword">else</span> <span class="hljs-variable language_">self</span>.token<br>        res = <span class="hljs-variable language_">self</span>.media.GetSnapshotUri(&#123;<span class="hljs-string">&#x27;ProfileToken&#x27;</span>: token&#125;)<br>        auth = HTTPDigestAuth(<span class="hljs-variable language_">self</span>.usr, <span class="hljs-variable language_">self</span>.pwd)<br>        rsp = requests.get(res.Uri, auth=auth)<br>        <span class="hljs-keyword">return</span> base64.b64encode(rsp.content).decode(<span class="hljs-string">&#x27;utf-8&#x27;</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">get_deviceInfo</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        获取设备信息</span><br><span class="hljs-string">        参考文档：https://www.onvif.org/onvif/ver10/device/wsdl/devicemgmt.wsdl#op.GetDeviceInformation</span><br><span class="hljs-string">        :return: 设备信息，包括名称-Model、厂家-Manufacturer、固件版本-FirmwareVersion、序列号-SerialNumber、硬件ID-HardwareId</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        <span class="hljs-keyword">return</span> serialize_object(<span class="hljs-variable language_">self</span>.cam.devicemgmt.GetDeviceInformation())<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">ptz_move</span>(<span class="hljs-params">self, Velocity=<span class="hljs-literal">None</span>, token=<span class="hljs-literal">None</span></span>):<br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        PTZ控制移动</span><br><span class="hljs-string">        参考文档：https://www.onvif.org/onvif/ver20/ptz/wsdl/ptz.wsdl#op.ContinuousMove</span><br><span class="hljs-string">        :param token: 移动设备的token</span><br><span class="hljs-string">        :param Velocity: 可选参数，不传表示停止移动</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        token = token <span class="hljs-keyword">if</span> token <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span> <span class="hljs-keyword">else</span> <span class="hljs-variable language_">self</span>.token<br>        <span class="hljs-keyword">if</span> <span class="hljs-variable language_">self</span>.ptz <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:<br>            <span class="hljs-keyword">if</span> Velocity <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span>:<br>                <span class="hljs-comment"># 只在移动时展示不支持，以免频繁打扰</span><br>                <span class="hljs-keyword">raise</span> Exception(<span class="hljs-string">&quot;该设备不支持PTZ控制&quot;</span>)<br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-keyword">if</span> Velocity <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:<br>                <span class="hljs-variable language_">self</span>.ptz.Stop(&#123;<span class="hljs-string">&#x27;ProfileToken&#x27;</span>: token&#125;)<br>            <span class="hljs-keyword">else</span>:<br>                request = <span class="hljs-variable language_">self</span>.ptz.create_type(<span class="hljs-string">&#x27;ContinuousMove&#x27;</span>)<br>                request.ProfileToken = token<br>                request.Velocity = Velocity<br>                <span class="hljs-variable language_">self</span>.ptz.ContinuousMove(request)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">focus_move</span>(<span class="hljs-params">self, speed=<span class="hljs-literal">None</span>, token=<span class="hljs-literal">None</span></span>):<br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        聚焦</span><br><span class="hljs-string">        参考文档：https://www.onvif.org/onvif/ver20/imaging/wsdl/imaging.wsdl#op.Move</span><br><span class="hljs-string">        :param token: VideoSourceToken</span><br><span class="hljs-string">        :param speed: 正数：聚焦+，拉近；负数：聚焦-，拉远；None：停止聚焦</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        token = token <span class="hljs-keyword">if</span> token <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span> <span class="hljs-keyword">else</span> <span class="hljs-variable language_">self</span>.sourceToken<br>        <span class="hljs-keyword">if</span> speed <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span>:<br>            request = <span class="hljs-variable language_">self</span>.imaging.create_type(<span class="hljs-string">&#x27;Move&#x27;</span>)<br>            request.VideoSourceToken = token<br>            request.Focus = &#123;<span class="hljs-string">&#x27;Continuous&#x27;</span>: &#123;<span class="hljs-string">&#x27;Speed&#x27;</span>: speed&#125;&#125;<br>            <span class="hljs-keyword">try</span>:<br>                <span class="hljs-variable language_">self</span>.imaging.Move(request)<br>            <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:<br>                <span class="hljs-keyword">raise</span> Exception(<br>                    <span class="hljs-string">&quot;该设备不支持该功能！&quot;</span><br>                    <span class="hljs-string">&quot;&lt;br/&gt;&lt;br/&gt;&lt;front style=&#x27;color: #aaa;&#x27;&gt;异常信息：%s&lt;/front&gt;&quot;</span> % <span class="hljs-built_in">str</span>(e))<br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-variable language_">self</span>.imaging.Stop(&#123;<span class="hljs-string">&#x27;VideoSourceToken&#x27;</span>: token&#125;)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">set_cam_time</span>(<span class="hljs-params">self, timeStamp=<span class="hljs-literal">None</span></span>):<br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        设置时间</span><br><span class="hljs-string">        参考文档：https://www.onvif.org/onvif/ver10/device/wsdl/devicemgmt.wsdl#op.SetSystemDateAndTime</span><br><span class="hljs-string">        :param timeStamp: 秒级时间戳，不传则使用当前时间</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        <span class="hljs-keyword">if</span> timeStamp <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:<br>            timeNow = datetime.datetime.now()<br>        <span class="hljs-keyword">else</span>:<br>            timeNow = datetime.datetime.fromtimestamp(<span class="hljs-built_in">int</span>(timeStamp))<br>        utc_now = timeNow.astimezone(pytz.utc)<br>        <span class="hljs-variable language_">self</span>.cam.devicemgmt.SetSystemDateAndTime(&#123;<br>            <span class="hljs-string">&#x27;DateTimeType&#x27;</span>: <span class="hljs-string">&#x27;Manual&#x27;</span>,<br>            <span class="hljs-string">&#x27;DaylightSavings&#x27;</span>: <span class="hljs-literal">False</span>,<br>            <span class="hljs-string">&#x27;TimeZone&#x27;</span>: &#123;<br>                <span class="hljs-string">&#x27;TZ&#x27;</span>: <span class="hljs-string">&#x27;CST-8&#x27;</span><br>            &#125;,<br>            <span class="hljs-string">&#x27;UTCDateTime&#x27;</span>: &#123;<br>                <span class="hljs-string">&#x27;Time&#x27;</span>: &#123;<br>                    <span class="hljs-string">&#x27;Hour&#x27;</span>: utc_now.hour,<br>                    <span class="hljs-string">&#x27;Minute&#x27;</span>: utc_now.minute,<br>                    <span class="hljs-string">&#x27;Second&#x27;</span>: utc_now.second<br>                &#125;,<br>                <span class="hljs-string">&#x27;Date&#x27;</span>: &#123;<br>                    <span class="hljs-string">&#x27;Year&#x27;</span>: utc_now.year,<br>                    <span class="hljs-string">&#x27;Month&#x27;</span>: utc_now.month,<br>                    <span class="hljs-string">&#x27;Day&#x27;</span>: utc_now.day<br>                &#125;<br>            &#125;<br>        &#125;)<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">ptzChangeByClient</span>(<span class="hljs-params">client, codeStr, status, speed=<span class="hljs-number">50.0</span></span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    PTZ控制</span><br><span class="hljs-string">    :param client: onvif客户端</span><br><span class="hljs-string">    :param speed: 相对速度，1-100</span><br><span class="hljs-string">    :param status:  状态，1-开始，0-停止</span><br><span class="hljs-string">    :param codeStr: 标志字符串</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    ptzList = [<span class="hljs-string">&#x27;Up&#x27;</span>, <span class="hljs-string">&#x27;Right&#x27;</span>, <span class="hljs-string">&#x27;Down&#x27;</span>, <span class="hljs-string">&#x27;Left&#x27;</span>, <span class="hljs-string">&#x27;LeftUp&#x27;</span>, <span class="hljs-string">&#x27;RightUp&#x27;</span>, <span class="hljs-string">&#x27;LeftDown&#x27;</span>, <span class="hljs-string">&#x27;RightDown&#x27;</span>, <span class="hljs-string">&#x27;ZoomWide&#x27;</span>, <span class="hljs-string">&#x27;ZoomTele&#x27;</span>]<br>    focusList = [<span class="hljs-string">&#x27;FocusFar&#x27;</span>, <span class="hljs-string">&#x27;FocusNear&#x27;</span>]<br>    <span class="hljs-keyword">if</span> codeStr <span class="hljs-keyword">in</span> ptzList:<br>        <span class="hljs-keyword">if</span> client.ptz <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:<br>            <span class="hljs-keyword">if</span> status == <span class="hljs-number">1</span>:<br>                <span class="hljs-keyword">raise</span> Exception(<span class="hljs-string">&quot;当前设备不支持PTZ控制&quot;</span>)<br>            <span class="hljs-keyword">else</span>:<br>                <span class="hljs-keyword">return</span><br>        <span class="hljs-keyword">if</span> status == <span class="hljs-number">0</span>:<br>            <span class="hljs-keyword">if</span> <span class="hljs-string">&#x27;Zoom&#x27;</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> codeStr:<br>                <span class="hljs-keyword">if</span> client.PanTiltSpeedMax <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:<br>                    <span class="hljs-keyword">return</span><br>            <span class="hljs-keyword">else</span>:<br>                <span class="hljs-keyword">if</span> client.ZoomSpeedMax <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:<br>                    <span class="hljs-keyword">return</span><br>            client.ptz_move()<br>        <span class="hljs-keyword">else</span>:<br>            PanTiltSpeed = <span class="hljs-number">0</span><br>            ZoomSpeed = <span class="hljs-number">0</span><br>            <span class="hljs-keyword">if</span> <span class="hljs-string">&#x27;Zoom&#x27;</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> codeStr:<br>                <span class="hljs-keyword">if</span> client.PanTiltSpeedMax <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:<br>                    <span class="hljs-keyword">raise</span> Exception(<span class="hljs-string">&quot;当前设备不支持云台控制&quot;</span>)<br>                PanTiltSpeed = client.PanTiltSpeedMax * <span class="hljs-built_in">float</span>(speed) / <span class="hljs-number">100.0</span><br>                speedTilt = PanTiltSpeed <span class="hljs-keyword">if</span> <span class="hljs-string">&#x27;Up&#x27;</span> <span class="hljs-keyword">in</span> codeStr <span class="hljs-keyword">else</span> (<br>                    PanTiltSpeed * -<span class="hljs-number">1.0</span> <span class="hljs-keyword">if</span> <span class="hljs-string">&#x27;Down&#x27;</span> <span class="hljs-keyword">in</span> codeStr <span class="hljs-keyword">else</span> <span class="hljs-number">0</span>)<br>                speedPan = PanTiltSpeed <span class="hljs-keyword">if</span> <span class="hljs-string">&#x27;Right&#x27;</span> <span class="hljs-keyword">in</span> codeStr <span class="hljs-keyword">else</span> (<br>                    PanTiltSpeed * -<span class="hljs-number">1.0</span> <span class="hljs-keyword">if</span> <span class="hljs-string">&#x27;Left&#x27;</span> <span class="hljs-keyword">in</span> codeStr <span class="hljs-keyword">else</span> <span class="hljs-number">0</span>)<br>                params = &#123;<br>                    <span class="hljs-string">&#x27;PanTilt&#x27;</span>: &#123;<br>                        <span class="hljs-string">&#x27;x&#x27;</span>: speedPan,<br>                        <span class="hljs-string">&#x27;y&#x27;</span>: speedTilt<br>                    &#125;<br>                &#125;<br>            <span class="hljs-keyword">else</span>:<br>                <span class="hljs-keyword">if</span> client.ZoomSpeedMax <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:<br>                    <span class="hljs-keyword">raise</span> Exception(<span class="hljs-string">&quot;当前设备不支持缩放控制&quot;</span>)<br>                ZoomSpeed = client.ZoomSpeedMax * <span class="hljs-built_in">float</span>(speed) / <span class="hljs-number">100.0</span><br>                speedZoom = <span class="hljs-number">0</span> <span class="hljs-keyword">if</span> <span class="hljs-string">&#x27;Zoom&#x27;</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> codeStr <span class="hljs-keyword">else</span> (<br>                    ZoomSpeed * -<span class="hljs-number">1.0</span> <span class="hljs-keyword">if</span> <span class="hljs-string">&#x27;Wide&#x27;</span> <span class="hljs-keyword">in</span> codeStr <span class="hljs-keyword">else</span> ZoomSpeed)<br>                params = &#123;<br>                    <span class="hljs-string">&#x27;Zoom&#x27;</span>: speedZoom<br>                &#125;<br>            client.ptz_move(params)<br>    <span class="hljs-keyword">elif</span> codeStr <span class="hljs-keyword">in</span> focusList:<br>        <span class="hljs-keyword">if</span> client.MoveSpeedMax <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:<br>            <span class="hljs-keyword">if</span> status == <span class="hljs-number">1</span>:<br>                <span class="hljs-keyword">raise</span> Exception(<span class="hljs-string">&quot;当前设备不支持聚焦控制&quot;</span>)<br>            <span class="hljs-keyword">else</span>:<br>                <span class="hljs-keyword">return</span><br>        <span class="hljs-keyword">if</span> status == <span class="hljs-number">0</span>:<br>            client.focus_move()<br>        <span class="hljs-keyword">else</span>:<br>            MoveSpeed = client.MoveSpeedMax * <span class="hljs-built_in">float</span>(speed) / <span class="hljs-number">100.0</span><br>            client.focus_move(MoveSpeed <span class="hljs-keyword">if</span> <span class="hljs-string">&#x27;FocusNear&#x27;</span> == codeStr <span class="hljs-keyword">else</span> MoveSpeed * -<span class="hljs-number">1.0</span>)<br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">if</span> status == <span class="hljs-number">1</span>:<br>            <span class="hljs-keyword">raise</span> Exception(<span class="hljs-string">&quot;该方式暂不支持&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<p>调用方</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> time<br><span class="hljs-keyword">import</span> json<br><br><br><span class="hljs-comment"># 设备发现</span><br><span class="hljs-built_in">print</span>(ws_discovery())<br><br>client = OnvifClient(<span class="hljs-string">&#x27;192.168.1.10&#x27;</span>, <span class="hljs-number">80</span>, <span class="hljs-string">&#x27;admin&#x27;</span>, <span class="hljs-string">&#x27;123456&#x27;</span>, needSnapImg=<span class="hljs-literal">False</span>)<br><span class="hljs-comment"># 如果要控制特定摄像头，可以下边这样写</span><br><span class="hljs-comment"># client = OnvifClient(&#x27;192.168.1.10&#x27;, 80, &#x27;admin&#x27;, &#x27;123456&#x27;, token=&quot;ProfileToken002&quot;, sourceToken= &quot;VideoSourceToken002&quot;, nodeToken=&quot;NodeToken002&quot;, needSnapImg=False)</span><br><br><span class="hljs-comment"># 获取所有画面所有码流的RTSP地址、token(即ProfileToken)、sourceToken、nodeToken等信息</span><br><span class="hljs-built_in">print</span>(json.dumps(client.get_rtsp()))<br><br><span class="hljs-comment"># 获取设备信息</span><br><span class="hljs-built_in">print</span>(json.dumps(client.get_deviceInfo()))<br><br><span class="hljs-comment"># 设置时间</span><br>client.set_cam_time()<br><br><span class="hljs-comment"># 云台与聚焦控制</span><br><span class="hljs-comment"># 云台上移</span><br>ptzChangeByClient(client, <span class="hljs-string">&#x27;Up&#x27;</span>, <span class="hljs-number">1</span>)<br><span class="hljs-comment"># 移动一秒</span><br>time.sleep(<span class="hljs-number">1</span>)<br><span class="hljs-comment"># 然后停止</span><br>ptzChangeByClient(client, <span class="hljs-string">&#x27;Up&#x27;</span>, <span class="hljs-number">0</span>)<br></code></pre></td></tr></table></figure>
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Python/" class="print-no-link">#Python</a>
+      
+        <a href="/tags/Onvif/" class="print-no-link">#Onvif</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>在Python中使用onvif管理摄像头，包括设备发现，获取RTSP地址，获取设备信息，截图，云台控制与缩放，设置时间</div>
+      <div>https://blog.ctftools.com/2023/12/newpost-54/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Dr3@m</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年12月14日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="NC - 非商业性使用">
+                    <i class="iconfont icon-cc-nc"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                    <i class="iconfont icon-cc-sa"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/04/newpost-55/" title="JS计算字节大小，把字节转换为KB/MB/GB/TB等">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">JS计算字节大小，把字节转换为KB/MB/GB/TB等</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/09/newpost-53/" title="编写bat脚本实现对vue项目构建并压缩">
+                        <span class="hidden-mobile">编写bat脚本实现对vue项目构建并压缩</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"dr34m-cn/dr34m-cn.github.io","repo-id":"MDEwOlJlcG9zaXRvcnkxMTI4MDcyODI=","category":"Announcements","category-id":"DIC_kwDOBrlNcs4Cibmt","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":1,"input-position":"top","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       &copy; <span id="nowYear">2021</span> Dr3@m | Power by  <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> Theme <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/assets/js/foot.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      冀ICP备16028844号
+    </a>
+  </span>
+  
+</div>
+
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="/assets/static/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="/assets/static/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="/assets/static/jquery.min.js" ></script>
+<script  src="/assets/static/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="/assets/static/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('/assets/static/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=/assets/static/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('/assets/static/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('/assets/static/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
